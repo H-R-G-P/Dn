@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DanceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Dance
      * @ORM\Column(type="integer", nullable=true)
      */
     private $views;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
+     */
+    private $versions;
+
+    public function __construct()
+    {
+        $this->versions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,36 @@ class Dance
     public function setViews(?int $views): self
     {
         $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Version[]
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setIdDance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->removeElement($version)) {
+            // set the owning side to null (unless already changed)
+            if ($version->getIdDance() === $this) {
+                $version->setIdDance(null);
+            }
+        }
 
         return $this;
     }
