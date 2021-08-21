@@ -61,9 +61,9 @@ class Dance
         return $this->views;
     }
 
-    public function setViews(int $views): self
+    public function subView(): self
     {
-        $this->views = $views;
+        $this->views = ++$this->views;
 
         return $this;
     }
