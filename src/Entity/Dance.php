@@ -25,9 +25,9 @@ class Dance
     private $name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default":0})
      */
-    private $views;
+    private $views = 0;
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
@@ -56,12 +56,12 @@ class Dance
         return $this;
     }
 
-    public function getViews(): ?int
+    public function getViews(): int
     {
         return $this->views;
     }
 
-    public function setViews(?int $views): self
+    public function setViews(int $views): self
     {
         $this->views = $views;
 
