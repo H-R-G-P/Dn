@@ -5,48 +5,72 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <h1>Танцы Беларусі</h1>
+            <h1 class="text-center my-5">Танцы Беларусі</h1>
         </div>
 
         <div class="row">
-            <div class="col-3">
-                <h5>Регионы</h5>
-                <div class="list-group">
-                    {% for region in regions %}
-                        <a href="#{# TODO вставить ссылку на страницу региона #}" class="list-group-item list-group-item-action">
-                            {{ region.name }}({{ region.dances|length }})
-                        </a>
-                    {% endfor %}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Регионы</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for region in regions %}
+                                <a href="#{# TODO вставить ссылку на страницу региона #}" class="list-group-item list-group-item-action">
+                                    {{ region.name }}({{ region.dances|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <h5>Типы</h5>
-                <div class="list-group">
-                    {% for type in types %}
-                        <a href="#{# TODO вставить ссылку на страницу типа #}" class="list-group-item list-group-item-action">
-                            {{ type.name }}({{ type.dances|length }})
-                        </a>
-                    {% endfor %}
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Типы</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for type in types %}
+                                <a href="#{# TODO вставить ссылку на страницу типа #}" class="list-group-item list-group-item-action">
+                                    {{ type.name }}({{ type.dances|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <h5>Ресурсы</h5>
-                <div class="list-group">
-                    {% for source in sources %}
-                        <a href="#{# TODO вставить ссылку на страницу ресурса #}" class="list-group-item list-group-item-action">
-                            {{ source.name }}({{ source.dances|length }})
-                        </a>
-                    {% endfor %}
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-3 mt-lg-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Ресурсы</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for source in sources %}
+                                <a href="#{# TODO вставить ссылку на страницу ресурса #}" class="list-group-item list-group-item-action">
+                                    {{ source.name }}({{ source.dances|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <h5>Топ 10 танцев</h5>
-                <div class="list-group">
-                    {% for dance in top_ten_dances %}
-                        <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
-                            {{ dance.name }}({{ dance.versions|length }})
-                        </a>
-                    {% endfor %}
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-3 mt-lg-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Топ 10 танцев</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for dance in top_ten_dances %}
+                                <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
+                                    {{ dance.name }}({{ dance.versions|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
