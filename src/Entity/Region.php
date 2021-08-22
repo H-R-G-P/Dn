@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RegionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,16 @@ class Region
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="region")
+     */
+    private $dances;
+
+    public function __construct()
+    {
+        $this->dances = new ArrayCollection();
+    }
+
     public function getId(): int
     {
         return $this->id;
@@ -35,6 +47,36 @@ class Region
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dance[]
+     */
+    public function getDances(): Collection
+    {
+        return $this->dances;
+    }
+
+    public function addDance(Dance $dance): self
+    {
+        if (!$this->dances->contains($dance)) {
+            $this->dances[] = $dance;
+            $dance->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDance(Dance $dance): self
+    {
+        if ($this->dances->removeElement($dance)) {
+            // set the owning side to null (unless already changed)
+            if ($dance->getRegion() === $this) {
+                $dance->setRegion(null);
+            }
+        }
 
         return $this;
     }
