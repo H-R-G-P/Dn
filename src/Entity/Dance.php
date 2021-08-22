@@ -44,6 +44,11 @@ class Dance
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="dances")
+     */
+    private $source;
+
     public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -128,6 +133,18 @@ class Dance
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): self
+    {
+        $this->source = $source;
 
         return $this;
     }
