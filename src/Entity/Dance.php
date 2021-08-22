@@ -34,6 +34,11 @@ class Dance
      */
     private $versions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
+     */
+    private $region;
+
     public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -94,6 +99,18 @@ class Dance
                 $version->setIdDance(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }
