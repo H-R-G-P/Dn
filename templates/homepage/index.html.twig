@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Танцы Беларусі{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Танцы Беларусі</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <h5>Регионы</h5>
+                <div class="list-group">
+                    {% for region in regions %}
+                        <a href="#{# TODO вставить ссылку на страницу региона #}" class="list-group-item list-group-item-action">
+                            {{ region.name }}(...{# TODO вставить количество танцев в этом регионе #})
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-3">
+                <h5>Типы</h5>
+                <div class="list-group">
+                    {% for type in types %}
+                        <a href="#{# TODO вставить ссылку на страницу типа #}" class="list-group-item list-group-item-action">
+                            {{ type.name }}(...{# TODO вставить количество танцев этого типа #})
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-3">
+                <h5>Ресурсы</h5>
+                <div class="list-group">
+                    {% for source in sources %}
+                        <a href="#{# TODO вставить ссылку на страницу ресурса #}" class="list-group-item list-group-item-action">
+                            {{ source.name }}(...{# TODO вставить количество танцев из этого ресурса #})
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-3">
+                <h5>Топ 10 танцев</h5>
+                <div class="list-group">
+                    {% for dance in top_ten_dances %}
+                        <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
+                            {{ dance.name }}({{ dance.versions|length }})
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
