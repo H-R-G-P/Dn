@@ -1,5 +1,5 @@
 body {
     /*background-color: lightgray;*/
-    background: url("../images/body_background_big.jpg") no-repeat;
+    background: url("../images/body-background.png") repeat-y;
     background-size: 100%;
 }
