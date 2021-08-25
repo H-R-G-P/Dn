@@ -78,7 +78,7 @@ class Dance
 
     public function subView(): self
     {
-        $this->views = ++$this->views;
+        $this->views++;
 
         return $this;
     }
