@@ -34,6 +34,21 @@ class Dance
      */
     private $versions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
+     */
+    private $region;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="dances")
+     */
+    private $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="dances")
+     */
+    private $source;
+
     public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -63,7 +78,7 @@ class Dance
 
     public function subView(): self
     {
-        $this->views = ++$this->views;
+        $this->views++;
 
         return $this;
     }
@@ -94,6 +109,42 @@ class Dance
                 $version->setIdDance(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): self
+    {
+        $this->source = $source;
 
         return $this;
     }

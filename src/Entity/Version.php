@@ -24,12 +24,12 @@ class Version
     private $id_dance;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default":0})
      */
     private $views;
 
@@ -50,26 +50,26 @@ class Version
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getViews(): ?int
+    public function getViews(): int
     {
         return $this->views;
     }
 
-    public function setViews(?int $views): self
+    public function subView(): self
     {
-        $this->views = $views;
+        $this->views++;
 
         return $this;
     }
