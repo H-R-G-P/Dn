@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <div class="list-group list-group-flush">
                             {% for region in regions %}
-                                <a href="#{# TODO вставить ссылку на страницу региона #}" class="list-group-item list-group-item-action">
+                                <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
                                     {{ region.name }}({{ region.dances|length }})
                                 </a>
                             {% endfor %}
