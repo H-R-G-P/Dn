@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ region.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-5">{{ region.name }}</h1>
+        </div>
+        <div class="row">
+            {# TODO Put in a map #}
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Dances</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for dance in dances %}
+                            <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
+                                {{ dance.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

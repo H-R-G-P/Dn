@@ -24,4 +24,24 @@ class RegionController extends AbstractController
             'regions' => $regions,
         ]);
     }
+
+    /**
+     * @Route("/regions/{slug}", name="region")
+     *
+     * @param string $slug
+     * @param RegionRepository $regionRepository
+     *
+     * @return Response
+     */
+    public function show(string $slug, RegionRepository $regionRepository) : Response
+    {
+        $region = $regionRepository->findOneBy([
+            'slug' => $slug,
+        ]);
+
+        return $this->render('region/show.html.twig', [
+            'region' => $region,
+            'dances' => $region->getDances(),
+        ]);
+    }
 }
