@@ -21,11 +21,13 @@ final class Version20210831124642 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F62F1765E237E06 ON region (name)');
+        $this->addSql('ALTER TABLE region ADD slug VARCHAR(110) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP INDEX UNIQ_F62F1765E237E06 ON region');
+        $this->addSql('ALTER TABLE region DROP slug');
     }
 }
