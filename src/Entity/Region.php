@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RegionRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -52,6 +53,8 @@ class Region
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $this->setSlug(Slugify::create()->slugify($name));
 
         return $this;
     }
