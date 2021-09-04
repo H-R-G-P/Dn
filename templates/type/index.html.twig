@@ -10,7 +10,7 @@
 
         <div class="row">
             {% for type in types %}
-                <a href="#{# TODO вставить ссылку на страницу типа #}" class="list-group-item list-group-item-action">
+                <a href="{{ url('show_type', {"slug": type.slug}) }}" class="list-group-item list-group-item-action">
                     {{ type.name }} ({{ type.dances|length }})
                 </a>
             {% endfor %}
