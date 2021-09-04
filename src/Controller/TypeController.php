@@ -24,4 +24,23 @@ class TypeController extends AbstractController
             'types' => $types,
         ]);
     }
+
+    /**
+     * @Route("/type/{slug}", name="show_type")
+     *
+     * @param string $slug
+     * @param TypeRepository $typeRepository
+     *
+     * @return Response
+     */
+    public function show(string $slug, TypeRepository $typeRepository): Response
+    {
+       $type = $typeRepository->findOneBy([
+           'slug' => $slug,
+       ]);
+
+        return $this->render('type/show.html.twig', [
+            'type' => $type,
+        ]);
+    }
 }
