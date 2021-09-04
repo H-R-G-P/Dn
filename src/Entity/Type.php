@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TypeRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -49,6 +50,11 @@ class Type
      */
     private $is_woman;
 
+    /**
+     * @ORM\Column(type="string", length=110)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->dances = new ArrayCollection();
@@ -67,6 +73,8 @@ class Type
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $this->setSlug(Slugify::create()->slugify($name));
 
         return $this;
     }
@@ -145,6 +153,18 @@ class Type
     public function setIsWoman(bool $is_woman): self
     {
         $this->is_woman = $is_woman;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
