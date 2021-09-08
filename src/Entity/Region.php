@@ -31,7 +31,7 @@ class Region
     private $dances;
 
     /**
-     * @ORM\Column(type="string", length=110)
+     * @ORM\Column(type="string", length=110, unique=true)
      */
     private $slug;
 
