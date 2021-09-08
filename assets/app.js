@@ -12,6 +12,10 @@ import './styles/app.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 
+// leaflet library
+import '../node_modules/leaflet/dist/leaflet.css';
+import 'leaflet';
+
 // start the Stimulus application
 import './bootstrap';
 

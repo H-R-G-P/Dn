@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ type.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-5">{{ type.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col">
+                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=23.6%2C51.3%2C32.7%2C56.14&amp;layer=mapnik"
+                        style="border: 1px solid black; width: 100%; height: 300%;">
+                </iframe>
+            </div>
+            <div class="col">
+                {% for dance in type.dances %}
+                    <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
+                        {{ dance.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

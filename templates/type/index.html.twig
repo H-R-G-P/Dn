@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Types{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-5">Types</h1>
+        </div>
+
+        <div class="row">
+            {% for type in types %}
+                <a href="{{ url('show_type', {"slug": type.slug}) }}" class="list-group-item list-group-item-action">
+                    {{ type.name }} ({{ type.dances|length }})
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

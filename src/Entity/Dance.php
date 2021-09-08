@@ -17,37 +17,37 @@ class Dance
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=150)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer", options={"default":0})
      */
-    private $views = 0;
+    private int $views = 0;
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
      */
-    private $versions;
+    private ArrayCollection $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
      */
-    private $region;
+    private Region $region;
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="dances")
      */
-    private $type;
+    private Type $type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="dances")
      */
-    private $source;
+    private Source $source;
 
     public function __construct()
     {
@@ -113,36 +113,36 @@ class Dance
         return $this;
     }
 
-    public function getRegion(): ?Region
+    public function getRegion(): Region
     {
         return $this->region;
     }
 
-    public function setRegion(?Region $region): self
+    public function setRegion(Region $region): self
     {
         $this->region = $region;
 
         return $this;
     }
 
-    public function getType(): ?Type
+    public function getType(): Type
     {
         return $this->type;
     }
 
-    public function setType(?Type $type): self
+    public function setType(Type $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getSource(): ?Source
+    public function getSource(): Source
     {
         return $this->source;
     }
 
-    public function setSource(?Source $source): self
+    public function setSource(Source $source): self
     {
         $this->source = $source;
 
