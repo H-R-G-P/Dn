@@ -51,7 +51,7 @@ class Type
     private bool $is_woman;
 
     /**
-     * @ORM\Column(type="string", length=110)
+     * @ORM\Column(type="string", length=110, unique=true)
      */
     private string $slug;
 

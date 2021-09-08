@@ -21,11 +21,13 @@ final class Version20210904092302 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE type ADD dancers INT NOT NULL, ADD is_group TINYINT(1) NOT NULL, ADD is_man TINYINT(1) NOT NULL, ADD is_woman TINYINT(1) NOT NULL, ADD slug VARCHAR(110) NOT NULL');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8CDE5729989D9B62 ON type (slug)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE type DROP dancers, DROP is_group, DROP is_man, DROP is_woman, DROP slug');
+        $this->addSql('DROP INDEX UNIQ_8CDE5729989D9B62 ON type');
     }
 }
