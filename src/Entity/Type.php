@@ -74,7 +74,7 @@ class Type
     {
         $this->name = $name;
 
-        $this->setSlug(Slugify::create()->slugify($name));
+        $this->slug = Slugify::create()->slugify($name);
 
         return $this;
     }
@@ -160,12 +160,5 @@ class Type
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 }
