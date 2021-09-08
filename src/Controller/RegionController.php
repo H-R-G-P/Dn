@@ -41,7 +41,6 @@ class RegionController extends AbstractController
 
         return $this->render('region/show.html.twig', [
             'region' => $region,
-            'dances' => $region->getDances(),
         ]);
     }
 }
