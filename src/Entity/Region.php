@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RegionRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +21,7 @@ class Region
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $name;
 
@@ -28,6 +29,11 @@ class Region
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="region")
      */
     private $dances;
+
+    /**
+     * @ORM\Column(type="string", length=110, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -47,6 +53,8 @@ class Region
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $this->slug = Slugify::create()->slugify($name);
 
         return $this;
     }
@@ -79,5 +87,10 @@ class Region
         }
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 }
