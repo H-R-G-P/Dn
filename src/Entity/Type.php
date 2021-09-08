@@ -18,42 +18,42 @@ class Type
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="type")
      */
-    private $dances;
+    private ArrayCollection $dances;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $dancers;
+    private int $dancers;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_group;
+    private bool $is_group;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_man;
+    private bool $is_man;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_woman;
+    private bool $is_woman;
 
     /**
      * @ORM\Column(type="string", length=110)
      */
-    private $slug;
+    private string $slug;
 
     public function __construct()
     {

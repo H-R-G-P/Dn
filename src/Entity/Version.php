@@ -15,35 +15,35 @@ class Version
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Dance::class, inversedBy="versions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_dance;
+    private Dance $id_dance;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer", options={"default":0})
      */
-    private $views;
+    private int $views;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getIdDance(): ?Dance
+    public function getIdDance(): Dance
     {
         return $this->id_dance;
     }
 
-    public function setIdDance(?Dance $id_dance): self
+    public function setIdDance(Dance $id_dance): self
     {
         $this->id_dance = $id_dance;
 

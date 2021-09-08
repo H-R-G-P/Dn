@@ -17,17 +17,17 @@ class Source
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="source")
      */
-    private $dances;
+    private ArrayCollection $dances;
 
     public function __construct()
     {
