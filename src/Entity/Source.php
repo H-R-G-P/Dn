@@ -28,7 +28,7 @@ class Source
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="source")
      */
-    private ArrayCollection $dances;
+    private $dances;
 
     /**
      * @ORM\Column(type="string", length=110, unique=true)
