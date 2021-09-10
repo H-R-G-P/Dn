@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DanceRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +21,7 @@ class Dance
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, unique=true)
      */
     private string $name;
 
@@ -32,7 +33,7 @@ class Dance
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
      */
-    private ArrayCollection $versions;
+    private $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
@@ -48,6 +49,11 @@ class Dance
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="dances")
      */
     private Source $source;
+
+    /**
+     * @ORM\Column(type="string", length=165, unique=true)
+     */
+    private string $slug;
 
     public function __construct()
     {
@@ -67,6 +73,8 @@ class Dance
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $this->slug = Slugify::create()->slugify($name);
 
         return $this;
     }
@@ -147,5 +155,10 @@ class Dance
         $this->source = $source;
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }
