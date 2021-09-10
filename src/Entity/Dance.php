@@ -92,7 +92,7 @@ class Dance
     }
 
     /**
-     * @return Collection|Version[]
+     * @return Collection
      */
     public function getVersions(): Collection
     {
