@@ -12,6 +12,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DanceController extends AbstractController
 {
+    /**
+     * @Route("/dances", name="dances")
+     *
+     * @param DanceRepository $danceRepository
+     *
+     * @return Response
+     */
+    public function index(DanceRepository $danceRepository): Response
+    {
+        $dances = $danceRepository->findAll();
+
+        return $this->render('dance/index.html.twig', [
+            'dances' => $dances,
+        ]);
+    }
 
     /**
      * @Route("/dances/{slug}", name="dance")
