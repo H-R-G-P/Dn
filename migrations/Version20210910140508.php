@@ -23,6 +23,7 @@ final class Version20210910140508 extends AbstractMigration
         $this->addSql('ALTER TABLE dance ADD slug VARCHAR(165) NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_184BFD6F5E237E06 ON dance (name)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_184BFD6F989D9B62 ON dance (slug)');
+        $this->addSql('ALTER TABLE version ADD slug VARCHAR(110) NOT NULL, ADD youtube VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
@@ -31,5 +32,6 @@ final class Version20210910140508 extends AbstractMigration
         $this->addSql('DROP INDEX UNIQ_184BFD6F5E237E06 ON dance');
         $this->addSql('DROP INDEX UNIQ_184BFD6F989D9B62 ON dance');
         $this->addSql('ALTER TABLE dance DROP slug');
+        $this->addSql('ALTER TABLE version DROP slug, DROP youtube');
     }
 }

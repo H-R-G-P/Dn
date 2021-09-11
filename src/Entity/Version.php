@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VersionRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +34,16 @@ class Version
      */
     private int $views;
 
+    /**
+     * @ORM\Column(type="string", length=110)
+     */
+    private string $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $youtube;
+
     public function getId(): int
     {
         return $this->id;
@@ -59,6 +70,8 @@ class Version
     {
         $this->name = $name;
 
+        $this->slug = Slugify::create()->slugify($name);
+
         return $this;
     }
 
@@ -70,6 +83,23 @@ class Version
     public function subView(): self
     {
         $this->views++;
+
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function getYoutube(): ?string
+    {
+        return $this->youtube;
+    }
+
+    public function setYoutube(?string $youtube): self
+    {
+        $this->youtube = $youtube;
 
         return $this;
     }
