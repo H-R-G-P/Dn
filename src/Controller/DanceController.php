@@ -50,8 +50,8 @@ class DanceController extends AbstractController
         }
 
         $session = $requestStack->getSession();
-        if (!$session->has($dance->getId())) {
-            $session->set($dance->getId(), 'This dance already was viewed.');
+        if (!$session->has($dance->getId().'Dance')) {
+            $session->set($dance->getId().'Dance', 'This dance already was viewed.');
             $dance->subView();
             $entityManager->flush();
         }
@@ -89,8 +89,8 @@ class DanceController extends AbstractController
         $dance = $version->getIdDance();
         $session = $requestStack->getSession();
 
-        if (!$session->has($dance->getId())) {
-            $session->set($dance->getId(), 'This dance already was viewed.');
+        if (!$session->has($dance->getId().'Dance')) {
+            $session->set($dance->getId().'Dance', 'This dance already was viewed.');
             $dance->subView();
             $entityManager->flush();
         }
