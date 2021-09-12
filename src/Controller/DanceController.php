@@ -69,4 +69,41 @@ class DanceController extends AbstractController
             'versions' => $versions,
         ]);
     }
+
+    /**
+     * @Route("/dances/{slugDance}/{slugVersion}")
+     *
+     * @param string $slugDance
+     * @param string $slugVersion
+     * @param RequestStack $requestStack
+     * @param VersionRepository $versionRepository
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return Response
+     */
+    public function showVersion(string $slugDance, string $slugVersion, RequestStack $requestStack, VersionRepository $versionRepository, EntityManagerInterface $entityManager) : Response
+    {
+        $version = $versionRepository->findOneBy([
+            'slug' => $slugVersion,
+        ]);
+        $dance = $version->getIdDance();
+        $session = $requestStack->getSession();
+
+        if (!$session->has($dance->getId())) {
+            $session->set($dance->getId(), 'This dance already was viewed.');
+            $dance->subView();
+            $entityManager->flush();
+        }
+
+        if (!$session->has($version->getId().'Version')) {
+            $session->set($version->getId().'Version', 'This version already was viewed.');
+            $version->subView();
+            $entityManager->flush();
+        }
+
+        return $this->render('dance/show_version.html.twig', [
+            'dance' => $dance,
+            'version' => $version,
+        ]);
+    }
 }
