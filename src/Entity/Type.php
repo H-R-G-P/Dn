@@ -28,7 +28,7 @@ class Type
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="type")
      */
-    private ArrayCollection $dances;
+    private $dances;
 
     /**
      * @ORM\Column(type="integer")

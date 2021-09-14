@@ -28,7 +28,7 @@ class Region
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="region")
      */
-    private ArrayCollection $dances;
+    private $dances;
 
     /**
      * @ORM\Column(type="string", length=110, unique=true)

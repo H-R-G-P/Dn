@@ -32,7 +32,7 @@ class Dance
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
      */
-    private ArrayCollection $versions;
+    private $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
