@@ -93,4 +93,9 @@ class Region
     {
         return $this->slug;
     }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }

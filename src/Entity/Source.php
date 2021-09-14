@@ -159,4 +159,9 @@ class Source
     {
         $this->from = $from;
     }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }
