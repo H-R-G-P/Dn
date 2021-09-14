@@ -4,6 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Type;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TypeCrudController extends AbstractCrudController
 {
@@ -12,14 +16,15 @@ class TypeCrudController extends AbstractCrudController
         return Type::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield TextField::new('name');
+        yield IntegerField::new('dancers');
+        yield SlugField::new('slug')->setTargetFieldName('name');
+        yield BooleanField::new('isGroup');
+        yield BooleanField::new('isMan');
+        yield BooleanField::new('isWoman');
     }
-    */
+
 }
