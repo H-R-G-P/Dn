@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Dance;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -16,6 +17,14 @@ class DanceCrudController extends AbstractCrudController
         return Dance::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Dance')
+            ->setEntityLabelInPlural('Dances')
+            ->setSearchFields(['name'])
+            ->setDefaultSort(['name' => 'ASC']);
+    }
 
     public function configureFields(string $pageName): iterable
     {

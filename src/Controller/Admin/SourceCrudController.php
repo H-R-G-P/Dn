@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Source;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -15,6 +16,14 @@ class SourceCrudController extends AbstractCrudController
         return Source::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Source')
+            ->setEntityLabelInPlural('Sources')
+            ->setSearchFields(['name', 'nameShort'])
+            ->setDefaultSort(['name' => 'ASC']);
+    }
 
     public function configureFields(string $pageName): iterable
     {
