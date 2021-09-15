@@ -34,10 +34,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-        yield MenuItem::linkToCrud('Dances', 'fas fa-map-marker-alt', Dance::class);
-        yield MenuItem::linkToCrud('Regions', 'fas fa-comments', Region::class);
-        yield MenuItem::linkToCrud('Sources', 'fas fa-map-marker-alt', Source::class);
-        yield MenuItem::linkToCrud('Types', 'fas fa-map-marker-alt', Type::class);
-        yield MenuItem::linkToCrud('Versions', 'fas fa-map-marker-alt', Version::class);
+        yield MenuItem::linkToCrud('Dances', 'fas fa-user-friends', Dance::class);
+        yield MenuItem::linkToCrud('Regions', 'fas fa-map-marker-alt', Region::class);
+        yield MenuItem::linkToCrud('Sources', 'fab fa-sourcetree', Source::class);
+        yield MenuItem::linkToCrud('Types', 'fab fa-tumblr', Type::class);
+        yield MenuItem::linkToCrud('Versions', 'fas fa-code-branch', Version::class);
     }
 }
