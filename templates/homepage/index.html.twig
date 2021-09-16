@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <div class="list-group list-group-flush">
                             {% for type in types %}
-                                <a href="#{# TODO вставить ссылку на страницу типа #}" class="list-group-item list-group-item-action">
+                                <a href="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
                                     {{ type.name }}({{ type.dances|length }})
                                 </a>
                             {% endfor %}
@@ -49,7 +49,7 @@
                     <div class="card-body">
                         <div class="list-group list-group-flush">
                             {% for source in sources %}
-                                <a href="#{# TODO вставить ссылку на страницу ресурса #}" class="list-group-item list-group-item-action">
+                                <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
                                     {{ source.name }}({{ source.dances|length }})
                                 </a>
                             {% endfor %}
@@ -65,7 +65,7 @@
                     <div class="card-body">
                         <div class="list-group list-group-flush">
                             {% for dance in top_ten_dances %}
-                                <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
+                                <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
                                     {{ dance.name }}({{ dance.versions|length }})
                                 </a>
                             {% endfor %}

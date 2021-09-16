@@ -71,7 +71,7 @@ class DanceController extends AbstractController
     }
 
     /**
-     * @Route("/dances/{slugDance}/{slugVersion}")
+     * @Route("/dances/{slugDance}/{slugVersion}", name="version")
      *
      * @param string $slugDance
      * @param string $slugVersion

@@ -26,7 +26,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/type/{slug}", name="show_type")
+     * @Route("/type/{slug}", name="type")
      *
      * @param string $slug
      * @param TypeRepository $typeRepository

@@ -16,7 +16,7 @@
             <div class="col">
                 <div class="list-group list-group-flush">
                     {% for version in versions %}
-                        <a href="#{# TODO вставить ссылку на страницу версии #}" class="list-group-item list-group-item-action">
+                        <a href="{{ url('version', {'slugDance': dance.slug, 'slugVersion': version.slug}) }}" class="list-group-item list-group-item-action">
                             {{ version.name }} ({{ version.views }})
                         </a>
                     {% endfor %}

@@ -16,7 +16,7 @@
             <div class="col">
                 <div class="list-group list-group-flush">
                     {% for dance in source.dances %}
-                        <a href="#{# TODO вставить ссылку на страницу танца #}" class="list-group-item list-group-item-action">
+                        <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
                             {{ dance.name }}
                         </a>
                     {% endfor %}
