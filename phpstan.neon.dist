@@ -6,3 +6,5 @@ parameters:
         - tests
     excludePaths:
         - tests/bootstrap.php
+    ignoreErrors:
+        - '#Attribute class JetBrains\\PhpStorm\\Pure does not exist.#'
