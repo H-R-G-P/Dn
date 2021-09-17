@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Dance;
+use App\Entity\Version;
 use App\Repository\DanceRepository;
 use App\Repository\VersionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +17,7 @@ class DanceController extends AbstractController
     /**
      * @Route("/dances", name="dances")
      *
-     * @param DanceRepository $danceRepository
+     * @param DanceRepository<Dance> $danceRepository
      *
      * @return Response
      */
@@ -33,8 +35,8 @@ class DanceController extends AbstractController
      *
      * @param string $slug
      * @param RequestStack $requestStack
-     * @param DanceRepository $danceRepository
-     * @param VersionRepository $versionRepository
+     * @param DanceRepository<Dance> $danceRepository
+     * @param VersionRepository<Version> $versionRepository
      * @param EntityManagerInterface $entityManager
      *
      * @return Response
@@ -75,7 +77,7 @@ class DanceController extends AbstractController
      *
      * @param string $slugVersion
      * @param RequestStack $requestStack
-     * @param VersionRepository $versionRepository
+     * @param VersionRepository<Version> $versionRepository
      * @param EntityManagerInterface $entityManager
      *
      * @return Response

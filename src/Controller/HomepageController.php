@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Dance;
+use App\Entity\Region;
+use App\Entity\Source;
+use App\Entity\Type;
 use App\Repository\DanceRepository;
 use App\Repository\RegionRepository;
 use App\Repository\SourceRepository;
@@ -15,10 +19,10 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="homepage")
      *
-     * @param RegionRepository $regionRepository
-     * @param TypeRepository $typeRepository
-     * @param SourceRepository $sourceRepository
-     * @param DanceRepository $danceRepository
+     * @param RegionRepository<Region> $regionRepository
+     * @param TypeRepository<Type> $typeRepository
+     * @param SourceRepository<Source> $sourceRepository
+     * @param DanceRepository<Dance> $danceRepository
      *
      * @return Response
      */

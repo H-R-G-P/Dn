@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Source;
 use App\Repository\SourceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ class SourceController extends AbstractController
     /**
      * @Route("/sources", name="sources")
      *
-     * @param SourceRepository $sourceRepository
+     * @param SourceRepository<Source> $sourceRepository
      *
      * @return Response
      */
@@ -29,7 +30,7 @@ class SourceController extends AbstractController
      * @Route("/sources/{slug}", name="source")
      *
      * @param string $slug
-     * @param SourceRepository $sourceRepository
+     * @param SourceRepository<Source> $sourceRepository
      *
      * @return Response
      */

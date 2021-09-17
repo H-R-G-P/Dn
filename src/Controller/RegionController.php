@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Region;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\RegionRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ class RegionController extends AbstractController
     /**
      * @Route("/regions", name="regions")
      *
-     * @param RegionRepository $regionRepository
+     * @param RegionRepository<Region> $regionRepository
      *
      * @return Response
      */
@@ -29,7 +30,7 @@ class RegionController extends AbstractController
      * @Route("/regions/{slug}", name="region")
      *
      * @param string $slug
-     * @param RegionRepository $regionRepository
+     * @param RegionRepository<Region> $regionRepository
      *
      * @return Response
      */
