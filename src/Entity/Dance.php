@@ -7,6 +7,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=DanceRepository::class)
@@ -32,8 +33,10 @@ class Dance
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
+     *
+     * @var Collection<int, Version>
      */
-    private $versions;
+    private Collection $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
@@ -55,7 +58,7 @@ class Dance
      */
     private string $slug;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->versions = new ArrayCollection();
     }
@@ -92,7 +95,7 @@ class Dance
     }
 
     /**
-     * @return Collection
+     * @return Collection<int, Version>
      */
     public function getVersions(): Collection
     {
