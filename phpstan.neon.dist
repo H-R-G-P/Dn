@@ -6,5 +6,6 @@ parameters:
         - tests
     excludePaths:
         - tests/bootstrap.php
+        - src/Security/AppAuthenticator.php
     ignoreErrors:
         - '#Attribute class JetBrains\\PhpStorm\\Pure does not exist.#'
