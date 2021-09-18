@@ -22,7 +22,7 @@ class Version
      * @ORM\ManyToOne(targetEntity=Dance::class, inversedBy="versions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Dance $id_dance;
+    private Dance $id_dance;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -49,12 +49,12 @@ class Version
         return $this->id;
     }
 
-    public function getIdDance(): ?Dance
+    public function getIdDance(): Dance
     {
         return $this->id_dance;
     }
 
-    public function setIdDance(?Dance $id_dance): self
+    public function setIdDance(Dance $id_dance): self
     {
         $this->id_dance = $id_dance;
 

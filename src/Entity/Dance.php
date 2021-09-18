@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\DanceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
@@ -117,7 +116,7 @@ class Dance
         if ($this->versions->removeElement($version)) {
             // set the owning side to null (unless already changed)
             if ($version->getIdDance() === $this) {
-                $version->setIdDance(null);
+                $version = null;
             }
         }
 

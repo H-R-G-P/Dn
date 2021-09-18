@@ -88,7 +88,7 @@ class DanceController extends AbstractController
             'slug' => $slugVersion,
         ]);
 
-        if ($version === null || $version->getIdDance() === null){
+        if ($version === null){
             return $this->redirectToRoute('dances');
         }
         else{
