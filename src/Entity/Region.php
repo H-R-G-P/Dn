@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RegionRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
@@ -28,9 +29,9 @@ class Region
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="region")
      *
-     * @var ArrayCollection<int, Dance>
+     * @var Collection<int, Dance>
      */
-    private ArrayCollection $dances;
+    private Collection $dances;
 
     /**
      * @ORM\Column(type="string", length=110, unique=true)
@@ -62,9 +63,9 @@ class Region
     }
 
     /**
-     * @return ArrayCollection<int, Dance>
+     * @return Collection<int, Dance>
      */
-    public function getDances(): ArrayCollection
+    public function getDances(): Collection
     {
         return $this->dances;
     }

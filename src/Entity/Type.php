@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TypeRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
@@ -28,9 +29,9 @@ class Type
     /**
      * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="type")
      *
-     * @var ArrayCollection<int, Dance>
+     * @var Collection<int, Dance>
      */
-    private ArrayCollection $dances;
+    private Collection $dances;
 
     /**
      * @ORM\Column(type="integer")
@@ -82,9 +83,9 @@ class Type
     }
 
     /**
-     * @return ArrayCollection<int, Dance>
+     * @return Collection<int, Dance>
      */
-    public function getDances(): ArrayCollection
+    public function getDances(): Collection
     {
         return $this->dances;
     }
