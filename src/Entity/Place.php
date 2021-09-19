@@ -18,7 +18,7 @@ class Place
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=3)
      */
     private string $category;
 
