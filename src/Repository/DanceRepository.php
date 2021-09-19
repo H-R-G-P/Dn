@@ -11,6 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Dance|null findOneBy(array $criteria, array $orderBy = null)
  * @method Dance[]    findAll()
  * @method Dance[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template Dance
+ * @extends ServiceEntityRepository<Dance::class>
  */
 class DanceRepository extends ServiceEntityRepository
 {

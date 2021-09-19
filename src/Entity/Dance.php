@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Repository\DanceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=DanceRepository::class)
@@ -32,30 +32,32 @@ class Dance
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
+     *
+     * @var ArrayCollection<int, Version>
      */
-    private $versions;
+    private ArrayCollection $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
      */
-    private Region $region;
+    private ?Region $region;
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="dances")
      */
-    private Type $type;
+    private ?Type $type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="dances")
      */
-    private Source $source;
+    private ?Source $source;
 
     /**
      * @ORM\Column(type="string", length=165, unique=true)
      */
     private string $slug;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->versions = new ArrayCollection();
     }
@@ -92,9 +94,9 @@ class Dance
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection<int, Version>
      */
-    public function getVersions(): Collection
+    public function getVersions(): ArrayCollection
     {
         return $this->versions;
     }
@@ -114,43 +116,43 @@ class Dance
         if ($this->versions->removeElement($version)) {
             // set the owning side to null (unless already changed)
             if ($version->getIdDance() === $this) {
-                $version->setIdDance(null);
+                $version = null;
             }
         }
 
         return $this;
     }
 
-    public function getRegion(): Region
+    public function getRegion(): ?Region
     {
         return $this->region;
     }
 
-    public function setRegion(Region $region): self
+    public function setRegion(?Region $region): self
     {
         $this->region = $region;
 
         return $this;
     }
 
-    public function getType(): Type
+    public function getType(): ?Type
     {
         return $this->type;
     }
 
-    public function setType(Type $type): self
+    public function setType(?Type $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getSource(): Source
+    public function getSource(): ?Source
     {
         return $this->source;
     }
 
-    public function setSource(Source $source): self
+    public function setSource(?Source $source): self
     {
         $this->source = $source;
 

@@ -1,0 +1,11 @@
+parameters:
+    phpVersion: 80080
+    level: 8
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - tests/bootstrap.php
+        - src/Security/AppAuthenticator.php
+    ignoreErrors:
+        - '#Attribute class JetBrains\\PhpStorm\\Pure does not exist.#'

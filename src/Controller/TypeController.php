@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Type;
 use App\Repository\TypeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ class TypeController extends AbstractController
     /**
      * @Route("/types", name="types")
      *
-     * @param TypeRepository $typeRepository
+     * @param TypeRepository<Type> $typeRepository
      *
      * @return Response
      */
@@ -29,7 +30,7 @@ class TypeController extends AbstractController
      * @Route("/type/{slug}", name="type")
      *
      * @param string $slug
-     * @param TypeRepository $typeRepository
+     * @param TypeRepository<Type> $typeRepository
      *
      * @return Response
      */

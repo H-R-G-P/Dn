@@ -11,6 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Version|null findOneBy(array $criteria, array $orderBy = null)
  * @method Version[]    findAll()
  * @method Version[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template Version
+ * @extends ServiceEntityRepository<Version::class>
  */
 class VersionRepository extends ServiceEntityRepository
 {

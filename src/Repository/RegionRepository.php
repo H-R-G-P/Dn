@@ -11,6 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Region|null findOneBy(array $criteria, array $orderBy = null)
  * @method Region[]    findAll()
  * @method Region[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template Region
+ * @extends ServiceEntityRepository<Region::class>
  */
 class RegionRepository extends ServiceEntityRepository
 {
