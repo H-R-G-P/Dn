@@ -33,9 +33,9 @@ class Place
     private ?District $district_id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="places")
      */
-    private int $department_id;
+    private ?Department $department_id;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -93,12 +93,12 @@ class Place
         return $this;
     }
 
-    public function getDepartmentId(): int
+    public function getDepartmentId(): ?Department
     {
         return $this->department_id;
     }
 
-    public function setDepartmentId(int $department_id): self
+    public function setDepartmentId(?Department $department_id): self
     {
         $this->department_id = $department_id;
 
