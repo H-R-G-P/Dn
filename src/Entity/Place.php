@@ -26,7 +26,7 @@ class Place
     private string $category;
 
     /**
-     * @ORM\Column(type="string", length=150, unique=true)
+     * @ORM\Column(type="string", length=150)
      */
     private string $name;
 

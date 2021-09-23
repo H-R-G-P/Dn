@@ -24,6 +24,7 @@ final class Version20210923134111 extends AbstractMigration
         $this->addSql('ALTER TABLE district ADD department_id_id INT DEFAULT NULL, DROP department_id');
         $this->addSql('ALTER TABLE district ADD CONSTRAINT FK_31C1548764E7214B FOREIGN KEY (department_id_id) REFERENCES department (id)');
         $this->addSql('CREATE INDEX IDX_31C1548764E7214B ON district (department_id_id)');
+        $this->addSql('DROP INDEX UNIQ_741D53CD5E237E06 ON place');
         $this->addSql('ALTER TABLE place ADD department_id_id INT DEFAULT NULL, DROP department_id');
         $this->addSql('ALTER TABLE place ADD CONSTRAINT FK_741D53CD64E7214B FOREIGN KEY (department_id_id) REFERENCES department (id)');
         $this->addSql('CREATE INDEX IDX_741D53CD64E7214B ON place (department_id_id)');
@@ -42,6 +43,7 @@ final class Version20210923134111 extends AbstractMigration
         $this->addSql('ALTER TABLE district ADD department_id INT NOT NULL, DROP department_id_id');
         $this->addSql('DROP INDEX IDX_741D53CD64E7214B ON place');
         $this->addSql('ALTER TABLE place ADD department_id INT NOT NULL, DROP department_id_id');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_741D53CD5E237E06 ON place (name)');
         $this->addSql('ALTER TABLE version DROP FOREIGN KEY FK_BF1CD3C3DA6A219');
         $this->addSql('DROP INDEX IDX_BF1CD3C3DA6A219 ON version');
         $this->addSql('ALTER TABLE version DROP place_id');
