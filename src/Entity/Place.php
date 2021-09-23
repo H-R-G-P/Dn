@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\PlaceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
@@ -51,6 +54,18 @@ class Place
      * @ORM\Column(type="string", length=150, nullable=true)
      */
     private ?string $comment;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="place")
+     *
+     * @var ArrayCollection<int, Version>
+     */
+    private ArrayCollection $versions;
+
+    #[Pure] public function __construct()
+    {
+        $this->versions = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -137,6 +152,36 @@ class Place
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<int, Version>
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->removeElement($version)) {
+            // set the owning side to null (unless already changed)
+            if ($version->getPlace() === $this) {
+                $version->setPlace(null);
+            }
+        }
 
         return $this;
     }
