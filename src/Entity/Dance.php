@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DanceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
@@ -33,9 +34,9 @@ class Dance
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
      *
-     * @var ArrayCollection<int, Version>
+     * @var Collection<int, Version>
      */
-    private ArrayCollection $versions;
+    private Collection $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
@@ -94,9 +95,9 @@ class Dance
     }
 
     /**
-     * @return ArrayCollection<int, Version>
+     * @return Collection<int, Version>
      */
-    public function getVersions(): ArrayCollection
+    public function getVersions(): Collection
     {
         return $this->versions;
     }
