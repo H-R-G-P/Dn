@@ -26,13 +26,6 @@ class Department
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=District::class, mappedBy="department_id")
-     *
-     * @var ArrayCollection<int, District>
-     */
-    private ArrayCollection $districts;
-
-    /**
      * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department_id", orphanRemoval=true)
      *
      * @var ArrayCollection<int, Place>
@@ -41,7 +34,6 @@ class Department
 
     #[Pure] public function __construct()
     {
-        $this->districts = new ArrayCollection();
         $this->places = new ArrayCollection();
     }
 
@@ -58,36 +50,6 @@ class Department
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection<int, District>
-     */
-    public function getDistricts(): Collection
-    {
-        return $this->districts;
-    }
-
-    public function addDistrict(District $district): self
-    {
-        if (!$this->districts->contains($district)) {
-            $this->districts[] = $district;
-            $district->setDepartmentId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDistrict(District $district): self
-    {
-        if ($this->districts->removeElement($district)) {
-            // set the owning side to null (unless already changed)
-            if ($district->getDepartmentId() === $this) {
-                $district->setDepartmentId(null);
-            }
-        }
 
         return $this;
     }

@@ -31,11 +31,6 @@ class Place
     private string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=District::class, inversedBy="places")
-     */
-    private ?District $district_id;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="places")
      */
     private ?Department $department_id;
@@ -92,18 +87,6 @@ class Place
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDistrictId(): ?District
-    {
-        return $this->district_id;
-    }
-
-    public function setDistrictId(?District $district_id): self
-    {
-        $this->district_id = $district_id;
 
         return $this;
     }
