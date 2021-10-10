@@ -44,6 +44,11 @@ class Version
      */
     private ?string $youtube;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="versions")
+     */
+    private ?Place $place;
+
     public function getId(): int
     {
         return $this->id;
@@ -107,5 +112,17 @@ class Version
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?Place $place): self
+    {
+        $this->place = $place;
+
+        return $this;
     }
 }
