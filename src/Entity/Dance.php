@@ -39,11 +39,6 @@ class Dance
     private Collection $versions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="dances")
-     */
-    private ?Region $region;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="dances")
      */
     private ?Type $type;
@@ -120,18 +115,6 @@ class Dance
                 $version = null;
             }
         }
-
-        return $this;
-    }
-
-    public function getRegion(): ?Region
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?Region $region): self
-    {
-        $this->region = $region;
 
         return $this;
     }
