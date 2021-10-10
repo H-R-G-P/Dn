@@ -32,9 +32,17 @@ class Department
      */
     private ArrayCollection $places;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Region::class, mappedBy="dapartment", orphanRemoval=true)
+     *
+     * @var Collection<int, Region>
+     */
+    private Collection $regions;
+
     #[Pure] public function __construct()
     {
         $this->places = new ArrayCollection();
+        $this->regions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -78,6 +86,36 @@ class Department
             // set the owning side to null (unless already changed)
             if ($place->getDepartmentId() === $this) {
                 $place->setDepartmentId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Region>
+     */
+    public function getRegions(): Collection
+    {
+        return $this->regions;
+    }
+
+    public function addRegion(Region $region): self
+    {
+        if (!$this->regions->contains($region)) {
+            $this->regions[] = $region;
+            $region->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegion(Region $region): self
+    {
+        if ($this->regions->removeElement($region)) {
+            // set the owning side to null (unless already changed)
+            if ($region->getDepartment() === $this) {
+                $region = null;
             }
         }
 

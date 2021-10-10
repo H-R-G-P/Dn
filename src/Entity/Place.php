@@ -57,6 +57,11 @@ class Place
      */
     private ArrayCollection $versions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="places")
+     */
+    private ?Region $region;
+
     #[Pure] public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -165,6 +170,18 @@ class Place
                 $version->setPlace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
 
         return $this;
     }
