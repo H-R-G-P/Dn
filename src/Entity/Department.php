@@ -28,9 +28,9 @@ class Department
     /**
      * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department_id", orphanRemoval=true)
      *
-     * @var ArrayCollection<int, Place>
+     * @var Collection<int, Place>
      */
-    private ArrayCollection $places;
+    private Collection $places;
 
     /**
      * @ORM\OneToMany(targetEntity=Region::class, mappedBy="dapartment", orphanRemoval=true)
@@ -63,7 +63,7 @@ class Department
     }
 
     /**
-     * @return ArrayCollection<int, Place>
+     * @return Collection<int, Place>
      */
     public function getPlaces(): Collection
     {

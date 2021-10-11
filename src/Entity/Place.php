@@ -53,9 +53,9 @@ class Place
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="place")
      *
-     * @var ArrayCollection<int, Version>
+     * @var Collection<int, Version>
      */
-    private ArrayCollection $versions;
+    private Collection $versions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="places")
@@ -145,7 +145,7 @@ class Place
     }
 
     /**
-     * @return ArrayCollection<int, Version>
+     * @return Collection<int, Version>
      */
     public function getVersions(): Collection
     {
