@@ -119,4 +119,21 @@ class Region
 
         return $this;
     }
+
+    /**
+     * @return array<int, Dance>
+     */
+    public function getDances() : array
+    {
+        $dances = [];
+
+        foreach ($this->getPlaces() as $place) {
+            foreach ($place->getVersions() as $version) {
+                $dance = $version->getIdDance();
+                $dances += [$dance->getId() => $dance];
+            }
+        }
+
+        return $dances;
+    }
 }
