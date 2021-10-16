@@ -9,9 +9,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=23.6%2C51.3%2C32.7%2C56.14&amp;layer=mapnik"
-                        style="border: 1px solid black; width: 100%; height: 300%;">
-                </iframe>
+                <div id="map" style="border: 1px solid black; width: 100%; height: 300%;"></div>
             </div>
             <div class="col">
                 <div class="list-group list-group-flush">
@@ -24,6 +22,8 @@
             </div>
         </div>
     </div>
+    <div hidden id="region_obj">{{ region_json|raw }}</div>
+    <div hidden id="polygon">{{ polygon|raw }}</div>
 {% endblock %}
 
 {% block javascripts %}
