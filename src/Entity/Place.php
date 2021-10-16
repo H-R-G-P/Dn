@@ -113,7 +113,7 @@ class Place
         return $this->lon;
     }
 
-    public function setLon(float $lon): self
+    public function setLon(?float $lon): self
     {
         $this->lon = $lon;
 
@@ -125,7 +125,7 @@ class Place
         return $this->lat;
     }
 
-    public function setLat(float $lat): self
+    public function setLat(?float $lat): self
     {
         $this->lat = $lat;
 
