@@ -33,7 +33,7 @@ class Department
     private Collection $places;
 
     /**
-     * @ORM\OneToMany(targetEntity=Region::class, mappedBy="dapartment", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Region::class, mappedBy="department", orphanRemoval=true)
      *
      * @var Collection<int, Region>
      */
