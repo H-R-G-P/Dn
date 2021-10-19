@@ -1,17 +1,19 @@
-let map = L.map('map');
+let map = L.map('map').setView([53.900372, 27.558951], 6);
+let polygon = JSON.parse(document.getElementById('polygon').innerText);
+let region = JSON.parse(document.getElementById('region_obj').innerText)
 
 $( document ).ready(function() {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    if (JSON.parse($('#polygon')) === null){
+    if (polygon === null){
         setBelMap();
     }else {
-        setMap(JSON.parse($('#map_corners')));
+        setMap(polygon);
     }
 
-    setMarkers(JSON.parse($('#region_obj')));
+    setMarkers(region);
 });
 
 function setBelMap() {
@@ -23,20 +25,25 @@ function setBelMap() {
 }
 
 function setMap(polygon) {
-    let southWest = new L.LatLng(polygon.getTop(), polygon.getRight()),
-        northEast = new L.LatLng(polygon.getBottom(), polygon.getleft()),
+    let southWest = new L.LatLng(polygon.top, polygon.right),
+        northEast = new L.LatLng(polygon.bottom, polygon.left),
         bounds = new L.LatLngBounds(southWest, northEast);
 
     map.fitBounds(bounds);
 }
 
 function setMarkers(region) {
-    for (let place in region.getPlaces()) {
-        let lat = place.getLat(),
-            lon = place.getLon();
+    let defIcon = L.icon({
+        iconUrl: "/build/images/marker-icon.2b3e1faf.png",
+        iconSize:     [20, 35]
+    });
+
+    region.places.forEach(function (place) {
+        let lat = place.lat,
+            lon = place.lon;
 
         if (lat && lon){
-            L.marker([lat, lon]).addTo(map);
+            L.marker([lat, lon], {icon: defIcon}).addTo(map);
         }
-    }
+    });
 }
