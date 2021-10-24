@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Dance;
+use App\Entity\Department;
+use App\Entity\Place;
 use App\Entity\Region;
 use App\Entity\Source;
 use App\Entity\Type;
@@ -35,6 +37,8 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('Dances', 'fas fa-user-friends', Dance::class);
+        yield MenuItem::linkToCrud('Department', 'fas fa-map-marker-alt', Department::class);
+        yield MenuItem::linkToCrud('Place', 'fas fa-map-marker-alt', Place::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marker-alt', Region::class);
         yield MenuItem::linkToCrud('Sources', 'fab fa-sourcetree', Source::class);
         yield MenuItem::linkToCrud('Types', 'fab fa-tumblr', Type::class);

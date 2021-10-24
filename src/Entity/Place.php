@@ -31,11 +31,6 @@ class Place
     private string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=District::class, inversedBy="places")
-     */
-    private ?District $district_id;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="places")
      */
     private ?Department $department_id;
@@ -58,9 +53,14 @@ class Place
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="place")
      *
-     * @var ArrayCollection<int, Version>
+     * @var Collection<int, Version>
      */
-    private ArrayCollection $versions;
+    private Collection $versions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="places")
+     */
+    private ?Region $region;
 
     #[Pure] public function __construct()
     {
@@ -92,18 +92,6 @@ class Place
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDistrictId(): ?District
-    {
-        return $this->district_id;
-    }
-
-    public function setDistrictId(?District $district_id): self
-    {
-        $this->district_id = $district_id;
 
         return $this;
     }
@@ -157,7 +145,7 @@ class Place
     }
 
     /**
-     * @return ArrayCollection<int, Version>
+     * @return Collection<int, Version>
      */
     public function getVersions(): Collection
     {
@@ -184,5 +172,22 @@ class Place
         }
 
         return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

@@ -26,23 +26,23 @@ class Department
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=District::class, mappedBy="department_id")
-     *
-     * @var ArrayCollection<int, District>
-     */
-    private ArrayCollection $districts;
-
-    /**
      * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department_id", orphanRemoval=true)
      *
-     * @var ArrayCollection<int, Place>
+     * @var Collection<int, Place>
      */
-    private ArrayCollection $places;
+    private Collection $places;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Region::class, mappedBy="dapartment", orphanRemoval=true)
+     *
+     * @var Collection<int, Region>
+     */
+    private Collection $regions;
 
     #[Pure] public function __construct()
     {
-        $this->districts = new ArrayCollection();
         $this->places = new ArrayCollection();
+        $this->regions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -63,37 +63,7 @@ class Department
     }
 
     /**
-     * @return ArrayCollection<int, District>
-     */
-    public function getDistricts(): Collection
-    {
-        return $this->districts;
-    }
-
-    public function addDistrict(District $district): self
-    {
-        if (!$this->districts->contains($district)) {
-            $this->districts[] = $district;
-            $district->setDepartmentId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDistrict(District $district): self
-    {
-        if ($this->districts->removeElement($district)) {
-            // set the owning side to null (unless already changed)
-            if ($district->getDepartmentId() === $this) {
-                $district->setDepartmentId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection<int, Place>
+     * @return Collection<int, Place>
      */
     public function getPlaces(): Collection
     {
@@ -120,5 +90,40 @@ class Department
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Region>
+     */
+    public function getRegions(): Collection
+    {
+        return $this->regions;
+    }
+
+    public function addRegion(Region $region): self
+    {
+        if (!$this->regions->contains($region)) {
+            $this->regions[] = $region;
+            $region->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegion(Region $region): self
+    {
+        if ($this->regions->removeElement($region)) {
+            // set the owning side to null (unless already changed)
+            if ($region->getDepartment() === $this) {
+                $region = null;
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

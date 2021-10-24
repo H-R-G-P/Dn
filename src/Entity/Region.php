@@ -27,20 +27,26 @@ class Region
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="region")
-     *
-     * @var Collection<int, Dance>
-     */
-    private Collection $dances;
-
-    /**
      * @ORM\Column(type="string", length=110, unique=true)
      */
     private string $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="regions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private Department $department;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="region")
+     *
+     * @var Collection<int, Place>
+     */
+    private Collection $places;
+
     #[Pure] public function __construct()
     {
-        $this->dances = new ArrayCollection();
+        $this->places = new ArrayCollection();
     }
 
     public function getId(): int
@@ -62,36 +68,6 @@ class Region
         return $this;
     }
 
-    /**
-     * @return Collection<int, Dance>
-     */
-    public function getDances(): Collection
-    {
-        return $this->dances;
-    }
-
-    public function addDance(Dance $dance): self
-    {
-        if (!$this->dances->contains($dance)) {
-            $this->dances[] = $dance;
-            $dance->setRegion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDance(Dance $dance): self
-    {
-        if ($this->dances->removeElement($dance)) {
-            // set the owning side to null (unless already changed)
-            if ($dance->getRegion() === $this) {
-                $dance->setRegion(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -100,5 +76,64 @@ class Region
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getDepartment(): Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(Department $department): self
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Place>
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): self
+    {
+        if (!$this->places->contains($place)) {
+            $this->places[] = $place;
+            $place->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): self
+    {
+        if ($this->places->removeElement($place)) {
+            // set the owning side to null (unless already changed)
+            if ($place->getRegion() === $this) {
+                $place->setRegion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<int, Dance>
+     */
+    public function getDances() : array
+    {
+        $dances = [];
+
+        foreach ($this->getPlaces() as $place) {
+            foreach ($place->getVersions() as $version) {
+                $dance = $version->getIdDance();
+                $dances += [$dance->getId() => $dance];
+            }
+        }
+
+        return $dances;
     }
 }
