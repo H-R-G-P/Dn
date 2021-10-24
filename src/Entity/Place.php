@@ -62,9 +62,11 @@ class Place
      */
     private ?Region $region;
 
-    #[Pure] public function __construct()
+    #[Pure] public function __construct(?float $lat, ?float $lon)
     {
         $this->versions = new ArrayCollection();
+        $this->lat = $lat;
+        $this->lon = $lon;
     }
 
     public function getId(): int
