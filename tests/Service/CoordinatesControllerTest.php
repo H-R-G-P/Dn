@@ -47,9 +47,9 @@ class CoordinatesControllerTest extends TestCase
             $polygon = null;
             $polygon = $service->getPolygon($collection);
             self::assertSame($polygon->getTop(), $collection->getValues()[2]->getLat());
-            self::assertSame($polygon->getRight(), $collection->getValues()[1]->getLat());
+            self::assertSame($polygon->getRight(), $collection->getValues()[1]->getLon());
             self::assertSame($polygon->getBottom(), $collection->getValues()[0]->getLat());
-            self::assertSame($polygon->getLeft(), $collection->getValues()[0]->getLat());
+            self::assertSame($polygon->getLeft(), $collection->getValues()[0]->getLon());
         }catch (\Exception $e) {
             self::assertInstanceOf(Polygon::class, $polygon);
         }
