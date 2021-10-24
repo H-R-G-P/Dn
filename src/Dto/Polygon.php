@@ -26,19 +26,27 @@ class Polygon
     private float $left;
 
     /**
+     * Polygon constructor.
+     *
+     * @param float $top
+     * @param float $right
+     * @param float $bottom
+     * @param float $left
+     */
+    public function __construct(float $top, float $right, float $bottom, float $left)
+    {
+        $this->top = $top;
+        $this->right = $right;
+        $this->bottom = $bottom;
+        $this->left = $left;
+    }
+
+    /**
      * @return float
      */
     public function getTop(): float
     {
         return $this->top;
-    }
-
-    /**
-     * @param float $top
-     */
-    public function setTop(float $top): void
-    {
-        $this->top = $top;
     }
 
     /**
@@ -50,14 +58,6 @@ class Polygon
     }
 
     /**
-     * @param float $right
-     */
-    public function setRight(float $right): void
-    {
-        $this->right = $right;
-    }
-
-    /**
      * @return float
      */
     public function getBottom(): float
@@ -66,26 +66,10 @@ class Polygon
     }
 
     /**
-     * @param float $bottom
-     */
-    public function setBottom(float $bottom): void
-    {
-        $this->bottom = $bottom;
-    }
-
-    /**
      * @return float
      */
     public function getLeft(): float
     {
         return $this->left;
-    }
-
-    /**
-     * @param float $left
-     */
-    public function setLeft(float $left): void
-    {
-        $this->left = $left;
     }
 }
