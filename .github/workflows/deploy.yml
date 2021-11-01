@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Add ssh private key
-      - run: |
+        run: |
           cd ../
           mkdir .ssh
           echo ${{ env.PRIV_KEY }} > .ssh/id_rsa
