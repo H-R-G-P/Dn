@@ -1,48 +1,32 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Deploy
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
-env:
-  USER_NAME: danik
-  SERVER_HOST: localhost
-  SERVER_PORT: 2200
-  PRIV_KEY: "key"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Create project directory
-        run: |
-          mkdir Dn
-          cd Dn
-    
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Create SSH connection
+        run: ssh root@130.0.235.81
+        
+      - name: Remove project code
+        run: rm -rf *
+        
       - uses: actions/checkout@v2
       
-      - name: Add ssh private key
-        run: |
-          cd ../
-          mkdir .ssh
-          echo ${{ env.PRIV_KEY }} > .ssh/id_rsa
-
-      - name: Create SSH connection
-        run: ssh ${{ env.USER_NAME }}@${{ env.SERVER_HOST }} -p ${{ env.SERVER_PORT }}
+      - name: Composer install
+        run: composer install
         
-      - name: Copy project to server
-        run: scp -r Dn Dn
+      - name: Migrate database
+        run: symfony console doctrine:migrations:migrate
+        
+      - name: To build the assets
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          npm run build
