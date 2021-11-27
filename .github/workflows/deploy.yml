@@ -29,7 +29,10 @@ jobs:
       - name: Install encore
         run: npm install
         
+      #- name: To build the assets
+       # run: |
+        #  export NODE_OPTIONS=--openssl-legacy-provider
+         # npm run build
+        
       - name: To build the assets
-        run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
-          npm run build
+        run: npm run build
