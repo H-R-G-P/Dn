@@ -9,14 +9,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-      - name: Create SSH connection
-        run: ssh root@130.0.235.81
+      #- name: Create SSH connection
+       # run: ssh root@130.0.235.81
         
-      - name: Remove project code
-        run: rm -rf *
+      #- name: Remove project code
+      #  run: rm -rf *
         
       - uses: actions/checkout@v2
       
