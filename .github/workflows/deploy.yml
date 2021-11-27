@@ -33,6 +33,8 @@ jobs:
        # run: |
         #  export NODE_OPTIONS=--openssl-legacy-provider
          # npm run build
+      - name: Set local variables
+        run: export NODE_OPTIONS=--openssl-legacy-provider
         
       - name: To build the assets
         run: yarn encore production
