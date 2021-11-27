@@ -27,7 +27,7 @@ jobs:
         run: symfony console doctrine:migrations:migrate
         
       - name: Install encore
-        run: npm install
+        run: yarn install
         
       #- name: To build the assets
        # run: |
@@ -35,4 +35,4 @@ jobs:
          # npm run build
         
       - name: To build the assets
-        run: npm run build
+        run: yarn encore production
