@@ -26,6 +26,9 @@ jobs:
       - name: Migrate database
         run: symfony console doctrine:migrations:migrate
         
+      - name: Install encore
+        run: npm install
+        
       - name: To build the assets
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
