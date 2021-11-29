@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      #- name: Create SSH connection
+       # run: ssh root@130.0.235.81
+        
+      #- name: Remove project code
+      #  run: rm -rf *
+        
+      - uses: actions/checkout@v2
+      
+      - name: Composer install
+        run: composer install
+        
+      - name: Migrate database
+        run: symfony console doctrine:migrations:migrate
+        
+      - name: Install encore
+        run: yarn install
+        
+      #- name: To build the assets
+       # run: |
+        #  export NODE_OPTIONS=--openssl-legacy-provider
+         # npm run build
+        
+      - name: To build the assets
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          yarn encore production
