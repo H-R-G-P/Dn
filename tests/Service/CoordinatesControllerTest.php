@@ -24,9 +24,7 @@ class CoordinatesControllerTest extends TestCase
             self::assertSame('Minimum 2 places.', $e->getMessage());
         }
 
-        $collection->add((new Place())
-            ->setLat(1.2)
-            ->setLon(1.2));
+        $collection->add(new Place(1.2, 1.2));
 
         try {
             $polygon = null;
@@ -36,20 +34,16 @@ class CoordinatesControllerTest extends TestCase
             self::assertSame('Minimum 2 places.', $e->getMessage());
         }
 
-        $collection->add((new Place())
-            ->setLat(1.4)
-            ->setLon(1.6));
-        $collection->add((new Place())
-            ->setLat(1.7)
-            ->setLon(1.2));
+        $collection->add(new Place(1.4, 1.6));
+        $collection->add(new Place(1.7, 1.2));
 
         try {
             $polygon = null;
             $polygon = $service->getPolygon($collection);
             self::assertSame($polygon->getTop(), $collection->getValues()[2]->getLat());
-            self::assertSame($polygon->getRight(), $collection->getValues()[1]->getLat());
+            self::assertSame($polygon->getRight(), $collection->getValues()[1]->getLon());
             self::assertSame($polygon->getBottom(), $collection->getValues()[0]->getLat());
-            self::assertSame($polygon->getLeft(), $collection->getValues()[0]->getLat());
+            self::assertSame($polygon->getLeft(), $collection->getValues()[0]->getLon());
         }catch (\Exception $e) {
             self::assertInstanceOf(Polygon::class, $polygon);
         }
@@ -60,10 +54,10 @@ class CoordinatesControllerTest extends TestCase
         $service = new CoordinatesService();
         $collection = new ArrayCollection();
 
-        $collection->add((new Place())->setLat(null)->setLon(null));
-        $collection->add((new Place())->setLat(1.2)->setLon(null));
-        $collection->add((new Place())->setLat(null)->setLon(1.2));
-        $collection->add((new Place())->setLon(1.2)->setLat(1.2));
+        $collection->add(new Place(null, null));
+        $collection->add(new Place(1.2, null));
+        $collection->add(new Place(null, 1.2));
+        $collection->add(new Place(1.2, 1.2));
 
         try {
             $polygon = null;
@@ -73,8 +67,8 @@ class CoordinatesControllerTest extends TestCase
             self::assertSame('Minimum 2 places.', $e->getMessage());
         }
 
-        $collection->add((new Place())->setLon(1.2)->setLat(1.2));
-        $collection->add((new Place())->setLon(1.2)->setLat(1.2));
+        $collection->add(new Place(1.2, 1.2));
+        $collection->add(new Place(1.2, 1.2));
 
         try {
             $polygon = null;

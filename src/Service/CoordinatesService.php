@@ -52,12 +52,7 @@ class CoordinatesService
         $highestLon = $places[0]->getLon();
         $lowerLon = $places[array_key_last($places)]->getLon();
 
-        $polygon = new Polygon();
-
-        $polygon->setTop($highestLat);
-        $polygon->setRight($highestLon);
-        $polygon->setBottom($lowerLat);
-        $polygon->setLeft($lowerLon);
+        $polygon = new Polygon($highestLat, $highestLon, $lowerLat, $lowerLon);
 
         return $polygon;
     }
