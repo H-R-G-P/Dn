@@ -62,9 +62,11 @@ class Place
      */
     private ?Region $region;
 
-    #[Pure] public function __construct()
+    #[Pure] public function __construct(?float $lat, ?float $lon)
     {
         $this->versions = new ArrayCollection();
+        $this->lat = $lat;
+        $this->lon = $lon;
     }
 
     public function getId(): int
@@ -113,7 +115,7 @@ class Place
         return $this->lon;
     }
 
-    public function setLon(float $lon): self
+    public function setLon(?float $lon): self
     {
         $this->lon = $lon;
 
@@ -125,7 +127,7 @@ class Place
         return $this->lat;
     }
 
-    public function setLat(float $lat): self
+    public function setLat(?float $lat): self
     {
         $this->lat = $lat;
 
