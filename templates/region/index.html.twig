@@ -17,7 +17,7 @@
                 <div class="list-group list-group-flush">
                     {% for region in regions %}
                         <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
-                            {{ region.name }}({{ region.dances|length }})
+                            {{ region.name }} ({{ region.dances|length }})
                         </a>
                     {% endfor %}
                 </div>
