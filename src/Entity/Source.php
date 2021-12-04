@@ -167,4 +167,19 @@ class Source
     {
         return $this->name;
     }
+
+    /**
+     * @return array<int, Dance>
+     */
+    public function getDances() : array
+    {
+        $dances = [];
+
+        foreach ($this->getVersions() as $version) {
+            $dance = $version->getIdDance();
+            $dances += [$dance->getId() => $dance];
+        }
+
+        return $dances;
+    }
 }
