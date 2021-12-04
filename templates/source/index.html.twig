@@ -2,20 +2,22 @@
 
 {% block title %}Dance sources{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center my-5">Dance sources</h1>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="list-group list-group-flush">
-                    {% for source in sources %}
-                        <a href="{{ url('source', {'slug': source.slug}) }}" class="list-group-item list-group-item-action">
-                            {{ source.name }}({{ source.dances|length }})
-                        </a>
-                    {% endfor %}
-                </div>
+{% block header %}Dance sources{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Sources</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="list-group list-group-flush">
+                {% for source in sources %}
+                    <a href="{{ url('source', {'slug': source.slug}) }}" class="list-group-item list-group-item-action">
+                        {{ source.name }}({{ source.dances|length }})
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </div>
