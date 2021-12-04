@@ -27,11 +27,11 @@ class Source
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="source")
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="source")
      *
-     * @var Collection<int, Dance>
+     * @var Collection<int, Version>
      */
-    private Collection $dances;
+    private Collection $versions;
 
     /**
      * @ORM\Column(type="string", length=110, unique=true)
@@ -60,7 +60,7 @@ class Source
 
     #[Pure] public function __construct()
     {
-        $this->dances = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -83,29 +83,29 @@ class Source
     }
 
     /**
-     * @return Collection<int, Dance>
+     * @return Collection<int, Version>
      */
-    public function getDances(): Collection
+    public function getVersions(): Collection
     {
-        return $this->dances;
+        return $this->versions;
     }
 
-    public function addDance(Dance $dance): self
+    public function addVersion(Version $version): self
     {
-        if (!$this->dances->contains($dance)) {
-            $this->dances[] = $dance;
-            $dance->setSource($this);
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setSource($this);
         }
 
         return $this;
     }
 
-    public function removeDance(Dance $dance): self
+    public function removeVersion(Version $version): self
     {
-        if ($this->dances->removeElement($dance)) {
+        if ($this->versions->removeElement($version)) {
             // set the owning side to null (unless already changed)
-            if ($dance->getSource() === $this) {
-                $dance->setSource(null);
+            if ($version->getSource() === $this) {
+                $version->setSource(null);
             }
         }
 

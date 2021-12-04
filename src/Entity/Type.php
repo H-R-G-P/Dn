@@ -27,16 +27,16 @@ class Type
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="type")
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="type")
      *
-     * @var Collection<int, Dance>
+     * @var Collection<int, Version>
      */
-    private Collection $dances;
+    private Collection $versions;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $dancers;
+    private int $versionrs;
 
     /**
      * @ORM\Column(type="boolean")
@@ -60,7 +60,7 @@ class Type
 
     #[Pure] public function __construct()
     {
-        $this->dances = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -83,43 +83,43 @@ class Type
     }
 
     /**
-     * @return Collection<int, Dance>
+     * @return Collection<int, Version>
      */
-    public function getDances(): Collection
+    public function getVersions(): Collection
     {
-        return $this->dances;
+        return $this->versions;
     }
 
-    public function addDance(Dance $dance): self
+    public function addVersion(Version $version): self
     {
-        if (!$this->dances->contains($dance)) {
-            $this->dances[] = $dance;
-            $dance->setType($this);
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setType($this);
         }
 
         return $this;
     }
 
-    public function removeDance(Dance $dance): self
+    public function removeVersion(Version $version): self
     {
-        if ($this->dances->removeElement($dance)) {
+        if ($this->versions->removeElement($version)) {
             // set the owning side to null (unless already changed)
-            if ($dance->getType() === $this) {
-                $dance->setType(null);
+            if ($version->getType() === $this) {
+                $version->setType(null);
             }
         }
 
         return $this;
     }
 
-    public function getDancers(): ?int
+    public function getVersionrs(): ?int
     {
-        return $this->dancers;
+        return $this->versionrs;
     }
 
-    public function setDancers(int $dancers): self
+    public function setVersionrs(int $versionrs): self
     {
-        $this->dancers = $dancers;
+        $this->versionrs = $versionrs;
 
         return $this;
     }
