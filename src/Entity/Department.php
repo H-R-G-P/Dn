@@ -26,7 +26,7 @@ class Department
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department", orphanRemoval=true)
      *
      * @var Collection<int, Place>
      */
@@ -74,7 +74,7 @@ class Department
     {
         if (!$this->places->contains($place)) {
             $this->places[] = $place;
-            $place->setDepartmentId($this);
+            $place->setDepartment($this);
         }
 
         return $this;
@@ -84,8 +84,8 @@ class Department
     {
         if ($this->places->removeElement($place)) {
             // set the owning side to null (unless already changed)
-            if ($place->getDepartmentId() === $this) {
-                $place->setDepartmentId(null);
+            if ($place->getDepartment() === $this) {
+                $place->setDepartment(null);
             }
         }
 
