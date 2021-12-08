@@ -3,13 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Dance;
-use App\Entity\Region;
-use App\Entity\Source;
-use App\Entity\Type;
 use App\Repository\DanceRepository;
-use App\Repository\RegionRepository;
-use App\Repository\SourceRepository;
-use App\Repository\TypeRepository;
+use App\Vo\Database;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,24 +14,18 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="homepage")
      *
-     * @param RegionRepository<Region> $regionRepository
-     * @param TypeRepository<Type> $typeRepository
-     * @param SourceRepository<Source> $sourceRepository
+     * @param Database $database
      * @param DanceRepository<Dance> $danceRepository
      *
      * @return Response
      */
-    public function index(RegionRepository $regionRepository, TypeRepository $typeRepository, SourceRepository $sourceRepository, DanceRepository $danceRepository): Response
+    public function index(Database $database, DanceRepository $danceRepository): Response
     {
-        $regions = $regionRepository->findAll();
-        $types = $typeRepository->findAll();
-        $sources = $sourceRepository->findAll();
+        $danceCollection = $database->getDancesRelatedByEntities();
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
 
         return $this->render('homepage/index.html.twig', [
-            'regions' => $regions,
-            'types' => $types,
-            'sources' => $sources,
+            'dance_collection' => $danceCollection,
             'top_ten_dances' => $topTenDances,
         ]);
     }
