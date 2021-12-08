@@ -4,36 +4,30 @@
 namespace App\Dto;
 
 
-use App\Entity\Dance;
-use App\Entity\Department;
-use App\Entity\Region;
-use App\Entity\Source;
-use App\Entity\Type;
-
 class DanceCollection
 {
     /**
-     * @var array<Region, Dance[]>
+     * @var EntityExtended[]
      */
     private array $regions;
 
     /**
-     * @var array<Department, Dance[]>
+     * @var EntityExtended[]
      */
     private array $departments;
 
     /**
-     * @var array<Type, Dance[]>
+     * @var EntityExtended[]
      */
     private array $types;
 
     /**
-     * @var array<Source, Dance[]>
+     * @var EntityExtended[]
      */
     private array $sources;
 
     /**
-     * @return array<Region, Dance[]>
+     * @return EntityExtended[]
      */
     public function getRegions(): array
     {
@@ -41,7 +35,7 @@ class DanceCollection
     }
 
     /**
-     * @param array<Region, Dance[]> $regions
+     * @param EntityExtended[] $regions
      */
     public function setRegions(array $regions): void
     {
@@ -49,7 +43,7 @@ class DanceCollection
     }
 
     /**
-     * @return array<Department, Dance[]>
+     * @return EntityExtended[]
      */
     public function getDepartments(): array
     {
@@ -57,7 +51,7 @@ class DanceCollection
     }
 
     /**
-     * @param array<Department, Dance[]> $departments
+     * @param EntityExtended[] $departments
      */
     public function setDepartments(array $departments): void
     {
@@ -65,7 +59,7 @@ class DanceCollection
     }
 
     /**
-     * @return array<Type, Dance[]>
+     * @return EntityExtended[]
      */
     public function getTypes(): array
     {
@@ -73,7 +67,7 @@ class DanceCollection
     }
 
     /**
-     * @param array<Type, Dance[]> $types
+     * @param EntityExtended[] $types
      */
     public function setTypes(array $types): void
     {
@@ -81,7 +75,7 @@ class DanceCollection
     }
 
     /**
-     * @return array<Source, Dance[]>
+     * @return EntityExtended[]
      */
     public function getSources(): array
     {
@@ -89,7 +83,7 @@ class DanceCollection
     }
 
     /**
-     * @param array<Source, Dance[]> $sources
+     * @param EntityExtended[] $sources
      */
     public function setSources(array $sources): void
     {
