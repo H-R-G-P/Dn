@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ department.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-5">{{ department.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="map"></div>
+            </div>
+            <div class="col">
+                <div class="list-group list-group-flush">
+                    {% for region in department.regions %}
+                        <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
+                            {{ region.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div hidden id="region_obj">{{ department_json|raw }}</div>
+    <div hidden id="polygon">{{ polygon|raw }}</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('regions') }}
+{% endblock %}
