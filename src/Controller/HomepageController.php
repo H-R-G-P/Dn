@@ -36,11 +36,6 @@ class HomepageController extends AbstractController
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
         $departments = $departmentRepository->findAll();
 
-        $c = [];
-        foreach ($departments as $department) {
-            $c[] = count($department->getDances());
-        }
-
         return $this->render('homepage/index.html.twig', [
             'regions' => $regions,
             'types' => $types,
