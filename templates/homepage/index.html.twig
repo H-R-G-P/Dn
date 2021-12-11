@@ -5,6 +5,22 @@
 {% block header %}Dances of Belarus{% endblock %}
 
 {% block content %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5>Departments</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% for department in departments %}
+                        <a href="{{ url('department', {'slug': department.slug}) }}" class="list-group-item list-group-item-action">
+                            {{ department.name }} ({{ department.dances|length }})
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="card">
