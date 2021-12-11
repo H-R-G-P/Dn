@@ -2,25 +2,28 @@
 
 {% block title %}Regions{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center my-5">Regions</h1>
+{% block header %}Regions{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Regions</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=23.6%2C51.3%2C32.7%2C56.14&amp;layer=mapnik"
+                    style="border: 1px solid black; width: 100%; height: 300%;">
+            </iframe>
         </div>
-        <div class="row">
-            <div class="col">
-                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=23.6%2C51.3%2C32.7%2C56.14&amp;layer=mapnik"
-                        style="border: 1px solid black; width: 100%; height: 300%;">
-                </iframe>
-            </div>
-            <div class="col">
-                <div class="list-group list-group-flush">
-                    {% for region in regions %}
-                        <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
-                            {{ region.name }} ({{ region.dances|length }})
-                        </a>
-                    {% endfor %}
-                </div>
+
+        <div class="col">
+            <div class="list-group list-group-flush">
+                {% for region in regions %}
+                    <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
+                        {{ region.name }}({{ region.dances|length }})
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </div>

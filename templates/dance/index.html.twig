@@ -2,20 +2,20 @@
 
 {% block title %}Dances{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center my-5">Dances</h1>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="list-group list-group-flush">
-                    {% for dance in dances %}
-                        <a href="{{ url('dance', {'slug': dance.slug}) }}" class="list-group-item list-group-item-action">
-                            {{ dance.name }} ({{ dance.versions|length }})
-                        </a>
-                    {% endfor %}
-                </div>
+{% block header %}Dances{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Dances</li>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="list-group list-group-flush">
+                {% for dance in dances %}
+                    <a href="{{ url('dance', {'slug': dance.slug}) }}" class="list-group-item list-group-item-action">
+                        {{ dance.name }} ({{ dance.versions|length }})
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </div>
