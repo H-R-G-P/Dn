@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interface\EntityExtended;
 use App\Repository\SourceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * @ORM\Entity(repositoryClass=SourceRepository::class)
  */
-class Source
+class Source implements EntityExtended
 {
     /**
      * @ORM\Id
@@ -57,6 +58,11 @@ class Source
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $from;
+
+    /**
+     * @var Dance[]
+     */
+    private array $dances = [];
 
     #[Pure] public function __construct()
     {
@@ -181,5 +187,23 @@ class Source
         }
 
         return $dances;
+    }
+
+    /**
+     * @param Dance[] $dances
+     *
+     * @return void
+     */
+    public function setDances(array $dances): void
+    {
+        $this->dances = $dances;
+    }
+
+    /**
+     * @return Dance[]
+     */
+    public function getDances(): array
+    {
+        return $this->dances;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interface\EntityExtended;
 use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +12,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
  */
-class Department
+class Department implements EntityExtended
 {
     /**
      * @ORM\Id
@@ -38,6 +39,11 @@ class Department
      * @var Collection<int, Region>
      */
     private Collection $regions;
+
+    /**
+     * @var Dance[]
+     */
+    private array $dances = [];
 
     #[Pure] public function __construct()
     {
@@ -125,5 +131,23 @@ class Department
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param Dance[] $dances
+     *
+     * @return void
+     */
+    public function setDances(array $dances): void
+    {
+        $this->dances = $dances;
+    }
+
+    /**
+     * @return Dance[]
+     */
+    public function getDances(): array
+    {
+        return $this->dances;
     }
 }
