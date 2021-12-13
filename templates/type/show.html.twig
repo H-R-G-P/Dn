@@ -14,7 +14,7 @@
                 </iframe>
             </div>
             <div class="col">
-                {% for dance in type.dances %}
+                {% for dance in type.dancesFromDb %}
                     <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
                         {{ dance.name }}
                     </a>

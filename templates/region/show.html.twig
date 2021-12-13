@@ -13,7 +13,7 @@
             </div>
             <div class="col">
                 <div class="list-group list-group-flush">
-                    {% for dance in region.dances %}
+                    {% for dance in region.dancesFromDb %}
                         <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
                             {{ dance.name }}
                         </a>

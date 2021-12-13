@@ -171,7 +171,7 @@ class Source
     /**
      * @return array<int, Dance>
      */
-    public function getDances() : array
+    public function getDancesFromDb() : array
     {
         $dances = [];
 
