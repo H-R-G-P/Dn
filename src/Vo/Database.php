@@ -4,8 +4,8 @@
 namespace App\Vo;
 
 
-use App\Dto\DanceCollection;
-use App\Dto\EntityExtended;
+use App\Dto\EntityCollection;
+use App\Interface\EntityExtended;
 use App\Entity\Department;
 use App\Entity\Place;
 use App\Entity\Region;
@@ -64,29 +64,27 @@ class Database
 
     /** Return entities (Region, Department, Source, Type) related by Dances
      *
-     * @return DanceCollection
+     * @return EntityCollection
      */
-    public function getDancesRelatedByEntities(): DanceCollection
+    public function getEntitiesRelatedByDances(): EntityCollection
     {
-        $danceCollection = new DanceCollection();
+        $danceCollection = new EntityCollection();
 
-        $danceCollection->setSources($this->getDancesBy($this->sources));
-        $danceCollection->setTypes($this->getDancesBy($this->types));
-        $danceCollection->setRegions($this->getDancesBy($this->regions));
-        $danceCollection->setDepartments($this->getDancesBy($this->departments));
+        $danceCollection->setSources($this->setDances($this->sources));
+        $danceCollection->setTypes($this->setDances($this->types));
+        $danceCollection->setRegions($this->setDances($this->regions));
+        $danceCollection->setDepartments($this->setDances($this->departments));
 
         return $danceCollection;
     }
 
     /**
-     * @param array <int, Region|Department|Source|Type> $entityCollection
+     * @param array <int, EntityExtended> $entityCollection
      *
      * @return EntityExtended[]
      */
-    public function getDancesBy(array $entityCollection): array
+    public function setDances(array $entityCollection): array
     {
-        $entitiesExtended = array();
-
         foreach ($entityCollection as $entity) {
             $versions = $this->getVersionsByEntity($entity);
             $dances = array();
@@ -95,22 +93,18 @@ class Database
                 $dances[] = $version->getIdDance();// TODO: Rename method and propt. from "IdDance" to "Dance"
             }
 
-            $entityExt = new EntityExtended();
-            $entityExt->setEntity($entity);
-            $entityExt->setDances($dances);
-
-            $entitiesExtended[] = $entityExt;
+            $entity->setDances($dances);
         }
 
-        return $entitiesExtended;
+        return $entityCollection;
     }
 
     /** Get related versions for Region or Department or Source or Type.
-     * @param Region|Department|Source|Type $entity
+     * @param EntityExtended $entity
      *
      * @return array<int, Version>
      */
-    public function getVersionsByEntity(Region|Department|Source|Type $entity): array
+    public function getVersionsByEntity(EntityExtended $entity): array
     {
         if ($entity::class === 'App\Entity\Region'
             || $entity::class === 'App\Entity\Department'

@@ -4,7 +4,9 @@
 namespace App\Dto;
 
 
-class DanceCollection
+use App\Interface\EntityExtended;
+
+class EntityCollection
 {
     /**
      * @var EntityExtended[]

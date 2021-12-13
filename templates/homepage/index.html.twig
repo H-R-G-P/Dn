@@ -16,9 +16,9 @@
                     </div>
                     <div class="card-body">
                         <div class="list-group list-group-flush">
-                            {% for regionExt in dance_collection.regions %}
-                                <a href="{{ url('region', {'slug': regionExt.entity.slug}) }}" class="list-group-item list-group-item-action">
-                                    {{ regionExt.entity.name }}({{ regionExt.dances|length }})
+                            {% for region in entity_collection.regions %}
+                                <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
+                                    {{ region.name }}({{ region.dances|length }})
                                 </a>
                             {% endfor %}
                         </div>
@@ -32,9 +32,9 @@
                     </div>
                     <div class="card-body">
                         <div class="list-group list-group-flush">
-                            {% for typeExt in dance_collection.types %}
-                                <a href ="{{ url('type', {'slug': typeExt.entity.slug})}}" class="list-group-item list-group-item-action">
-                                    {{ typeExt.entity.name }}({{ typeExt.dances|length }})
+                            {% for type in entity_collection.types %}
+                                <a href ="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
+                                    {{ type.name }}({{ type.dances|length }})
                                 </a>
                             {% endfor %}
                         </div>
@@ -48,9 +48,9 @@
                     </div>
                     <div class="card-body">
                         <div class="list-group list-group-flush">
-                            {% for sourceExt in dance_collection.sources %}
-                                <a href="{{ url('source', {'slug': sourceExt.entity.slug})}}" class="list-group-item list-group-item-action">
-                                    {{ sourceExt.entity.name }}({{ sourceExt.dances|length }})
+                            {% for source in entity_collection.sources %}
+                                <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
+                                    {{ source.name }}({{ source.dances|length }})
                                 </a>
                             {% endfor %}
                         </div>

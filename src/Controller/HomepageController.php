@@ -21,11 +21,11 @@ class HomepageController extends AbstractController
      */
     public function index(Database $database, DanceRepository $danceRepository): Response
     {
-        $danceCollection = $database->getDancesRelatedByEntities();
+        $entityCollection = $database->getEntitiesRelatedByDances();
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
 
         return $this->render('homepage/index.html.twig', [
-            'dance_collection' => $danceCollection,
+            'entity_collection' => $entityCollection,
             'top_ten_dances' => $topTenDances,
         ]);
     }
