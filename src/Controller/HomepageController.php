@@ -16,6 +16,7 @@ class HomepageController extends AbstractController
      *
      * @param Database $database
      * @param DanceRepository<Dance> $danceRepository
+     * @param DepartmentRepository $departmentRepository
      *
      * @return Response
      */
@@ -23,10 +24,12 @@ class HomepageController extends AbstractController
     {
         $entityCollection = $database->getEntitiesRelatedByDances();
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
+        $departments = $departmentRepository->findAll();
 
         return $this->render('homepage/index.html.twig', [
             'entity_collection' => $entityCollection,
             'top_ten_dances' => $topTenDances,
+            'departments' => $departments,
         ]);
     }
 }

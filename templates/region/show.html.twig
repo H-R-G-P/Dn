@@ -2,23 +2,26 @@
 
 {% block title %}{{ region.name }}{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center my-5">{{ region.name }}</h1>
+{% block header %}{{ region.name }}{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('regions') }}">Regions</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ region.name }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div id="map"></div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div id="map"></div>
-            </div>
-            <div class="col">
-                <div class="list-group list-group-flush">
-                    {% for dance in region.dancesFromDb %}
-                        <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                            {{ dance.name }}
-                        </a>
-                    {% endfor %}
-                </div>
+        <div class="col">
+            <div class="list-group list-group-flush">
+                {% for dance in region.dancesFromDb %}
+                    <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
+                        {{ dance.name }}
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </div>

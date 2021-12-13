@@ -12,6 +12,23 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <div class="container">
+                <div class="row">
+                    <h1 class="text-center my-5">{% block header %}{% endblock %}</h1>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-2 align-middle d-flex justify-content-between">
+                            <ol class="breadcrumb px-2">
+                                {% block breadcrumb %}{% endblock%}
+                            </ol>
+                            {% block rightOfBreadcrumb %}{% endblock%}
+                        </nav>
+                    </div>
+                </div>
+                {% block content %}{% endblock %}
+            </div>
+        {% endblock %}
     </body>
 </html>

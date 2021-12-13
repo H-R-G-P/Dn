@@ -2,12 +2,25 @@
 
 {% block title %}Dances of Belarus{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center my-5">Dances of Belarus</h1>
-        </div>
+{% block header %}Dances of Belarus{% endblock %}
 
+{% block content %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5>Departments</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% for department in entity_collection.departments %}
+                        <a href="{{ url('department', {'slug': department.slug}) }}" class="list-group-item list-group-item-action">
+                            {{ department.name }} ({{ department.dances|length }})
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
@@ -57,19 +70,35 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-3 mt-lg-0">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Top 10 dances</h5>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-3 mt-lg-0">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Sources</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for source in sources %}
+                            <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
+                                {{ source.name }}({{ source.dances|length }})
+                            </a>
+                        {% endfor %}
                     </div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush">
-                            {% for dance in top_ten_dances %}
-                                <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                                    {{ dance.name }}({{ dance.versions|length }})
-                                </a>
-                            {% endfor %}
-                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-3 mt-lg-0">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Top 10 dances</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for dance in top_ten_dances %}
+                            <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
+                                {{ dance.name }}({{ dance.versions|length }})
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
