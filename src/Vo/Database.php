@@ -54,7 +54,7 @@ class Database
     public function __construct(EntityManagerInterface $em)
     {
         $this->entityManager = $em;
-        $this->entityManager->getRepository(Version::class)->findAll();
+        $this->versions = $this->entityManager->getRepository(Version::class)->findAll();
         $this->sources = $this->entityManager->getRepository(Source::class)->findAll();
         $this->types = $this->entityManager->getRepository(Type::class)->findAll();
         $this->regions = $this->entityManager->getRepository(Region::class)->findAll();
@@ -113,7 +113,9 @@ class Database
     public function getVersionsByEntity(Region|Department|Source|Type $entity): array
     {
         if ($entity::class === 'App\Entity\Region'
-            || $entity::class === 'App\Entity\Department')
+            || $entity::class === 'App\Entity\Department'
+            || $entity::class === 'Proxies\__CG__\App\Entity\Region'
+            || $entity::class === 'Proxies\__CG__\App\Entity\Department')
         {
             return $this->getVersionsAcrossPlaces($entity);
         }
