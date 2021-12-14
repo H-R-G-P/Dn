@@ -33,7 +33,7 @@ class Place
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="places")
      */
-    private ?Department $department_id;
+    private ?Department $department;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -98,14 +98,14 @@ class Place
         return $this;
     }
 
-    public function getDepartmentId(): ?Department
+    public function getDepartment(): ?Department
     {
-        return $this->department_id;
+        return $this->department;
     }
 
-    public function setDepartmentId(?Department $department_id): self
+    public function setDepartment(?Department $department): self
     {
-        $this->department_id = $department_id;
+        $this->department = $department;
 
         return $this;
     }

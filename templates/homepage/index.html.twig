@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <div class="list-group list-group-flush">
-                    {% for department in departments %}
+                    {% for department in entity_collection.departments %}
                         <a href="{{ url('department', {'slug': department.slug}) }}" class="list-group-item list-group-item-action">
                             {{ department.name }} ({{ department.dances|length }})
                         </a>
@@ -21,35 +21,52 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Regions</h5>
-                </div>
-                <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        {% for region in regions %}
-                            <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
-                                {{ region.name }}({{ region.dances|length }})
-                            </a>
-                        {% endfor %}
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Regions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for region in entity_collection.regions %}
+                                <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
+                                    {{ region.name }}({{ region.dances|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-0">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Types</h5>
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Types</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for type in entity_collection.types %}
+                                <a href ="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
+                                    {{ type.name }}({{ type.dances|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        {% for type in types %}
-                            <a href="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
-                                {{ type.name }}({{ type.dances|length }})
-                            </a>
-                        {% endfor %}
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-sm-3 mt-md-3 mt-lg-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Sources</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for source in entity_collection.sources %}
+                                <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
+                                    {{ source.name }}({{ source.dances|length }})
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

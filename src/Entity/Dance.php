@@ -39,16 +39,6 @@ class Dance
     private Collection $versions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="dances")
-     */
-    private ?Type $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="dances")
-     */
-    private ?Source $source;
-
-    /**
      * @ORM\Column(type="string", length=165, unique=true)
      */
     private string $slug;
@@ -115,30 +105,6 @@ class Dance
                 $version = null;
             }
         }
-
-        return $this;
-    }
-
-    public function getType(): ?Type
-    {
-        return $this->type;
-    }
-
-    public function setType(?Type $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getSource(): ?Source
-    {
-        return $this->source;
-    }
-
-    public function setSource(?Source $source): self
-    {
-        $this->source = $source;
 
         return $this;
     }

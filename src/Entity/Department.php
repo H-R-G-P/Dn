@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interface\EntityExtended;
 use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +12,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
  */
-class Department
+class Department implements EntityExtended
 {
     /**
      * @ORM\Id
@@ -31,7 +32,7 @@ class Department
     private ?string $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="department", orphanRemoval=true)
      *
      * @var Collection<int, Place>
      */
@@ -43,6 +44,11 @@ class Department
      * @var Collection<int, Region>
      */
     private Collection $regions;
+
+    /**
+     * @var Dance[]
+     */
+    private array $dances = [];
 
     #[Pure] public function __construct()
     {
@@ -91,7 +97,7 @@ class Department
     {
         if (!$this->places->contains($place)) {
             $this->places[] = $place;
-            $place->setDepartmentId($this);
+            $place->setDepartment($this);
         }
 
         return $this;
@@ -101,8 +107,8 @@ class Department
     {
         if ($this->places->removeElement($place)) {
             // set the owning side to null (unless already changed)
-            if ($place->getDepartmentId() === $this) {
-                $place->setDepartmentId(null);
+            if ($place->getDepartment() === $this) {
+                $place->setDepartment(null);
             }
         }
 
@@ -159,5 +165,23 @@ class Department
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param Dance[] $dances
+     *
+     * @return void
+     */
+    public function setDances(array $dances): void
+    {
+        $this->dances = $dances;
+    }
+
+    /**
+     * @return Dance[]
+     */
+    public function getDances(): array
+    {
+        return $this->dances;
     }
 }

@@ -49,6 +49,16 @@ class Version
      */
     private ?Place $place;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="versions")
+     */
+    private ?Type $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="versions")
+     */
+    private ?Source $source;
+
     public function getId(): int
     {
         return $this->id;
@@ -122,6 +132,30 @@ class Version
     public function setPlace(?Place $place): self
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): self
+    {
+        $this->source = $source;
 
         return $this;
     }

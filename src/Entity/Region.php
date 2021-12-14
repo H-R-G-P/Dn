@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interface\EntityExtended;
 use App\Repository\RegionRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * @ORM\Entity(repositoryClass=RegionRepository::class)
  */
-class Region
+class Region implements EntityExtended
 {
     /**
      * @ORM\Id
@@ -43,6 +44,11 @@ class Region
      * @var Collection<int, Place>
      */
     private Collection $places;
+
+    /**
+     * @var Dance[]
+     */
+    private array $dances = [];
 
     #[Pure] public function __construct()
     {
@@ -123,7 +129,7 @@ class Region
     /**
      * @return array<int, Dance>
      */
-    public function getDances() : array
+    public function getDancesFromDb() : array
     {
         $dances = [];
 
@@ -135,5 +141,23 @@ class Region
         }
 
         return $dances;
+    }
+
+    /**
+     * @param Dance[] $dances
+     *
+     * @return void
+     */
+    public function setDances(array $dances): void
+    {
+        $this->dances = $dances;
+    }
+
+    /**
+     * @return Dance[]
+     */
+    public function getDances(): array
+    {
+        return $this->dances;
     }
 }

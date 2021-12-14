@@ -30,6 +30,8 @@ class VersionCrudController extends AbstractCrudController
     {
         yield TextField::new('name');
         yield SlugField::new('slug')->setTargetFieldName('name');
+        yield AssociationField::new('type');
+        yield AssociationField::new('source');
         yield AssociationField::new('id_dance');
         yield TextField::new('youtube');
         yield IntegerField::new('views');

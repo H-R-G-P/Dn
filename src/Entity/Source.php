@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interface\EntityExtended;
 use App\Repository\SourceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * @ORM\Entity(repositoryClass=SourceRepository::class)
  */
-class Source
+class Source implements EntityExtended
 {
     /**
      * @ORM\Id
@@ -27,11 +28,11 @@ class Source
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dance::class, mappedBy="source")
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="source")
      *
-     * @var Collection<int, Dance>
+     * @var Collection<int, Version>
      */
-    private Collection $dances;
+    private Collection $versions;
 
     /**
      * @ORM\Column(type="string", length=110, unique=true)
@@ -58,9 +59,14 @@ class Source
      */
     private ?string $from;
 
+    /**
+     * @var Dance[]
+     */
+    private array $dances = [];
+
     #[Pure] public function __construct()
     {
-        $this->dances = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -83,29 +89,29 @@ class Source
     }
 
     /**
-     * @return Collection<int, Dance>
+     * @return Collection<int, Version>
      */
-    public function getDances(): Collection
+    public function getVersions(): Collection
     {
-        return $this->dances;
+        return $this->versions;
     }
 
-    public function addDance(Dance $dance): self
+    public function addVersion(Version $version): self
     {
-        if (!$this->dances->contains($dance)) {
-            $this->dances[] = $dance;
-            $dance->setSource($this);
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setSource($this);
         }
 
         return $this;
     }
 
-    public function removeDance(Dance $dance): self
+    public function removeVersion(Version $version): self
     {
-        if ($this->dances->removeElement($dance)) {
+        if ($this->versions->removeElement($version)) {
             // set the owning side to null (unless already changed)
-            if ($dance->getSource() === $this) {
-                $dance->setSource(null);
+            if ($version->getSource() === $this) {
+                $version->setSource(null);
             }
         }
 
@@ -166,5 +172,38 @@ class Source
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return array<int, Dance>
+     */
+    public function getDancesFromDb() : array
+    {
+        $dances = [];
+
+        foreach ($this->getVersions() as $version) {
+            $dance = $version->getIdDance();
+            $dances += [$dance->getId() => $dance];
+        }
+
+        return $dances;
+    }
+
+    /**
+     * @param Dance[] $dances
+     *
+     * @return void
+     */
+    public function setDances(array $dances): void
+    {
+        $this->dances = $dances;
+    }
+
+    /**
+     * @return Dance[]
+     */
+    public function getDances(): array
+    {
+        return $this->dances;
     }
 }
