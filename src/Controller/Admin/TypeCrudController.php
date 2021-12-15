@@ -29,7 +29,7 @@ class TypeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield IntegerField::new('dancers');
+        yield IntegerField::new('versionrs');
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield BooleanField::new('isGroup');
         yield BooleanField::new('isMan');
