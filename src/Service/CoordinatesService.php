@@ -4,7 +4,7 @@
 namespace App\Service;
 
 
-use App\Dto\Polygon;
+use App\Dto\PolygonDTO;
 use App\Entity\Place;
 use Doctrine\Common\Collections\Collection;
 use Exception;
@@ -14,11 +14,11 @@ class CoordinatesService
     /**
      * @param Collection<int, Place> $places
      *
-     * @return Polygon
+     * @return PolygonDTO
      *
      * @throws Exception
      */
-    public function getPolygon(Collection $places): Polygon
+    public function getPolygon(Collection $places): PolygonDTO
     {
         $places = $places->toArray();
 
@@ -52,7 +52,7 @@ class CoordinatesService
         $highestLon = $places[0]->getLon();
         $lowerLon = $places[array_key_last($places)]->getLon();
 
-        $polygon = new Polygon($highestLat, $highestLon, $lowerLat, $lowerLon);
+        $polygon = new PolygonDTO($highestLat, $highestLon, $lowerLat, $lowerLon);
 
         return $polygon;
     }

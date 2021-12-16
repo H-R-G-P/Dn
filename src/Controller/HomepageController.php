@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Dance;
 use App\Repository\DanceRepository;
-use App\Vo\Database;
+use App\Vo\DatabaseVO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,12 +14,12 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="homepage")
      *
-     * @param Database $database
+     * @param DatabaseVO $database
      * @param DanceRepository<Dance> $danceRepository
      *
      * @return Response
      */
-    public function index(Database $database, DanceRepository $danceRepository): Response
+    public function index(DatabaseVO $database, DanceRepository $danceRepository): Response
     {
         $entityCollection = $database->getEntitiesRelatedByDances();
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);

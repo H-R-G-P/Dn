@@ -3,7 +3,7 @@
 namespace App\Dto;
 
 
-class Polygon
+class PolygonDTO
 {
     /**
      * @var float Latitude
@@ -26,7 +26,7 @@ class Polygon
     private float $left;
 
     /**
-     * Polygon constructor.
+     * PolygonDTO constructor.
      *
      * @param float $top
      * @param float $right
