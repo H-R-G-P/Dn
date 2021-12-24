@@ -92,7 +92,7 @@ class DanceController extends AbstractController
             return $this->redirectToRoute('dances');
         }
         else{
-            $dance = $version->getIdDance();
+            $dance = $version->getDance();
             $session = $requestStack->getSession();
 
             if (!$session->has($dance->getId().'Dance')) {

@@ -90,7 +90,7 @@ class DatabaseVO
             $dances = array();
 
             foreach ($versions as $version) {
-                $dances[] = $version->getIdDance();// TODO: Rename method and propt. from "IdDance" to "Dance"
+                $dances[] = $version->getDance();
             }
 
             $entity->setDances($dances);
