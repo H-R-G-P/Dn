@@ -91,7 +91,7 @@ class Dance
     {
         if (!$this->versions->contains($version)) {
             $this->versions[] = $version;
-            $version->setIdDance($this);
+            $version->setDance($this);
         }
 
         return $this;
@@ -101,7 +101,7 @@ class Dance
     {
         if ($this->versions->removeElement($version)) {
             // set the owning side to null (unless already changed)
-            if ($version->getIdDance() === $this) {
+            if ($version->getDance() === $this) {
                 $version = null;
             }
         }

@@ -4,7 +4,7 @@
 namespace App\Vo;
 
 
-use App\Dto\EntityCollection;
+use App\Dto\EntityCollectionDTO;
 use App\Interface\EntityExtended;
 use App\Entity\Department;
 use App\Entity\Place;
@@ -14,7 +14,7 @@ use App\Entity\Type;
 use App\Entity\Version;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Database
+class DatabaseVO
 {
     /** All versions in database
      * @var array<int, Version>
@@ -64,11 +64,11 @@ class Database
 
     /** Return entities (Region, Department, Source, Type) related by Dances
      *
-     * @return EntityCollection
+     * @return EntityCollectionDTO
      */
-    public function getEntitiesRelatedByDances(): EntityCollection
+    public function getEntitiesRelatedByDances(): EntityCollectionDTO
     {
-        $danceCollection = new EntityCollection();
+        $danceCollection = new EntityCollectionDTO();
 
         $danceCollection->setSources($this->setDances($this->sources));
         $danceCollection->setTypes($this->setDances($this->types));
@@ -90,7 +90,7 @@ class Database
             $dances = array();
 
             foreach ($versions as $version) {
-                $dances[] = $version->getIdDance();// TODO: Rename method and propt. from "IdDance" to "Dance"
+                $dances[] = $version->getDance();
             }
 
             $entity->setDances($dances);

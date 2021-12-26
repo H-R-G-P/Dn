@@ -6,7 +6,7 @@ namespace App\Dto;
 
 use App\Interface\EntityExtended;
 
-class EntityCollection
+class EntityCollectionDTO
 {
     /**
      * @var EntityExtended[]

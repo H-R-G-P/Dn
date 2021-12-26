@@ -2,7 +2,7 @@
 
 namespace App\Tests\Service;
 
-use App\Dto\Polygon;
+use App\Dto\PolygonDTO;
 use App\Entity\Place;
 use App\Service\CoordinatesService;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -45,7 +45,7 @@ class CoordinatesControllerTest extends TestCase
             self::assertSame($polygon->getBottom(), $collection->getValues()[0]->getLat());
             self::assertSame($polygon->getLeft(), $collection->getValues()[0]->getLon());
         }catch (\Exception $e) {
-            self::assertInstanceOf(Polygon::class, $polygon);
+            self::assertInstanceOf(PolygonDTO::class, $polygon);
         }
     }
 
@@ -73,9 +73,9 @@ class CoordinatesControllerTest extends TestCase
         try {
             $polygon = null;
             $polygon = $service->getPolygon($collection);
-            self::assertInstanceOf(Polygon::class, $polygon);
+            self::assertInstanceOf(PolygonDTO::class, $polygon);
         }catch (\Exception $e) {
-            self::assertInstanceOf(Polygon::class, $polygon);
+            self::assertInstanceOf(PolygonDTO::class, $polygon);
         }
     }
 }
