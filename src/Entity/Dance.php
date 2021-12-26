@@ -32,7 +32,7 @@ class Dance
     private int $views = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="id_dance")
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="dance")
      *
      * @var Collection<int, Version>
      */
