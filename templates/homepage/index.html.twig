@@ -31,7 +31,7 @@
                     <div class="list-group list-group-flush">
                         {% for region in entity_collection.regions %}
                             <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
-                                {{ region.name }}({{ region.dances|length }})
+                                {{ region.name }} ({{ region.dances|length }})
                             </a>
                         {% endfor %}
                     </div>
@@ -47,7 +47,7 @@
                     <div class="list-group list-group-flush">
                         {% for type in entity_collection.types %}
                             <a href ="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
-                                {{ type.name }}({{ type.dances|length }})
+                                {{ type.name }} ({{ type.dances|length }})
                             </a>
                         {% endfor %}
                     </div>
@@ -63,7 +63,7 @@
                     <div class="list-group list-group-flush">
                         {% for source in entity_collection.sources %}
                             <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
-                                {{ source.name }}({{ source.dances|length }})
+                                {{ source.name }} ({{ source.dances|length }})
                             </a>
                         {% endfor %}
                     </div>
@@ -79,7 +79,7 @@
                     <div class="list-group list-group-flush">
                         {% for dance in top_ten_dances %}
                             <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                                {{ dance.name }}({{ dance.versions|length }})
+                                {{ dance.name }} ({{ dance.versions|length }})
                             </a>
                         {% endfor %}
                     </div>
