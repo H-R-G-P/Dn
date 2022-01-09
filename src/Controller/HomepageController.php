@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Dance;
 use App\Repository\DanceRepository;
-use App\Vo\DatabaseVO;
+use App\Service\DatabaseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,14 +14,14 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="homepage")
      *
-     * @param DatabaseVO $database
      * @param DanceRepository<Dance> $danceRepository
+     * @param DatabaseService $databaseService
      *
      * @return Response
      */
-    public function index(DatabaseVO $database, DanceRepository $danceRepository): Response
+    public function index(DanceRepository $danceRepository, DatabaseService $databaseService): Response
     {
-        $entityCollection = $database->getEntitiesRelatedByDances();
+        $entityCollection = $databaseService->getEntitiesRelatedByDances();
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
 
         return $this->render('homepage/index.html.twig', [
