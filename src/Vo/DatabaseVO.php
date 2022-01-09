@@ -68,14 +68,14 @@ class DatabaseVO
      */
     public function getEntitiesRelatedByDances(): EntityCollectionDTO
     {
-        $danceCollection = new EntityCollectionDTO();
+        $entityCollection = new EntityCollectionDTO();
 
-        $danceCollection->setSources($this->setDances($this->sources));
-        $danceCollection->setTypes($this->setDances($this->types));
-        $danceCollection->setRegions($this->setDances($this->regions));
-        $danceCollection->setDepartments($this->setDances($this->departments));
+        $entityCollection->setSources($this->setDances($this->sources));
+        $entityCollection->setTypes($this->setDances($this->types));
+        $entityCollection->setRegions($this->setDances($this->regions));
+        $entityCollection->setDepartments($this->setDances($this->departments));
 
-        return $danceCollection;
+        return $entityCollection;
     }
 
     /**
