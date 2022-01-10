@@ -22,10 +22,12 @@ class HomepageController extends AbstractController
     public function index(DanceRepository $danceRepository, DatabaseService $databaseService): Response
     {
         $entityCollection = $databaseService->getEntitiesRelatedByDances();
+        $topTenRegions = $databaseService->getTopTenRegions();
         $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
 
         return $this->render('homepage/index.html.twig', [
             'entity_collection' => $entityCollection,
+            'top_ten_regions' => $topTenRegions,
             'top_ten_dances' => $topTenDances,
         ]);
     }

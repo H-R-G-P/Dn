@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group list-group-flush">
-                        {% for region in entity_collection.regions %}
+                        {% for region in top_ten_regions %}
                             <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
                                 {{ region.name }} ({{ region.dances|length }})
                             </a>

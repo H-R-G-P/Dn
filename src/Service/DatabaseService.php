@@ -171,4 +171,29 @@ class DatabaseService
 
         return $versions;
     }
+
+    /**
+     * @return array<int, Region>
+     */
+    public function getTopTenRegions(): array
+    {
+        $regions = $this->database->getRegions();
+        usort($regions, function ($a, $b){
+            $a = count($a->getDances());
+            $b = count($b->getDances());
+
+            if ($a == $b) {
+                return 0;
+            }
+
+            return ($a < $b) ? -1 : 1;
+        });
+
+        $top = [];
+        for ($i = 0; $i < 10; $i++){
+            $top[] = $regions[$i];
+        }
+
+        return $top;
+    }
 }
