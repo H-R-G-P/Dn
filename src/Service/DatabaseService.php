@@ -177,7 +177,23 @@ class DatabaseService
      */
     public function getTopTenRegions(): array
     {
+        $regions = $this->getRegionsSortedByDances();
+
+        $top = [];
+        for ($i = 0; $i < 10; $i++){
+            $top[] = $regions[$i];
+        }
+
+        return $top;
+    }
+
+    /**
+     * @return Region[]
+     */
+    public function getRegionsSortedByDances(): array
+    {
         $regions = $this->database->getRegions();
+
         usort($regions, function ($a, $b){
             $a = count($a->getDances());
             $b = count($b->getDances());
@@ -189,11 +205,6 @@ class DatabaseService
             return ($a < $b) ? -1 : 1;
         });
 
-        $top = [];
-        for ($i = 0; $i < 10; $i++){
-            $top[] = $regions[$i];
-        }
-
-        return $top;
+        return $regions;
     }
 }
