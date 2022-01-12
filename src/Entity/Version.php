@@ -119,6 +119,11 @@ class Version
      */
     private $is_game;
 
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $drob;
+
     public function getId(): int
     {
         return $this->id;
@@ -360,6 +365,18 @@ class Version
     public function setIsGame(bool $is_game): self
     {
         $this->is_game = $is_game;
+
+        return $this;
+    }
+
+    public function getDrob(): ?string
+    {
+        return $this->drob;
+    }
+
+    public function setDrob(string $drob): self
+    {
+        $this->drob = $drob;
 
         return $this;
     }
