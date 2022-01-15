@@ -62,12 +62,12 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isRec;
+    private int $isRec;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isImp;
+    private int $isImp;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -77,7 +77,7 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isCorrectPlace;
+    private int $isCorrectPlace;
 
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="versions")
@@ -92,7 +92,7 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $hasLocalVideo;
+    private int $hasLocalVideo;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -117,7 +117,7 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isGame;
+    private int $isGame;
 
     /**
      * @ORM\Column(type="string", length=1)
