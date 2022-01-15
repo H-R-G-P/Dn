@@ -62,67 +62,67 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_rec;
+    private bool $isRec;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_imp;
+    private bool $isImp;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $source_id_2;
+    private string $sourceId2;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_correct_place;
+    private bool $isCorrectPlace;
 
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="versions")
      */
-    private $department;
+    private ?Department $department;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="versions")
      */
-    private $region;
+    private ?Region $region;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $has_local_video;
+    private bool $hasLocalVideo;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $youtube_2;
+    private string $youtube2;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $vk;
+    private string $vk;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $comments;
+    private string $comments;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adrady;
+    private string $adrady;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_game;
+    private bool $isGame;
 
     /**
      * @ORM\Column(type="string", length=1)
      */
-    private $drob;
+    private string $drob;
 
     public function getId(): int
     {
@@ -225,50 +225,50 @@ class Version
         return $this;
     }
 
-    public function getIsRec(): ?bool
+    public function getIsRec(): bool
     {
-        return $this->is_rec;
+        return $this->isRec;
     }
 
-    public function setIsRec(bool $is_rec): self
+    public function setIsRec(bool $isRec): self
     {
-        $this->is_rec = $is_rec;
+        $this->isRec = $isRec;
 
         return $this;
     }
 
-    public function getIsImp(): ?bool
+    public function getIsImp(): bool
     {
-        return $this->is_imp;
+        return $this->isImp;
     }
 
-    public function setIsImp(bool $is_imp): self
+    public function setIsImp(bool $isImp): self
     {
-        $this->is_imp = $is_imp;
+        $this->isImp = $isImp;
 
         return $this;
     }
 
-    public function getSourceId2(): ?string
+    public function getSourceId2(): string
     {
-        return $this->source_id_2;
+        return $this->sourceId2;
     }
 
-    public function setSourceId2(string $source_id_2): self
+    public function setSourceId2(string $sourceId2): self
     {
-        $this->source_id_2 = $source_id_2;
+        $this->sourceId2 = $sourceId2;
 
         return $this;
     }
 
-    public function getIsCorrectPlace(): ?bool
+    public function getIsCorrectPlace(): bool
     {
-        return $this->is_correct_place;
+        return $this->isCorrectPlace;
     }
 
-    public function setIsCorrectPlace(bool $is_correct_place): self
+    public function setIsCorrectPlace(bool $isCorrectPlace): self
     {
-        $this->is_correct_place = $is_correct_place;
+        $this->isCorrectPlace = $isCorrectPlace;
 
         return $this;
     }
@@ -297,31 +297,31 @@ class Version
         return $this;
     }
 
-    public function getHasLocalVideo(): ?bool
+    public function getHasLocalVideo(): bool
     {
-        return $this->has_local_video;
+        return $this->hasLocalVideo;
     }
 
-    public function setHasLocalVideo(bool $has_local_video): self
+    public function setHasLocalVideo(bool $hasLocalVideo): self
     {
-        $this->has_local_video = $has_local_video;
+        $this->hasLocalVideo = $hasLocalVideo;
 
         return $this;
     }
 
-    public function getYoutube2(): ?string
+    public function getYoutube2(): string
     {
-        return $this->youtube_2;
+        return $this->youtube2;
     }
 
-    public function setYoutube2(string $youtube_2): self
+    public function setYoutube2(string $youtube2): self
     {
-        $this->youtube_2 = $youtube_2;
+        $this->youtube2 = $youtube2;
 
         return $this;
     }
 
-    public function getVk(): ?string
+    public function getVk(): string
     {
         return $this->vk;
     }
@@ -333,7 +333,7 @@ class Version
         return $this;
     }
 
-    public function getComments(): ?string
+    public function getComments(): string
     {
         return $this->comments;
     }
@@ -345,7 +345,7 @@ class Version
         return $this;
     }
 
-    public function getAdrady(): ?string
+    public function getAdrady(): string
     {
         return $this->adrady;
     }
@@ -357,19 +357,19 @@ class Version
         return $this;
     }
 
-    public function getIsGame(): ?bool
+    public function getIsGame(): bool
     {
-        return $this->is_game;
+        return $this->isGame;
     }
 
-    public function setIsGame(bool $is_game): self
+    public function setIsGame(bool $isGame): self
     {
-        $this->is_game = $is_game;
+        $this->isGame = $isGame;
 
         return $this;
     }
 
-    public function getDrob(): ?string
+    public function getDrob(): string
     {
         return $this->drob;
     }
