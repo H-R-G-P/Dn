@@ -70,9 +70,9 @@ class Version
     private int $isImp;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Source::class)
      */
-    private string $sourceId2;
+    private ?Source $sourceId2;
 
     /**
      * @ORM\Column(type="boolean")
@@ -105,14 +105,14 @@ class Version
     private string $vk;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2000)
      */
     private string $comments;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $adrady;
+    private string $abrady;
 
     /**
      * @ORM\Column(type="boolean")
@@ -225,48 +225,48 @@ class Version
         return $this;
     }
 
-    public function getIsRec(): bool
+    public function getIsRec(): int
     {
         return $this->isRec;
     }
 
-    public function setIsRec(bool $isRec): self
+    public function setIsRec(int $isRec): self
     {
         $this->isRec = $isRec;
 
         return $this;
     }
 
-    public function getIsImp(): bool
+    public function getIsImp(): int
     {
         return $this->isImp;
     }
 
-    public function setIsImp(bool $isImp): self
+    public function setIsImp(int $isImp): self
     {
         $this->isImp = $isImp;
 
         return $this;
     }
 
-    public function getSourceId2(): string
+    public function getSourceId2(): ?Source
     {
         return $this->sourceId2;
     }
 
-    public function setSourceId2(string $sourceId2): self
+    public function setSourceId2(?Source $sourceId2): self
     {
         $this->sourceId2 = $sourceId2;
 
         return $this;
     }
 
-    public function getIsCorrectPlace(): bool
+    public function getIsCorrectPlace(): int
     {
         return $this->isCorrectPlace;
     }
 
-    public function setIsCorrectPlace(bool $isCorrectPlace): self
+    public function setIsCorrectPlace(int $isCorrectPlace): self
     {
         $this->isCorrectPlace = $isCorrectPlace;
 
@@ -297,12 +297,12 @@ class Version
         return $this;
     }
 
-    public function getHasLocalVideo(): bool
+    public function getHasLocalVideo(): int
     {
         return $this->hasLocalVideo;
     }
 
-    public function setHasLocalVideo(bool $hasLocalVideo): self
+    public function setHasLocalVideo(int $hasLocalVideo): self
     {
         $this->hasLocalVideo = $hasLocalVideo;
 
@@ -345,24 +345,24 @@ class Version
         return $this;
     }
 
-    public function getAdrady(): string
+    public function getAbrady(): string
     {
-        return $this->adrady;
+        return $this->abrady;
     }
 
-    public function setAdrady(string $adrady): self
+    public function setAbrady(string $abrady): self
     {
-        $this->adrady = $adrady;
+        $this->abrady = $abrady;
 
         return $this;
     }
 
-    public function getIsGame(): bool
+    public function getIsGame(): int
     {
         return $this->isGame;
     }
 
-    public function setIsGame(bool $isGame): self
+    public function setIsGame(int $isGame): self
     {
         $this->isGame = $isGame;
 
