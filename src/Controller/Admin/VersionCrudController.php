@@ -32,7 +32,7 @@ class VersionCrudController extends AbstractCrudController
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield AssociationField::new('type');
         yield AssociationField::new('source');
-        yield AssociationField::new('id_dance');
+        yield AssociationField::new('dance');
         yield TextField::new('youtube');
         yield IntegerField::new('views');
     }
