@@ -59,7 +59,7 @@ class DanceController extends AbstractController
         }
 
         $versions = $versionRepository->findBy([
-            'id_dance' => $dance->getId(),
+            'dance' => $dance->getId(),
         ]);
 
         usort($versions, function ($a, $b) {
