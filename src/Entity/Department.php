@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -50,10 +50,16 @@ class Department implements EntityExtended
      */
     private array $dances = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="department")
+     */
+    private $versions;
+
     #[Pure] public function __construct()
     {
         $this->places = new ArrayCollection();
         $this->regions = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -166,5 +172,35 @@ class Department implements EntityExtended
     public function getDances(): array
     {
         return $this->dances;
+    }
+
+    /**
+     * @return Collection|Version[]
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->removeElement($version)) {
+            // set the owning side to null (unless already changed)
+            if ($version->getDepartment() === $this) {
+                $version->setDepartment(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -184,7 +184,7 @@ class Type implements EntityExtended
         $dances = [];
 
         foreach ($this->getVersions() as $version) {
-            $dance = $version->getIdDance();
+            $dance = $version->getDance();
             $dances += [$dance->getId() => $dance];
         }
 

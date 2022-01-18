@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -50,9 +50,15 @@ class Region implements EntityExtended
      */
     private array $dances = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="region")
+     */
+    private $versions;
+
     #[Pure] public function __construct()
     {
         $this->places = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -135,7 +141,7 @@ class Region implements EntityExtended
 
         foreach ($this->getPlaces() as $place) {
             foreach ($place->getVersions() as $version) {
-                $dance = $version->getIdDance();
+                $dance = $version->getDance();
                 $dances += [$dance->getId() => $dance];
             }
         }
@@ -159,5 +165,35 @@ class Region implements EntityExtended
     public function getDances(): array
     {
         return $this->dances;
+    }
+
+    /**
+     * @return Collection|Version[]
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): self
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions[] = $version;
+            $version->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): self
+    {
+        if ($this->versions->removeElement($version)) {
+            // set the owning side to null (unless already changed)
+            if ($version->getRegion() === $this) {
+                $version->setRegion(null);
+            }
+        }
+
+        return $this;
     }
 }
