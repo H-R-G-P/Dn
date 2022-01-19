@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Service;
@@ -179,12 +179,7 @@ class DatabaseService
     {
         $regions = $this->getRegionsSortedByDances();
 
-        $top = [];
-        for ($i = 0; $i < 10; $i++){
-            $top[] = $regions[$i];
-        }
-
-        return $top;
+        return array_slice($regions, 0, 10);
     }
 
     /**
