@@ -72,7 +72,7 @@ class Version
     /**
      * @ORM\ManyToOne(targetEntity=Source::class)
      */
-    private ?Source $sourceId2;
+    private ?Source $source2;
 
     /**
      * @ORM\Column(type="boolean")
@@ -249,14 +249,14 @@ class Version
         return $this;
     }
 
-    public function getSourceId2(): ?Source
+    public function getSource2(): ?Source
     {
-        return $this->sourceId2;
+        return $this->source2;
     }
 
-    public function setSourceId2(?Source $sourceId2): self
+    public function setSource2(?Source $source2): self
     {
-        $this->sourceId2 = $sourceId2;
+        $this->source2 = $source2;
 
         return $this;
     }
