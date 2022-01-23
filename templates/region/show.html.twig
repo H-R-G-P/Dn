@@ -5,8 +5,8 @@
 {% block header %}{{ region.name }}{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('regions') }}">Regions</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('regions') }}">{% trans %}Regions{{{% endtrans %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ region.name }}</li>
 {% endblock %}
 

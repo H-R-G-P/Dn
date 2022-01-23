@@ -5,8 +5,8 @@
 {% block header %}{{ type.name }}{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('types') }}">Types</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('types') }}">{% trans %}Types{{% endtrans %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ type.name }}</li>
 {% endblock %}
 
