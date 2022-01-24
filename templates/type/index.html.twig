@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Types{% endblock %}
+{% block title %}{% trans %}Types{{% endtrans %}{% endblock %}
 
-{% block header %}Types{% endblock %}
+{% block header %}{% trans %}Types{{% endtrans %}{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Types</li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans %}Types{{% endtrans %}</li>
 {% endblock %}
 
 {% block content %}

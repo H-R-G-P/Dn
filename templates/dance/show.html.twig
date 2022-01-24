@@ -5,8 +5,8 @@
 {% block header %}{{ dance.name }}{% endblock%}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('dances') }}">Dances</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('dances') }}">{% trans %}Dances{{{% endtrans %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ dance.name }}</li>
 {% endblock%}
 

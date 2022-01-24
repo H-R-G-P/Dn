@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Regions{% endblock %}
+{% block title %}{% trans %}Regions{{{% endtrans %}{% endblock %}
 
-{% block header %}Regions{% endblock %}
+{% block header %}{% trans %}Regions{{{% endtrans %}{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Regions</li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans %}Regions{{{% endtrans %}</li>
 {% endblock %}
 
 {% block content %}

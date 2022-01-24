@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dances{% endblock %}
+{% block title %}{% trans %}Dances{{{% endtrans %}{% endblock %}
 
-{% block header %}Dances{% endblock %}
+{% block header %}{% trans %}Dances{{{% endtrans %}{% endblock %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">Homepage</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Dances</li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans %}Dances{{{% endtrans %}</li>
 {% endblock %}
 {% block content %}
     <div class="row">
