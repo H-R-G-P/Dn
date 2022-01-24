@@ -81,13 +81,15 @@ class Version
 
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="versions")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private ?Department $department;
+    private Department $department;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="versions")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private ?Region $region;
+    private Region $region;
 
     /**
      * @ORM\Column(type="boolean")
@@ -273,24 +275,24 @@ class Version
         return $this;
     }
 
-    public function getDepartment(): ?Department
+    public function getDepartment(): Department
     {
         return $this->department;
     }
 
-    public function setDepartment(?Department $department): self
+    public function setDepartment(Department $department): self
     {
         $this->department = $department;
 
         return $this;
     }
 
-    public function getRegion(): ?Region
+    public function getRegion(): Region
     {
         return $this->region;
     }
 
-    public function setRegion(?Region $region): self
+    public function setRegion(Region $region): self
     {
         $this->region = $region;
 
