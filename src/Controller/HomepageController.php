@@ -12,7 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/{_locale}/",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="homepage"
+     * )
      *
      * @param DanceRepository<Dance> $danceRepository
      * @param DatabaseService $databaseService

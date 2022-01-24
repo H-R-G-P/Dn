@@ -11,7 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class TypeController extends AbstractController
 {
     /**
-     * @Route("/types", name="types")
+     * @Route("/{_locale}/types",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="types"
+     * )
      *
      * @param TypeRepository<Type> $typeRepository
      *
@@ -27,7 +33,13 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/type/{slug}", name="type")
+     * @Route("/{_locale}/type/{slug}",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="type"
+     * )
      *
      * @param string $slug
      * @param TypeRepository<Type> $typeRepository
