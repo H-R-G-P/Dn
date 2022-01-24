@@ -52,8 +52,10 @@ class Region implements EntityExtended
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="region")
+     *
+     * @var Collection<int, Version>
      */
-    private $versions;
+    private Collection $versions;
 
     #[Pure] public function __construct()
     {
