@@ -6,7 +6,6 @@ namespace App\Service;
 
 use App\Dto\EntityCollectionDTO;
 use App\Entity\Department;
-use App\Entity\Place;
 use App\Entity\Region;
 use App\Entity\Source;
 use App\Entity\Type;
@@ -47,7 +46,7 @@ class DatabaseService
     public function setDances(array $entityCollection): array
     {
         foreach ($entityCollection as $entity) {
-            $versions = $this->getVersionsByEntity($entity);
+            $versions = $this->getVersionsDirectly($entity);
             $dances = array();
 
             foreach ($versions as $version) {
@@ -60,116 +59,43 @@ class DatabaseService
         return $entityCollection;
     }
 
-    /** Get related versions for Region or Department or Source or Type.
+    /** Get related versions for Source or Type.
      * @param EntityExtended $entity
      *
      * @return array<int, Version>
      */
-    public function getVersionsByEntity(EntityExtended $entity): array
-    {
-        if ($entity::class === 'App\Entity\Region'
-            || $entity::class === 'App\Entity\Department'
-            || $entity::class === 'Proxies\__CG__\App\Entity\Region'
-            || $entity::class === 'Proxies\__CG__\App\Entity\Department')
-        {
-            return $this->getVersionsAcrossPlaces($entity);
-        }
-        else
-        {
-            return $this->getVersionsDirectly($entity);
-        }
-    }
-
-    /** Get related versions for Region or Department.
-     * @param Region|Department $entity
-     *
-     * @return Version[]
-     */
-    public function getVersionsAcrossPlaces(Region|Department $entity): array
-    {
-        $places = $this->getPlacesByEntity($entity);
-        $versions = array();
-
-        foreach ($places as $place) {
-            $versions = array_merge($versions, $this->getVersionsByPlace($place));
-        }
-
-        return $versions;
-    }
-
-    /** Get related versions for Source or Type.
-     * @param Type|Source $entity
-     *
-     * @return array<int, Version>
-     */
-    public function getVersionsDirectly(Type|Source $entity): array
+    public function getVersionsDirectly(EntityExtended $entity): array
     {
         $filteredVersions = [];
 
         foreach ($this->database->getVersions() as $version) {
-            if ($entity::class === 'App\Entity\Type'
+            if ($entity instanceof Type
                 && $version->getType() !== null
                 && $version->getType()->getId() === $entity->getId())
             {
                 $filteredVersions[] = $version;
             }
-            elseif ($entity::class === 'App\Entity\Source'
-                && $version->getSource() !== null
-                && $version->getSource()->getId() === $entity->getId())
+            elseif ($entity instanceof Source
+                && $version->getSource2() !== null
+                && $version->getSource2()->getId() === $entity->getId())
+            {
+                $filteredVersions[] = $version;
+            }
+            elseif ($entity instanceof Region
+                && $version->getRegion() !== null
+                && $version->getRegion()->getId() === $entity->getId())
+            {
+                $filteredVersions[] = $version;
+            }
+            elseif ($entity instanceof Department
+                && $version->getDepartment() !== null
+                && $version->getDepartment()->getId() === $entity->getId())
             {
                 $filteredVersions[] = $version;
             }
         }
 
         return $filteredVersions;
-    }
-
-    /** Get related places for Region or Department.
-     * @param Region|Department $entity
-     *
-     * @return array<int, Place>
-     */
-    public function getPlacesByEntity(Region|Department $entity): array
-    {
-        $filteredPlaces = [];
-
-        foreach ($this->database->getPlaces() as $place) {
-            if ($entity::class === 'App\Entity\Region'
-                && $place->getRegion() !== null
-                && $place->getRegion()->getId() === $entity->getId())
-            {
-                $filteredPlaces[] = $place;
-            }
-            elseif ($entity::class === 'App\Entity\Department' // TODO: Remove association between Place & Department
-                && $place->getDepartment() !== null
-                && $place->getDepartment()->getId() === $entity->getId())
-            {
-                $filteredPlaces[] = $place;
-            }
-        }
-
-        return $filteredPlaces;
-    }
-
-    /** Get related versions for Place.
-     * @param Place $place
-     *
-     * @return array<int, Version>
-     */
-    public function getVersionsByPlace(Place $place): array
-    {
-        $placeId = $place->getId();
-        $versions = array();
-
-        foreach ($this->database->getVersions() as $version) {
-            if ($version->getPlace() !== null
-                && $version->getPlace()->getId() === $placeId)
-            {
-                $versions[] = $version;
-            }
-        }
-
-        return $versions;
     }
 
     /**
