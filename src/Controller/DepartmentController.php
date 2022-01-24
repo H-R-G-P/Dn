@@ -15,12 +15,19 @@ use Symfony\Component\Serializer\Serializer;
 class DepartmentController extends AbstractController
 {
     /**
+     * @Route("/{_locale}/departments/{slug}",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="department"
+     * )
+     *
      * @param string $slug
      * @param DepartmentRepository $departmentRepository
      *
      * @return Response
      */
-    #[Route('/departments/{slug}', name: 'department')]
     public function show(string $slug, DepartmentRepository $departmentRepository, CoordinatesService $coordinatesService): Response
     {
         $department = $departmentRepository->findOneBy([

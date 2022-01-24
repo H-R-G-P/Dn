@@ -15,7 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class DanceController extends AbstractController
 {
     /**
-     * @Route("/dances", name="dances")
+     * @Route("/{_locale}/dances",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="dances"
+     * )
      *
      * @param DanceRepository<Dance> $danceRepository
      *
@@ -31,7 +37,13 @@ class DanceController extends AbstractController
     }
 
     /**
-     * @Route("/dances/{slug}", name="dance")
+     * @Route("/{_locale}/dances/{slug}",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="dance"
+     * )
      *
      * @param string $slug
      * @param RequestStack $requestStack
@@ -73,7 +85,13 @@ class DanceController extends AbstractController
     }
 
     /**
-     * @Route("/dances/{slugDance}/{slugVersion}", name="version")
+     * @Route("/{_locale}/dances/{slugDance}/{slugVersion}",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="version"
+     * )
      *
      * @param string $slugVersion
      * @param RequestStack $requestStack

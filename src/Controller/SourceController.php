@@ -11,7 +11,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class SourceController extends AbstractController
 {
     /**
-     * @Route("/sources", name="sources")
+     * @Route("/{_locale}/sources",
+locale="by",
+requirements={
+    "_locale": "by|en"
+},
+
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="sources"
+     * )
      *
      * @param SourceRepository<Source> $sourceRepository
      *
@@ -27,7 +38,13 @@ class SourceController extends AbstractController
     }
 
     /**
-     * @Route("/sources/{slug}", name="source")
+     * @Route("/{_locale}/sources/{slug}",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="source"
+     * )
      *
      * @param string $slug
      * @param SourceRepository<Source> $sourceRepository

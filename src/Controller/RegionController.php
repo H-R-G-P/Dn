@@ -16,7 +16,13 @@ use Symfony\Component\Serializer\Serializer;
 class RegionController extends AbstractController
 {
     /**
-     * @Route("/regions", name="regions")
+     * @Route("/{_locale}/regions",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="regions"
+     * )
      *
      * @param RegionRepository<Region> $regionRepository
      *
@@ -32,7 +38,13 @@ class RegionController extends AbstractController
     }
 
     /**
-     * @Route("/regions/{slug}", name="region")
+     * @Route("/{_locale}/regions/{slug}",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="region"
+     * )
      *
      * @param string $slug
      * @param RegionRepository<Region> $regionRepository
