@@ -4,7 +4,7 @@ namespace App\Tests\Service;
 
 use App\Entity\Region;
 use App\Service\DatabaseService;
-use App\Vo\DatabaseVO;
+use App\Dto\DatabaseDTO;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertSame;
 
@@ -29,7 +29,7 @@ class DatabaseServiceTest extends TestCase
             ->willReturn([2, 3]);
         $regions[] = $region;
 
-        $database = $this->createMock(DatabaseVO::class);
+        $database = $this->createMock(DatabaseDTO::class);
         $database->expects($this->any())
             ->method('getRegions')
             ->willReturn($regions);

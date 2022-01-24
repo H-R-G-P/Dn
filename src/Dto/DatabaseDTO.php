@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Vo;
+namespace App\Dto;
 
 
 use App\Entity\Department;
@@ -12,7 +12,7 @@ use App\Entity\Type;
 use App\Entity\Version;
 use Doctrine\ORM\EntityManagerInterface;
 
-class DatabaseVO
+class DatabaseDTO
 {
     /** All versions in database
      * @var array<int, Version>
