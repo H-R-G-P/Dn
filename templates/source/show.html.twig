@@ -5,7 +5,7 @@
 {% block header %}{{ source.name }}{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{{{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
     <li class="breadcrumb-item"><a href="{{ url('sources') }}">{% trans %}Sources{% endtrans %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ source.name }}</li>
 {% endblock %}
