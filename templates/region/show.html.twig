@@ -13,9 +13,6 @@
 {% block content %}
     <div class="row">
         <div class="col">
-            <div id="map"></div>
-        </div>
-        <div class="col">
             <div class="list-group list-group-flush">
                 {% for dance in region.dancesFromDb %}
                     <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
@@ -24,9 +21,13 @@
                 {% endfor %}
             </div>
         </div>
+        {% if map_json is same as(null) %}
+            <div class="col">
+                <div id="map"></div>
+            </div>
+        {% endif %}
     </div>
-    <div hidden id="region_obj">{{ region_json|raw }}</div>
-    <div hidden id="polygon">{{ polygon|raw }}</div>
+    <div hidden id="map_json">{{ map_json|raw }}</div>
 {% endblock %}
 
 {% block javascripts %}
