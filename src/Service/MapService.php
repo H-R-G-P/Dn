@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Dto\MapDTO;
 use App\Entity\Place;
 use App\Vo\CoordinatesVO;
 use App\Vo\PolygonVO;
@@ -11,6 +12,35 @@ use Exception;
 
 class MapService
 {
+    /** Create MapDTO if at least one place has full coordinates, otherwise return null.
+     *
+     * @param Place[] $places
+     *
+     * @return ?MapDTO
+     */
+    public function createMapDTO(array $places): ?MapDTO
+    {
+        $map = null;
+        $points = [];
+        foreach ($places as $place) {
+            if ($place->getLat() !== null && $place->getLon() !== null){
+                $coordinates = new CoordinatesVO($place->getLat(), $place->getLon());
+                $points[] = $coordinates;
+            }
+        }
+
+        try {
+            $polygon = $this->createPolygonVO($points);
+            $map = new MapDTO($points, $polygon);
+        }catch (Exception $e){
+            if (count($points) === 1){
+                $map = new MapDTO($points, null);
+            }
+        }
+
+        return $map;
+    }
+
     /**
      * @param CoordinatesVO[] $points
      *
