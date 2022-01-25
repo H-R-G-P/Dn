@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\DepartmentRepository;
-use App\Service\CoordinatesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +27,7 @@ class DepartmentController extends AbstractController
      *
      * @return Response
      */
-    public function show(string $slug, DepartmentRepository $departmentRepository, CoordinatesService $coordinatesService): Response
+    public function show(string $slug, DepartmentRepository $departmentRepository): Response
     {
         $department = $departmentRepository->findOneBy([
             'slug' => $slug,
@@ -38,11 +37,11 @@ class DepartmentController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        try {
-            $polygon = $coordinatesService->getPolygon($department->getPlaces());
-        }catch (\Exception $e) {
-            $polygon = null;
-        }
+//        try {
+//            $polygon = $coordinatesService->getPolygon($department->getPlaces());
+//        }catch (\Exception $e) {
+//            $polygon = null;
+//        }
 
         $encoder = new JsonEncoder();
         $defaultContext = [
@@ -55,12 +54,12 @@ class DepartmentController extends AbstractController
         $serializer = new Serializer([$normalizer], [$encoder]);
 
         $departmentJson = $serializer->serialize($department, 'json');
-        $polygonJson = $serializer->serialize($polygon, 'json');
+//        $polygonJson = $serializer->serialize($polygon, 'json');
 
         return $this->render('department/show.html.twig', [
             'department' => $department,
             'department_json' => $departmentJson,
-            'polygon' => $polygonJson,
+//            'polygon' => $polygonJson,
         ]);
     }
 }
