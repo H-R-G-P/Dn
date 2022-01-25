@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Vo;
 
 
-class PolygonDTO
+class PolygonVO
 {
     /**
      * @var float Latitude
@@ -26,7 +26,7 @@ class PolygonDTO
     private float $left;
 
     /**
-     * PolygonDTO constructor.
+     * PolygonVO constructor.
      *
      * @param float $top
      * @param float $right

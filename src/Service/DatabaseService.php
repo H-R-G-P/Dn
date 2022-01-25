@@ -12,13 +12,13 @@ use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
 use App\Interface\EntityExtended;
-use App\Vo\DatabaseVO;
+use App\Dto\DatabaseDTO;
 
 class DatabaseService
 {
-    private DatabaseVO $database;
+    private DatabaseDTO $database;
 
-    public function __construct(DatabaseVO $database)
+    public function __construct(DatabaseDTO $database)
     {
         $this->database = $database;
     }
