@@ -1,19 +1,18 @@
 let map = L.map('map').setView([53.900372, 27.558951], 6);
-let polygon = JSON.parse(document.getElementById('polygon').innerText);
-let region = JSON.parse(document.getElementById('region_obj').innerText)
+let mapProperties = JSON.parse(document.getElementById('map_json').innerText);
 
 $( document ).ready(function() {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    if (polygon === null){
+    if (mapProperties.getPolygon() === null){
         setBelMap();
     }else {
-        setMap(polygon);
+        setMap(mapProperties.getPolygon());
     }
 
-    setMarkers(region);
+    setMarkers(mapProperties.getPoints());
 });
 
 function setBelMap() {
@@ -32,15 +31,15 @@ function setMap(polygon) {
     map.fitBounds(bounds);
 }
 
-function setMarkers(region) {
+function setMarkers(points) {
     let defIcon = L.icon({
         iconUrl: "/build/images/marker-icon.2b3e1faf.png",
         iconSize:     [20, 35]
     });
 
-    region.places.forEach(function (place) {
-        let lat = place.lat,
-            lon = place.lon;
+    points.forEach(function (coordinates) {
+        let lat = coordinates.getLat(),
+            lon = coordinates.getLon();
 
         if (lat && lon){
             L.marker([lat, lon], {icon: defIcon}).addTo(map);
