@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use App\Dto\AddressDTO;
 use App\Repository\VersionRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=VersionRepository::class)
@@ -379,5 +381,10 @@ class Version
         $this->drob = $drob;
 
         return $this;
+    }
+
+    #[Pure] public function getAddress(): AddressDTO
+    {
+        return new AddressDTO($this);
     }
 }
