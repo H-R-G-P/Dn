@@ -16,7 +16,12 @@
             <div class="list-group list-group-flush">
                 {% for version in versions %}
                     <a href="{{ url('version', {'slugDance': dance.slug, 'slugVersion': version.slug}) }}" class="list-group-item list-group-item-action">
-                        {{ version.name }} ({{ version.views }})
+                        <b>{% if version.name is same as('') %}
+                                {{ dance.name }}
+                            {% else %}
+                                {{ version.name }}
+                            {% endif %}
+                        </b> {{ version.address }} ({{ version.views }})
                     </a>
                 {% endfor %}
             </div>
