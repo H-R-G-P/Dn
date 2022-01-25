@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Dto;
+namespace App\Vo;
 
 
 use App\Entity\Version;
 
-class AddressDTO
+class AddressVO
 {
     /** As possible full address to village.
      * If village unknown, then only department and region, itp.
