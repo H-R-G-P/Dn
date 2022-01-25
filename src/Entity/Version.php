@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Dto\AddressDTO;
+use App\Vo\AddressVO;
 use App\Repository\VersionRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
@@ -383,8 +383,8 @@ class Version
         return $this;
     }
 
-    #[Pure] public function getAddress(): AddressDTO
+    #[Pure] public function getAddress(): AddressVO
     {
-        return new AddressDTO($this);
+        return new AddressVO($this);
     }
 }
