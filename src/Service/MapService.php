@@ -24,7 +24,7 @@ class MapService
             throw new Exception('Minimum 2 places.');
         }
 
-        usort($points, function(Place $a, Place $b){
+        usort($points, function(CoordinatesVO $a, CoordinatesVO $b){
             if ($a->getLat() === $b->getLat()) {
                 return 0;
             }
@@ -34,7 +34,7 @@ class MapService
         $highestLat = $points[0]->getLat();
         $lowerLat = $points[array_key_last($points)]->getLat();
 
-        usort($points, function(Place $a, Place $b){
+        usort($points, function(CoordinatesVO $a, CoordinatesVO $b){
             if ($a->getLon() === $b->getLon()) {
                 return 0;
             }
