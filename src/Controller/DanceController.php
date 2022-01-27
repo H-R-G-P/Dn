@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Dance;
+use App\Entity\Place;
 use App\Entity\Version;
 use App\Repository\DanceRepository;
+use App\Repository\PlaceRepository;
 use App\Repository\VersionRepository;
+use App\Service\MapService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -50,19 +53,29 @@ class DanceController extends AbstractController
      * @param DanceRepository<Dance> $danceRepository
      * @param VersionRepository<Version> $versionRepository
      * @param EntityManagerInterface $entityManager
+     * @param MapService $mapService
+     * @param PlaceRepository<Place::class> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, RequestStack $requestStack, DanceRepository $danceRepository, VersionRepository $versionRepository, EntityManagerInterface $entityManager): Response
+    public function show(string $slug, RequestStack $requestStack, DanceRepository $danceRepository, VersionRepository $versionRepository, EntityManagerInterface $entityManager, MapService $mapService, PlaceRepository $placeRepository): Response
     {
         $dance = $danceRepository->findOneBy([
             'slug' => $slug,
         ]);
-
         if (!$dance) {
             return new Response('This dance dose not exists.');
         }
 
+        $versions = $versionRepository->findBy([
+            'dance' => $dance->getId(),
+        ]);
+        // TODO Move sorting to VersionRepository method
+        usort($versions, function ($a, $b) {
+            return strcmp($a->getName(), $b->getName());
+        });
+
+        // Add view to this dance
         $session = $requestStack->getSession();
         if (!$session->has($dance->getId().'Dance')) {
             $session->set($dance->getId().'Dance', 'This dance already was viewed.');
@@ -70,17 +83,15 @@ class DanceController extends AbstractController
             $entityManager->flush();
         }
 
-        $versions = $versionRepository->findBy([
-            'dance' => $dance->getId(),
-        ]);
+        $places = $placeRepository->findByDance($dance);
 
-        usort($versions, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('dance/show.html.twig', [
             'dance' => $dance,
             'versions' => $versions,
+            'map_json' => $map_json,
         ]);
     }
 
