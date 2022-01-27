@@ -37,7 +37,7 @@ class PlaceRepository extends ServiceEntityRepository
             FROM App\Entity\Place p 
             JOIN App\Entity\Version v 
             JOIN App\Entity\Dance d 
-            WHERE d.id = :danceId'
+            WHERE d.id = :danceId and v.dance = d.id and v.place = p.id'
         )->setParameter('danceId', $dance->getId());
 
         return $query->getResult();
