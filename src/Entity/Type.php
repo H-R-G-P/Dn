@@ -64,6 +64,11 @@ class Type implements EntityExtended
      */
     private array $dances = [];
 
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private string $namePlural;
+
     #[Pure] public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -207,5 +212,17 @@ class Type implements EntityExtended
     public function getDances(): array
     {
         return $this->dances;
+    }
+
+    public function getNamePlural(): string
+    {
+        return $this->namePlural;
+    }
+
+    public function setNamePlural(string $namePlural): self
+    {
+        $this->namePlural = $namePlural;
+
+        return $this;
     }
 }
