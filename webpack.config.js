@@ -26,7 +26,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     // TODO Rename entry point to 'map'
-    .addEntry('regions', './assets/regions.js')
+    .addEntry('regions', './assets/map.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
