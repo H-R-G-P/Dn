@@ -29,7 +29,11 @@
 
 {% block content %}
     <div class="card card-body mb-3">
-        <a href="#">{% trans %}Video{% endtrans %}</a>
+        {% if version.place is not same as(null) %}
+            {% trans %}Village{% endtrans %} {{ version.place.name }}
+        {% endif %}
+        <br>
+        <a href="#"><em>{% trans %}Video{% endtrans %}</em></a>
     </div>
 
     {% if version.youtube is not same as(null) %}
