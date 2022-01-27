@@ -6,13 +6,13 @@ $( document ).ready(function() {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    if (mapProperties.getPolygon() === null){
+    if (mapProperties.polygon === null){
         setBelMap();
     }else {
-        setMap(mapProperties.getPolygon());
+        setMap(mapProperties.polygon);
     }
 
-    setMarkers(mapProperties.getPoints());
+    setMarkers(mapProperties.points);
 });
 
 function setBelMap() {
@@ -38,8 +38,8 @@ function setMarkers(points) {
     });
 
     points.forEach(function (coordinates) {
-        let lat = coordinates.getLat(),
-            lon = coordinates.getLon();
+        let lat = coordinates.lat,
+            lon = coordinates.lon;
 
         if (lat && lon){
             L.marker([lat, lon], {icon: defIcon}).addTo(map);
