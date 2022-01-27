@@ -15,7 +15,7 @@
             <div class="list-group list-group-flush">
                 {% for source in sources %}
                     <a href="{{ url('source', {'slug': source.slug}) }}" class="list-group-item list-group-item-action">
-                        {{ source.name }}({{ source.dances|length }})
+                        {{ source.name }} ({{ source.dances|length }} {% trans %}dan.{% endtrans %})
                     </a>
                 {% endfor %}
             </div>
