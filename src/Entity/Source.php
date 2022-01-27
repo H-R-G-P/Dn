@@ -64,6 +64,11 @@ class Source implements EntityExtended
      */
     private array $dances = [];
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private string $title;
+
     #[Pure] public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -205,5 +210,17 @@ class Source implements EntityExtended
     public function getDances(): array
     {
         return $this->dances;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 }
