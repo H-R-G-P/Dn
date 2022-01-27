@@ -15,7 +15,7 @@
         <div class="col">
             {% for dance in type.dancesFromDb %}
                 <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                    {{ dance.name }}
+                    {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
                 </a>
             {% endfor %}
         </div>
