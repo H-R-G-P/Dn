@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Dance;
 use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,6 +21,26 @@ class PlaceRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Place::class);
+    }
+
+    /**
+     * @param Dance $dance
+     *
+     * @return array<int, Place>
+     */
+    public function findByDance(Dance $dance): array
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT p
+            FROM App\Entity\Place p 
+            JOIN App\Entity\Version v 
+            JOIN App\Entity\Dance d 
+            WHERE d.id = :danceId'
+        )->setParameter('danceId', $dance->getId());
+
+        return $query->getResult();
     }
 
     // /**
