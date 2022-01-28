@@ -67,13 +67,10 @@ class DanceController extends AbstractController
             return new Response('This dance dose not exists.');
         }
 
-        $versions = $versionRepository->findBy([
-            'dance' => $dance->getId(),
-        ]);
-        // TODO Move sorting to VersionRepository method
-        usort($versions, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
+        $versions = $versionRepository->findBy(
+            ['dance' => $dance->getId()],
+            ['name' => 'ASC'],
+        );
 
         // Add view to this dance
         $session = $requestStack->getSession();
