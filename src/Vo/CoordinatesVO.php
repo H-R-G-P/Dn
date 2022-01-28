@@ -6,14 +6,10 @@ namespace App\Vo;
 
 class CoordinatesVO
 {
-    /** Latitude
-     * @var float
-     */
+    /** Latitude */
     private float $lat;
 
-    /** Longitude
-     * @var float
-     */
+    /** Longitude */
     private float $lon;
 
     /**
