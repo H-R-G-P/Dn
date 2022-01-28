@@ -5,24 +5,16 @@ namespace App\Vo;
 
 class PolygonVO
 {
-    /**
-     * @var float Latitude
-     */
+    /** Latitude */
     private float $top;
 
-    /**
-     * @var float Longitude
-     */
+    /** Longitude */
     private float $right;
 
-    /**
-     * @var float Latitude
-     */
+    /** Latitude */
     private float $bottom;
 
-    /**
-     * @var float Longitude
-     */
+    /** Longitude */
     private float $left;
 
     /**
