@@ -12,11 +12,6 @@ class SourceController extends AbstractController
 {
     /**
      * @Route("/{_locale}/sources",
-locale="by",
-requirements={
-    "_locale": "by|en"
-},
-
      *     locale="by",
      *     requirements={
      *         "_locale": "by|en",

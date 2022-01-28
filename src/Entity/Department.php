@@ -52,8 +52,10 @@ class Department implements EntityExtended
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="department")
+     *
+     * @var Collection<int, Version>
      */
-    private $versions;
+    private Collection $versions;
 
     #[Pure] public function __construct()
     {
