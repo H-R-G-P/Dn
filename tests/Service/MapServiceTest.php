@@ -21,7 +21,7 @@ class MapServiceTest extends TestCase
             $polygon = $service->createPolygonVO($points);
             self::assertSame(null, $polygon);
         }catch (Exception $e) {
-            self::assertSame('Minimum 2 places.', $e->getMessage());
+            self::assertSame('Less_Then_2', $e->getMessage());
         }
 
         $points[] = new CoordinatesVO(1.2, 1.2);
@@ -31,7 +31,7 @@ class MapServiceTest extends TestCase
             $polygon = $service->createPolygonVO($points);
             self::assertSame(null, $polygon);
         }catch (Exception $e) {
-            self::assertSame('Minimum 2 places.', $e->getMessage());
+            self::assertSame('Less_Then_2', $e->getMessage());
         }
 
         $points[] = new CoordinatesVO(1.4, 1.6);
