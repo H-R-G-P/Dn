@@ -9,6 +9,7 @@ use App\Repository\DanceRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\VersionRepository;
 use App\Service\MapService;
+use App\Service\UpdateDatabaseService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -49,17 +50,17 @@ class DanceController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param RequestStack $requestStack
      * @param DanceRepository<Dance> $danceRepository
      * @param VersionRepository<Version> $versionRepository
-     * @param EntityManagerInterface $entityManager
      * @param MapService $mapService
      * @param PlaceRepository<Place::class> $placeRepository
+     * @param UpdateDatabaseService $databaseService
      *
      * @return Response
      */
-    public function show(string $slug, RequestStack $requestStack, DanceRepository $danceRepository, VersionRepository $versionRepository, EntityManagerInterface $entityManager, MapService $mapService, PlaceRepository $placeRepository): Response
+    public function show(string $slug, DanceRepository $danceRepository, VersionRepository $versionRepository, MapService $mapService, PlaceRepository $placeRepository, UpdateDatabaseService $databaseService): Response
     {
+        // Fetch database
         $dance = $danceRepository->findOneBy([
             'slug' => $slug,
         ]);
@@ -72,16 +73,11 @@ class DanceController extends AbstractController
             ['name' => 'ASC'],
         );
 
-        // Add view to this dance
-        $session = $requestStack->getSession();
-        if (!$session->has($dance->getId().'Dance')) {
-            $session->set($dance->getId().'Dance', 'This dance already was viewed.');
-            $dance->subView();
-            $entityManager->flush();
-        }
-
         $places = $placeRepository->findByDance($dance);
 
+        $databaseService->increaseViews($dance);
+
+        // Create map parameters
         $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();
 
