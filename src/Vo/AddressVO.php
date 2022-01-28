@@ -17,15 +17,29 @@ class AddressVO
      */
     private string $address;
 
-    public function __construct(Version $v)
+    /** AddressVO constructor.
+     *
+     * @param Version $v
+     * @param string $language
+     */
+    public function __construct(Version $v, string $language = 'by')
     {
         $department = $v->getDepartment() !== null ? $v->getDepartment()->getName() : '';
         $region = $v->getRegion() !== null ? $v->getRegion()->getName() : '';
         $village = $v->getPlace() !== null ? $v->getPlace()->getName() : '';
 
-        $this->address = ($department !== '' ? $department.' вобл.' : '')
-            .($region !== '' ? ', '.$region .' р-н': '')
-            .($village !== '' ? ', в. '.$village : '');
+        if ($language === 'by'){
+            $this->address = ($department !== '' ? $department.' вобл.' : '')
+                .($region !== '' ? ', '.$region .' р-н': '')
+                .($village !== '' ? ', в. '.$village : '');
+        }
+
+        if ($language === 'en'){
+            $this->address = ($department !== '' ? $department.' dep.' : '')
+                .($region !== '' ? ', '.$region .' reg.': '')
+                .($village !== '' ? ', vil. '.$village : '');
+        }
+
     }
 
     public function __toString(): string
