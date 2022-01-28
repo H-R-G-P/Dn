@@ -51,14 +51,13 @@ class DanceController extends AbstractController
      *
      * @param string $slug
      * @param DanceRepository<Dance> $danceRepository
-     * @param VersionRepository<Version> $versionRepository
      * @param MapService $mapService
      * @param PlaceRepository<Place::class> $placeRepository
      * @param UpdateDatabaseService $databaseService
      *
      * @return Response
      */
-    public function show(string $slug, DanceRepository $danceRepository, VersionRepository $versionRepository, MapService $mapService, PlaceRepository $placeRepository, UpdateDatabaseService $databaseService): Response
+    public function show(string $slug, DanceRepository $danceRepository, MapService $mapService, PlaceRepository $placeRepository, UpdateDatabaseService $databaseService): Response
     {
         // Fetch database
         $dance = $danceRepository->findOneBy([
@@ -67,11 +66,6 @@ class DanceController extends AbstractController
         if (!$dance) {
             return new Response('This dance dose not exists.');
         }
-
-        $versions = $versionRepository->findBy(
-            ['dance' => $dance->getId()],
-            ['name' => 'ASC'],
-        );
 
         $places = $placeRepository->findByDance($dance);
 
@@ -83,7 +77,6 @@ class DanceController extends AbstractController
 
         return $this->render('dance/show.html.twig', [
             'dance' => $dance,
-            'versions' => $versions,
             'map_json' => $map_json,
         ]);
     }
