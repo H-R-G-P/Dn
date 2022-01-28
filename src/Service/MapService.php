@@ -51,7 +51,7 @@ class MapService
     public function createPolygonVO(array $points): PolygonVO
     {
         if (count($points) < 2){
-            throw new Exception('Minimum 2 places.');
+            throw new Exception('Less_Then_2');
         }
 
         usort($points, function(CoordinatesVO $a, CoordinatesVO $b){
