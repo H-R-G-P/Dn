@@ -11,22 +11,20 @@ class AddressVO
     /** As possible full address to village.
      * If village unknown, then only department and region, itp.
      *
-     * @var string
-     *
      * @example "Мінская вобл., Барысаўскі р-н, в. Селішча"
      */
     private string $address;
 
     /** AddressVO constructor.
      *
-     * @param Version $v
+     * @param Version $version
      * @param string $language
      */
-    public function __construct(Version $v, string $language = 'by')
+    public function __construct(Version $version, string $language = 'by')
     {
-        $department = $v->getDepartment() !== null ? $v->getDepartment()->getName() : '';
-        $region = $v->getRegion() !== null ? $v->getRegion()->getName() : '';
-        $village = $v->getPlace() !== null ? $v->getPlace()->getName() : '';
+        $department = $version->getDepartment() !== null ? $version->getDepartment()->getName() : '';
+        $region = $version->getRegion() !== null ? $version->getRegion()->getName() : '';
+        $village = $version->getPlace() !== null ? $version->getPlace()->getName() : '';
 
         if ($language === 'by'){
             $this->address = ($department !== '' ? $department.' вобл.' : '')

@@ -383,8 +383,8 @@ class Version
         return $this;
     }
 
-    #[Pure] public function getAddress(): AddressVO
+    #[Pure] public function getAddress(string $language): AddressVO
     {
-        return new AddressVO($this);
+        return new AddressVO($this, $language);
     }
 }
