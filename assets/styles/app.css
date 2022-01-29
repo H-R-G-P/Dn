@@ -4,6 +4,14 @@ body {
     background-size: 100%;
 }
 
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 600px) {
+   body {
+      background: lightgray !important;
+  }
+}
+
 #map {
     border: 1px solid black;
     width: 100%;
