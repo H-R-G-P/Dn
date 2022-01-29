@@ -23,20 +23,20 @@
 
 {% block content %}
     <div class="card card-body mb-3">
-        {% if version.place is not same as(null) %}
+        {% if version.place %}
             {% trans %}Village{% endtrans %} {{ version.place.name }}
             <br>
         {% endif %}
-        {% if version.source is not same as(null) %}
+        {% if version.source %}
             {% trans %}Source{% endtrans %} {{ version.source.name }}
             <br>
         {% endif %}
-        {% if version.source2 is not same as(null) %}
+        {% if version.source2 %}
             {% trans %}Second source{% endtrans %} {{ version.source2.name }}
             <br>
         {% endif %}
         {% trans %}Type{% endtrans %}
-            {% if version.type is not same as(null) %}
+            {% if version.type %}
                 {{ version.type.name }}
             {% else %}
                 {% trans %}Improvisation{% endtrans %}
@@ -45,7 +45,7 @@
         <a href="#"><em>{% trans %}Video{% endtrans %}</em></a>
     </div>
 
-    {% if version.youtube is not same as(null) %}
+    {% if version.youtube %}
         <div class="row mb-3">
             <div class="col">
                 <iframe width="100%" height="600" src="{{ version.youtube }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
