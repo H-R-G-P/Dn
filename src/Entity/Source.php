@@ -62,7 +62,7 @@ class Source implements EntityExtended
     /**
      * @var Dance[]
      */
-    private array $dances = [];
+    private array $dances;
 
     #[Pure] public function __construct()
     {

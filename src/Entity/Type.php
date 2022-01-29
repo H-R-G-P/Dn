@@ -62,7 +62,7 @@ class Type implements EntityExtended
     /**
      * @var Dance[]
      */
-    private array $dances = [];
+    private array $dances;
 
     /**
      * @ORM\Column(type="string", length=30)
