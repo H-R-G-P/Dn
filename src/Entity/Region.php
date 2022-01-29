@@ -48,7 +48,7 @@ class Region implements EntityExtended
     /**
      * @var Dance[]
      */
-    private array $dances = [];
+    private array $dances;
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="region")
