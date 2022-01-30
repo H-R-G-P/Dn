@@ -59,10 +59,7 @@ class Type implements EntityExtended
      */
     private string $slug;
 
-    /**
-     * @var Dance[]
-     */
-    private array $dances;
+    private int $dancesCount = 0;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -197,21 +194,21 @@ class Type implements EntityExtended
     }
 
     /**
-     * @param Dance[] $dances
+     * @param int $dancesCount
      *
      * @return void
      */
-    public function setDances(array $dances): void
+    public function setDancesCount(int $dancesCount): void
     {
-        $this->dances = $dances;
+        $this->dancesCount = $dancesCount;
     }
 
     /**
-     * @return Dance[]
+     * @return int
      */
-    public function getDances(): array
+    public function getDancesCount(): int
     {
-        return $this->dances;
+        return $this->dancesCount;
     }
 
     public function getNamePlural(): string

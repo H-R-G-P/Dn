@@ -15,7 +15,7 @@
                     <div class="list-group list-group-flush">
                         {% for department in entity_collection.departments %}
                             <a href="{{ url('department', {'slug': department.slug}) }}" class="list-group-item list-group-item-action">
-                                {{ department.name }} ({{ department.dances|length }})
+                                {{ department.name }} ({{ department.dancesCount }})
                             </a>
                         {% endfor %}
                     </div>
@@ -31,7 +31,7 @@
                     <div class="list-group list-group-flush">
                         {% for region in top_ten_regions %}
                             <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
-                                {{ region.name }} ({{ region.dances|length }})
+                                {{ region.name }} ({{ region.dancesCount }})
                             </a>
                         {% endfor %}
                     </div>
@@ -47,7 +47,7 @@
                     <div class="list-group list-group-flush">
                         {% for type in entity_collection.types %}
                             <a href ="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
-                                {{ type.name }} ({{ type.dances|length }})
+                                {{ type.name }} ({{ type.dancesCount }})
                             </a>
                         {% endfor %}
                     </div>
@@ -63,7 +63,7 @@
                     <div class="list-group list-group-flush">
                         {% for source in entity_collection.sources %}
                             <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
-                                {{ source.name }} ({{ source.dances|length }})
+                                {{ source.name }} ({{ source.dancesCount }})
                             </a>
                         {% endfor %}
                     </div>

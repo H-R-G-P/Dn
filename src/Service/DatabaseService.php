@@ -53,7 +53,7 @@ class DatabaseService
                 $dances[] = $version->getDance();
             }
 
-            $entity->setDances($dances);
+            $entity->setDancesCount(count($dances));
         }
 
         return $entityCollection;
@@ -116,8 +116,8 @@ class DatabaseService
         $regions = $this->database->getRegions();
 
         usort($regions, function ($a, $b){
-            $a = count($a->getDances());
-            $b = count($b->getDances());
+            $a = $a->getDancesCount();
+            $b = $b->getDancesCount();
 
             if ($a == $b) {
                 return 0;

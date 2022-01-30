@@ -4,18 +4,16 @@
 namespace App\Interface;
 
 
-use App\Entity\Dance;
-
 interface EntityExtended {
     /**
-     * @param Dance[] $dances
+     * @param int $dancesCount
      *
      * @return void
      */
-    public function setDances(array $dances): void;
+    public function setDancesCount(int $dancesCount): void;
 
     /**
-     * @return Dance[]
+     * @return int
      */
-    public function getDances(): array;
+    public function getDancesCount(): int;
 }
