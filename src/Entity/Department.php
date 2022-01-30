@@ -45,10 +45,7 @@ class Department implements EntityExtended
      */
     private Collection $regions;
 
-    /**
-     * @var Dance[]
-     */
-    private array $dances;
+    private int $dancesCount = 0;
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="department")
@@ -159,21 +156,21 @@ class Department implements EntityExtended
     }
 
     /**
-     * @param Dance[] $dances
+     * @param int $dancesCount
      *
      * @return void
      */
-    public function setDances(array $dances): void
+    public function setDancesCount(int $dancesCount): void
     {
-        $this->dances = $dances;
+        $this->dancesCount = $dancesCount;
     }
 
     /**
-     * @return Dance[]
+     * @return int
      */
-    public function getDances(): array
+    public function getDancesCount(): int
     {
-        return $this->dances;
+        return $this->dancesCount;
     }
 
     /**
