@@ -10,23 +10,23 @@ use function PHPUnit\Framework\assertSame;
 
 class DatabaseServiceTest extends TestCase
 {
-    public function testGetRegionsSortedByDances()
+    public function testGetRegionsSortedByDances(): void
     {
         $regions = [];
         $region = $this->createMock(Region::class);
         $region->expects($this->any())
-            ->method('getDances')
-            ->willReturn([]);
+            ->method('getDancesCount')
+            ->willReturn(0);
         $regions[] = $region;
         $region = $this->createMock(Region::class);
         $region->expects($this->any())
-            ->method('getDances')
-            ->willReturn([1, 2, 3]);
+            ->method('getDancesCount')
+            ->willReturn(3);
         $regions[] = $region;
         $region = $this->createMock(Region::class);
         $region->expects($this->any())
-            ->method('getDances')
-            ->willReturn([2, 3]);
+            ->method('getDancesCount')
+            ->willReturn(2);
         $regions[] = $region;
 
         $database = $this->createMock(DatabaseVO::class);
@@ -37,8 +37,8 @@ class DatabaseServiceTest extends TestCase
         $service = new DatabaseService($database);
 
         $sortedRegions = $service->getRegionsSortedByDances();
-        assertSame(3, count($sortedRegions[0]->getDances()));
-        assertSame(2, count($sortedRegions[1]->getDances()));
-        assertSame(0, count($sortedRegions[2]->getDances()));
+        assertSame(3, $sortedRegions[0]->getDancesCount());
+        assertSame(2, $sortedRegions[1]->getDancesCount());
+        assertSame(0, $sortedRegions[2]->getDancesCount());
     }
 }
