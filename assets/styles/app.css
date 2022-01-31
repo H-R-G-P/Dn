@@ -6,10 +6,26 @@ body {
 
 @media only screen
 and (min-device-width : 320px)
-and (max-device-width : 600px) {
-   body {
-      background: lightgray !important;
-  }
+and (max-device-width : 780px) {
+    body {
+        background: lightgray !important;
+    }
+
+    #dropdownMenu {
+        display: flex !important;
+    }
+
+    .entity {
+        display: none !important;
+    }
+}
+
+#dropdownMenu {
+    display: none;
+}
+
+.entity {
+    visibility: visible;
 }
 
 #map {

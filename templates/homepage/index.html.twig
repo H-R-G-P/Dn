@@ -5,8 +5,58 @@
 {% block header %}{% trans %}Dances of Belarus{% endtrans %}{% endblock %}
 
 {% block content %}
+    <div id="dropdownMenu" class="row">
+        <div class="dropdown d-flex justify-content-center">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDepartmentButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans %}Departments{% endtrans %}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownDepartmentButton">
+                {% for department in entity_collection.departments %}
+                    <li>
+                        <a href="{{ url('department', {'slug': department.slug}) }}" class="list-group-item list-group-item-action">
+                            {{ department.name }} ({{ department.dances|length }})
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRegionButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans %}Regions{% endtrans %}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownRegionButton">
+                {% for region in top_ten_regions %}
+                    <li>
+                        <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
+                            {{ region.name }} ({{ region.dances|length }})
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownTypeButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans %}Types{% endtrans %}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownTypeButton">
+                {% for type in entity_collection.types %}
+                    <li>
+                        <a href ="{{ url('type', {'slug': type.slug})}}" class="list-group-item list-group-item-action">
+                        {{ type.name }} ({{ type.dances|length }})</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownSourceButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans %}Sources{% endtrans %}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownSourceButton">
+                {% for source in entity_collection.sources %}
+                    <li>
+                        <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
+                        {{ source.name }} ({{ source.dances|length }})</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
     <div class="row">
-        <div class="col">
+        <div class="col entity">
             <div class="card">
                 <div class="card-header">
                     <h5>{% trans %}Departments{% endtrans %}</h5>
@@ -22,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col entity">
             <div class="card">
                 <div class="card-header">
                     <h5>{% trans %}Regions{% endtrans %}</h5>
@@ -38,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="col mt-sm-3 mt-md-0">
+        <div class="col mt-sm-3 mt-md-0 entity">
             <div class="card">
                 <div class="card-header">
                     <h5>{% trans %}Types{% endtrans %}</h5>
@@ -54,7 +104,7 @@
                 </div>
             </div>
         </div>
-        <div class="col mt-sm-3 mt-md-3 mt-lg-0">
+        <div class="col mt-sm-3 mt-md-3 mt-lg-0 entity">
             <div class="card">
                 <div class="card-header">
                     <h5>{% trans %}Sources{% endtrans %}</h5>
