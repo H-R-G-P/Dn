@@ -50,7 +50,8 @@ class DatabaseService
             $dances = array();
 
             foreach ($versions as $version) {
-                $dances[] = $version->getDance();
+                $dance = $version->getDance();
+                $dances[$dance->getId()] = $dance;
             }
 
             $entity->setDancesCount(count($dances));
