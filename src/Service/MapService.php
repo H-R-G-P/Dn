@@ -23,10 +23,8 @@ class MapService
         $map = null;
         $points = [];
         foreach ($places as $place) {
-            if ($place->getLat() !== null && $place->getLon() !== null){
-                $coordinates = new CoordinatesVO($place->getLat(), $place->getLon());
-                $points[] = $coordinates;
-            }
+            if ($coordinates = $place->getCoordinates())
+            $points[] = $coordinates;
         }
 
         try {
