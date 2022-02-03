@@ -13,7 +13,7 @@
     <div class="row">
         {% for type in types %}
             <a href="{{ url('type', {"slug": type.slug}) }}" class="list-group-item list-group-item-action">
-                {{ type.name }} ({{ type.dances|length }})
+                {{ type.name }} ({{ type.dancesCount }})
             </a>
         {% endfor %}
     </div>
