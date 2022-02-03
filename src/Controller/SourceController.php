@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Place;
 use App\Entity\Source;
+use App\Repository\PlaceRepository;
 use App\Repository\SourceRepository;
+use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,15 +23,22 @@ class SourceController extends AbstractController
      * )
      *
      * @param SourceRepository<Source> $sourceRepository
+     * @param PlaceRepository<Place> $placeRepository
+     * @param MapService $mapService
      *
      * @return Response
      */
-    public function index(SourceRepository $sourceRepository): Response
+    public function index(SourceRepository $sourceRepository, PlaceRepository $placeRepository, MapService $mapService): Response
     {
         $sources = $sourceRepository->findAll();
+        $places = $placeRepository->findAll();
+
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('source/index.html.twig', [
             'sources' => $sources,
+            'map_json' => $map_json,
         ]);
     }
 
