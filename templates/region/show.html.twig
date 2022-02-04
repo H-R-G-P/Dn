@@ -12,7 +12,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col">
+        <div class="col mb-3">
             <div class="list-group list-group-flush">
                 {% for dance in region.dancesFromDb %}
                     <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
@@ -22,7 +22,7 @@
             </div>
         </div>
         {% if map_json %}
-            <div class="col">
+            <div id="map_parent" class="col mb-3">
                 <div id="map"></div>
             </div>
         {% endif %}

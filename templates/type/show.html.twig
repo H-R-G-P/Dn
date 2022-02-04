@@ -12,7 +12,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col">
+        <div class="col mb-3">
             {% for dance in type.dancesFromDb %}
                 <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
                     {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
@@ -20,7 +20,7 @@
             {% endfor %}
         </div>
         {% if map_json %}
-            <div class="col">
+            <div id="map_parent" class="col mb-3">
                 <div id="map"></div>
             </div>
         {% endif %}

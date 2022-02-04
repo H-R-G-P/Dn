@@ -8,7 +8,7 @@
             <h1 class="text-center my-5">{{ department.name }}</h1>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col mb-3">
                 <div class="list-group list-group-flush">
                     {% for region in department.regions %}
                         <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             {% if map_json %}
-                <div class="col">
+                <div id="map_parent" class="col mb-3">
                     <div id="map"></div>
                 </div>
             {% endif %}

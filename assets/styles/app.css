@@ -18,6 +18,11 @@ and (max-device-width : 780px) {
     .entity {
         display: none !important;
     }
+
+    #map_parent {
+        flex: 0 0 auto;
+        width: 100%;
+    }
 }
 
 #dropdownMenu {
