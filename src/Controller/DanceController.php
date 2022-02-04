@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Version;
+use App\Interface\EntityExtended;
 use App\Repository\DanceRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\VersionRepository;
@@ -97,7 +98,7 @@ class DanceController extends AbstractController
      *
      * @return Response
      */
-    public function showVersion(string $slugVersion, RequestStack $requestStack, VersionRepository $versionRepository, EntityManagerInterface $entityManager) : Response
+    public function showVersion(string $slugVersion, RequestStack $requestStack, VersionRepository $versionRepository, EntityManagerInterface $entityManager, MapService $mapService) : Response
     {
         $version = $versionRepository->findOneBy([
             'slug' => $slugVersion,
@@ -122,9 +123,17 @@ class DanceController extends AbstractController
                 $entityManager->flush();
             }
 
+            $map_json = null;
+            $place = $version->getPlace();
+            if ($place instanceof Place){
+                $map = $mapService->createMapDTO([$place]);
+                $map_json = $map === null ? null : $map->serializeToJson();
+            }
+
             return $this->render('dance/show_version.html.twig', [
                 'dance' => $dance,
                 'version' => $version,
+                'map_json' => $map_json,
             ]);
         }
     }
