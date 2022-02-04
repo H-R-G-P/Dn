@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Department;
+use App\Entity\Place;
 use App\Repository\DepartmentRepository;
+use App\Repository\PlaceRepository;
+use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class DepartmentController extends AbstractController
 {
@@ -23,11 +23,13 @@ class DepartmentController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param DepartmentRepository $departmentRepository
+     * @param DepartmentRepository<Department> $departmentRepository
+     * @param MapService $mapService
+     * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, DepartmentRepository $departmentRepository): Response
+    public function show(string $slug, DepartmentRepository $departmentRepository, MapService $mapService, PlaceRepository $placeRepository): Response
     {
         $department = $departmentRepository->findOneBy([
             'slug' => $slug,
@@ -37,29 +39,14 @@ class DepartmentController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-//        try {
-//            $polygon = $coordinatesService->getPolygon($department->getPlaces());
-//        }catch (\Exception $e) {
-//            $polygon = null;
-//        }
+        $places = $placeRepository->findByEntityExtended($department);
 
-        $encoder = new JsonEncoder();
-        $defaultContext = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getName();
-            },
-        ];
-        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
-
-        $serializer = new Serializer([$normalizer], [$encoder]);
-
-        $departmentJson = $serializer->serialize($department, 'json');
-//        $polygonJson = $serializer->serialize($polygon, 'json');
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('department/show.html.twig', [
             'department' => $department,
-            'department_json' => $departmentJson,
-//            'polygon' => $polygonJson,
+            'map_json' => $map_json,
         ]);
     }
 }
