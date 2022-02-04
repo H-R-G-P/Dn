@@ -12,7 +12,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col">
+        <div class="col mb-3">
             <div class="list-group list-group-flush">
                 {% for version in dance.versions %}
                     <a href="{{ url('version', {'slugDance': dance.slug, 'slugVersion': version.slug}) }}" class="list-group-item list-group-item-action">
@@ -27,7 +27,7 @@
             </div>
         </div>
         {% if map_json %}
-            <div class="col">
+            <div id="map_parent" class="col mb-3">
                 <div id="map"></div>
             </div>
         {% endif %}

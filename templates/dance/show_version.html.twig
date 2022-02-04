@@ -23,7 +23,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col">
+        <div class="col mb-3">
             <div class="card card-body mb-3">
                 {% if version.place %}
                     {% trans %}Village{% endtrans %} {{ version.place.name }}
@@ -49,9 +49,9 @@
         </div>
         <div class="col">
             {% if map_json %}
-                <div class="col">
-                    <div id="map"></div>
-                </div>
+                <div id="map_parent" class="col mb-3">
+                <div id="map"></div>
+            </div>
             {% endif %}
         </div>
     </div>
