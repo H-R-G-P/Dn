@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Dance;
 use App\Entity\Place;
+use App\Interface\EntityExtended;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,6 +40,29 @@ class PlaceRepository extends ServiceEntityRepository
             JOIN App\Entity\Dance d 
             WHERE d.id = :danceId and v.dance = d.id and v.place = p.id'
         )->setParameter('danceId', $dance->getId());
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param EntityExtended $entity
+     *
+     * @return array<int, Place>
+     */
+    public function findByEntityExtended(EntityExtended $entity): array
+    {
+        $em = $this->getEntityManager();
+
+        $array = explode('\\', get_class($entity));
+        $className = $array[array_key_last($array)];
+
+        $query = $em->createQuery(
+            'SELECT p
+            FROM App\Entity\Place p 
+            JOIN App\Entity\Version v 
+            JOIN App\Entity\\'.$className.' e 
+            WHERE e.id = :entityId and v.'.strtolower($className).' = e.id and v.place = p.id'
+        )->setParameter('entityId', $entity->getId());
 
         return $query->getResult();
     }
