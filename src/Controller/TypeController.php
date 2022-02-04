@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Place;
 use App\Entity\Type;
+use App\Repository\PlaceRepository;
 use App\Repository\TypeRepository;
+use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,17 +46,28 @@ class TypeController extends AbstractController
      *
      * @param string $slug
      * @param TypeRepository<Type> $typeRepository
+     * @param MapService $mapService
+     * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, TypeRepository $typeRepository): Response
+    public function show(string $slug, TypeRepository $typeRepository, MapService $mapService, PlaceRepository $placeRepository): Response
     {
-       $type = $typeRepository->findOneBy([
+        $type = $typeRepository->findOneBy([
            'slug' => $slug,
-       ]);
+        ]);
+        if ($type === null){
+            return $this->redirectToRoute('types');
+        }
+
+        $places = $placeRepository->findByEntityExtended($type);
+
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('type/show.html.twig', [
             'type' => $type,
+            'map_json' => $map_json,
         ]);
     }
 }
