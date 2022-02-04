@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Place;
 use App\Entity\Region;
+use App\Repository\PlaceRepository;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\RegionRepository;
@@ -45,10 +47,11 @@ class RegionController extends AbstractController
      * @param string $slug
      * @param RegionRepository<Region> $regionRepository
      * @param MapService $mapService
+     * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, RegionRepository $regionRepository, MapService $mapService) : Response
+    public function show(string $slug, RegionRepository $regionRepository, MapService $mapService, PlaceRepository $placeRepository) : Response
     {
         $region = $regionRepository->findOneBy([
             'slug' => $slug,
@@ -58,7 +61,9 @@ class RegionController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $map = $mapService->createMapDTO($region->getPlaces()->toArray());
+        $places = $placeRepository->findByEntityExtended($region);
+
+        $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('region/show.html.twig', [
