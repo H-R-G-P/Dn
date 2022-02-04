@@ -53,17 +53,28 @@ class SourceController extends AbstractController
      *
      * @param string $slug
      * @param SourceRepository<Source> $sourceRepository
+     * @param MapService $mapService
+     * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, SourceRepository $sourceRepository): Response
+    public function show(string $slug, SourceRepository $sourceRepository, MapService $mapService, PlaceRepository $placeRepository): Response
     {
         $source = $sourceRepository->findOneBy([
             'slug' => $slug,
         ]);
+        if ($source === null){
+            return $this->redirectToRoute('sources');
+        }
+
+        $places = $placeRepository->findByEntityExtended($source);
+
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('source/show.html.twig', [
             'source' => $source,
+            'map_json' => $map_json,
         ]);
     }
 }
