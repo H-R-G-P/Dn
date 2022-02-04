@@ -9,9 +9,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <div id="map"></div>
-            </div>
-            <div class="col">
                 <div class="list-group list-group-flush">
                     {% for region in department.regions %}
                         <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
@@ -20,10 +17,14 @@
                     {% endfor %}
                 </div>
             </div>
+            {% if map_json %}
+                <div class="col">
+                    <div id="map"></div>
+                </div>
+            {% endif %}
         </div>
     </div>
-    <div hidden id="region_obj">{{ department_json|raw }}</div>
-    <div hidden id="polygon">{{ polygon|raw }}</div>
+    <div hidden id="map_json">{{ map_json|raw }}</div>
 {% endblock %}
 
 {% block javascripts %}
