@@ -6,6 +6,11 @@ namespace App\Interface;
 
 interface EntityExtended {
     /**
+     * @return int
+     */
+    public function getId(): int;
+
+    /**
      * @param int $dancesCount
      *
      * @return void
