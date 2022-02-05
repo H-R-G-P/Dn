@@ -19,6 +19,16 @@
                 <div class="row">
                     <h1 class="text-center my-5">{% block header %}{% endblock %}</h1>
                 </div>
+                {% block flash_message %}
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }} justify-content-between d-flex">
+                                {{ message }}
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endblock %}
                 <div class="row">
                     <div class="col">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-2 align-middle d-flex justify-content-between">

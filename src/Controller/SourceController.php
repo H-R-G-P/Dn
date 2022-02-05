@@ -8,6 +8,7 @@ use App\Repository\PlaceRepository;
 use App\Repository\SourceRepository;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -52,19 +53,21 @@ class SourceController extends AbstractController
      * )
      *
      * @param string $slug
+     * @param Request $request
      * @param SourceRepository<Source> $sourceRepository
      * @param MapService $mapService
      * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, SourceRepository $sourceRepository, MapService $mapService, PlaceRepository $placeRepository): Response
+    public function show(string $slug, Request $request, SourceRepository $sourceRepository, MapService $mapService, PlaceRepository $placeRepository): Response
     {
         $source = $sourceRepository->findOneBy([
             'slug' => $slug,
         ]);
         if ($source === null){
-            return $this->redirectToRoute('sources');
+            $this->addFlash('dark', $request->getUri().' page is not exists.');
+            return $this->redirectToRoute('homepage');
         }
 
         $places = $placeRepository->findByEntityExtended($source);
