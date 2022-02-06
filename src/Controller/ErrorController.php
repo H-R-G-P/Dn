@@ -18,7 +18,11 @@ class ErrorController extends AbstractController
      */
     public function show(Throwable $exception): Response
     {
-        $this->addFlash('warning', $exception->getMessage());
-        return $this->redirectToRoute('homepage');
+        if ($exception->getCode() === 404){
+            $this->addFlash('warning', $exception->getMessage());
+            return $this->redirectToRoute('homepage');
+        }
+
+        throw new \Exception($exception->getMessage(), $exception->getCode(), $exception);
     }
 }
