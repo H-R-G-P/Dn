@@ -58,6 +58,7 @@ class RegionController extends AbstractController
         ]);
 
         if ($region === null) {
+            $this->addFlash('dark', 'Region "'.$slug.'" not exists.');
             return $this->redirectToRoute('homepage');
         }
 

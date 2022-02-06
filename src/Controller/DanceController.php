@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Version;
-use App\Interface\EntityExtended;
 use App\Repository\DanceRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\VersionRepository;
@@ -65,7 +64,8 @@ class DanceController extends AbstractController
             'slug' => $slug,
         ]);
         if (!$dance) {
-            return new Response('This dance dose not exists.');
+            $this->addFlash('dark', 'Dance "'.$slug.'" not exists.');
+            return $this->redirectToRoute('homepage');
         }
 
         $places = $placeRepository->findByDance($dance);
@@ -105,36 +105,36 @@ class DanceController extends AbstractController
         ]);
 
         if ($version === null){
-            return $this->redirectToRoute('dances');
+            $this->addFlash('dark', 'Version "'.$slugVersion.'" not exists.');
+            return $this->redirectToRoute('homepage');
         }
-        else{
-            $dance = $version->getDance();
-            $session = $requestStack->getSession();
 
-            if (!$session->has($dance->getId().'Dance')) {
-                $session->set($dance->getId().'Dance', 'This dance already was viewed.');
-                $dance->subView();
-                $entityManager->flush();
-            }
+        $dance = $version->getDance();
+        $session = $requestStack->getSession();
 
-            if (!$session->has($version->getId().'Version')) {
-                $session->set($version->getId().'Version', 'This version already was viewed.');
-                $version->subView();
-                $entityManager->flush();
-            }
-
-            $map_json = null;
-            $place = $version->getPlace();
-            if ($place instanceof Place){
-                $map = $mapService->createMapDTO([$place]);
-                $map_json = $map === null ? null : $map->serializeToJson();
-            }
-
-            return $this->render('dance/show_version.html.twig', [
-                'dance' => $dance,
-                'version' => $version,
-                'map_json' => $map_json,
-            ]);
+        if (!$session->has($dance->getId().'Dance')) {
+            $session->set($dance->getId().'Dance', 'This dance already was viewed.');
+            $dance->subView();
+            $entityManager->flush();
         }
+
+        if (!$session->has($version->getId().'Version')) {
+            $session->set($version->getId().'Version', 'This version already was viewed.');
+            $version->subView();
+            $entityManager->flush();
+        }
+
+        $map_json = null;
+        $place = $version->getPlace();
+        if ($place instanceof Place){
+            $map = $mapService->createMapDTO([$place]);
+            $map_json = $map === null ? null : $map->serializeToJson();
+        }
+
+        return $this->render('dance/show_version.html.twig', [
+            'dance' => $dance,
+            'version' => $version,
+            'map_json' => $map_json,
+        ]);
     }
 }

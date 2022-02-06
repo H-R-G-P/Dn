@@ -36,6 +36,7 @@ class DepartmentController extends AbstractController
         ]);
 
         if ($department === null) {
+            $this->addFlash('dark', 'Department "'.$slug.'" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
