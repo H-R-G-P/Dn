@@ -10,9 +10,9 @@
         <div class="row">
             <div class="col mb-3">
                 <div class="list-group list-group-flush">
-                    {% for region in department.regions %}
-                        <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
-                            {{ region.name }}
+                    {% for dance in dances %}
+                        <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
+                            {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
                         </a>
                     {% endfor %}
                 </div>

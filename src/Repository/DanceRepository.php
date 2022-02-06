@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Dance;
+use App\Interface\EntityExtended;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,6 +21,29 @@ class DanceRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Dance::class);
+    }
+
+    /**
+     * @param EntityExtended $entity
+     *
+     * @return array<int, Dance>
+     */
+    public function findByEntityExtended(EntityExtended $entity): array
+    {
+        $em = $this->getEntityManager();
+
+        $array = explode('\\', get_class($entity));
+        $className = $array[array_key_last($array)];
+
+        $query = $em->createQuery(
+            'SELECT d
+            FROM App\Entity\Dance d 
+            JOIN App\Entity\Version v 
+            JOIN App\Entity\\'.$className.' e 
+            WHERE e.id = :entityId and v.'.strtolower($className).' = e.id and v.place = d.id'
+        )->setParameter('entityId', $entity->getId());
+
+        return $query->getResult();
     }
 
     // /**

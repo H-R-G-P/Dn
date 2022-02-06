@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Dance;
 use App\Entity\Department;
 use App\Entity\Place;
 use App\Entity\Region;
@@ -48,6 +49,7 @@ class DepartmentController extends AbstractController
         $places = $placeRepository->findByEntityExtended($department);
         $regions = $regionRepository->findByDepartment($department);
         $regions = $databaseService->setDances($regions);
+        $dances = $this->getDoctrine()->getRepository(Dance::class)->findByEntityExtended($department);
 
         $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();
@@ -55,6 +57,7 @@ class DepartmentController extends AbstractController
         return $this->render('department/show.html.twig', [
             'department' => $department,
             'regions' => $regions,
+            'dances' => $dances,
             'map_json' => $map_json,
         ]);
     }
