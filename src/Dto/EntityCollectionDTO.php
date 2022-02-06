@@ -29,6 +29,11 @@ class EntityCollectionDTO
     private array $sources;
 
     /**
+     * @var EntityExtended[]
+     */
+    private array $places;
+
+    /**
      * @return EntityExtended[]
      */
     public function getRegions(): array
@@ -90,5 +95,21 @@ class EntityCollectionDTO
     public function setSources(array $sources): void
     {
         $this->sources = $sources;
+    }
+
+    /**
+     * @return EntityExtended[]
+     */
+    public function getPlaces(): array
+    {
+        return $this->places;
+    }
+
+    /**
+     * @param EntityExtended[] $places
+     */
+    public function setPlaces(array $places): void
+    {
+        $this->places = $places;
     }
 }
