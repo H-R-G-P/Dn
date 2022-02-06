@@ -57,7 +57,8 @@ class TypeController extends AbstractController
            'slug' => $slug,
         ]);
         if ($type === null){
-            return $this->redirectToRoute('types');
+            $this->addFlash('dark', 'Type "'.$slug.'" not exists.');
+            return $this->redirectToRoute('homepage');
         }
 
         $places = $placeRepository->findByEntityExtended($type);
