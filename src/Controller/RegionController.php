@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Place;
 use App\Entity\Region;
 use App\Repository\PlaceRepository;
+use App\Service\DatabaseService;
+use App\Service\HelperService;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\RegionRepository;
@@ -48,10 +50,11 @@ class RegionController extends AbstractController
      * @param RegionRepository<Region> $regionRepository
      * @param MapService $mapService
      * @param PlaceRepository<Place> $placeRepository
+     * @param DatabaseService $databaseService
      *
      * @return Response
      */
-    public function show(string $slug, RegionRepository $regionRepository, MapService $mapService, PlaceRepository $placeRepository) : Response
+    public function show(string $slug, RegionRepository $regionRepository, MapService $mapService, PlaceRepository $placeRepository, DatabaseService $databaseService) : Response
     {
         $region = $regionRepository->findOneBy([
             'slug' => $slug,
@@ -63,12 +66,16 @@ class RegionController extends AbstractController
         }
 
         $places = $placeRepository->findByEntityExtended($region);
+        $allPlaces = $databaseService->getEntitiesRelatedByDances()->getPlaces();
 
         $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();
 
+        $placesWithDances = HelperService::intersectEntitiesId($places, $allPlaces);
+
         return $this->render('region/show.html.twig', [
             'region' => $region,
+            'places' => $placesWithDances,
             'map_json' => $map_json,
         ]);
     }
