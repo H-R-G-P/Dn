@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Dto\EntityCollectionDTO;
 use App\Entity\Department;
+use App\Entity\Place;
 use App\Entity\Region;
 use App\Entity\Source;
 use App\Entity\Type;
@@ -22,7 +23,7 @@ class DatabaseService
         $this->database = $database;
     }
 
-    /** Return entities (Region, Department, Source, Type) related by Dances
+    /** Return entities (Region, Department, Source, Type, Place) related by Dances
      *
      * @return EntityCollectionDTO
      */
@@ -34,6 +35,7 @@ class DatabaseService
         $entityCollection->setTypes($this->setDances($this->database->getTypes()));
         $entityCollection->setRegions($this->setDances($this->database->getRegions()));
         $entityCollection->setDepartments($this->setDances($this->database->getDepartments()));
+        $entityCollection->setPlaces($this->setDances($this->database->getPlaces()));
 
         return $entityCollection;
     }
@@ -91,6 +93,12 @@ class DatabaseService
             elseif ($entity instanceof Department
                 && $version->getDepartment() !== null
                 && $version->getDepartment()->getId() === $entity->getId())
+            {
+                $filteredVersions[] = $version;
+            }
+            elseif ($entity instanceof Place
+                && $version->getPlace() !== null
+                && $version->getPlace()->getId() === $entity->getId())
             {
                 $filteredVersions[] = $version;
             }

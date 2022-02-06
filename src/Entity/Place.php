@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interface\EntityExtended;
 use App\Repository\PlaceRepository;
 use App\Vo\CoordinatesVO;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
  */
-class Place
+class Place implements EntityExtended
 {
     /**
      * @ORM\Id
@@ -62,6 +63,8 @@ class Place
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="places")
      */
     private ?Region $region;
+
+    private int $dancesCount = 0;
 
     #[Pure] public function __construct(?float $lat, ?float $lon)
     {
@@ -201,5 +204,15 @@ class Place
         }
 
         return null;
+    }
+
+    public function setDancesCount(int $dancesCount): void
+    {
+        $this->dancesCount = $dancesCount;
+    }
+
+    public function getDancesCount(): int
+    {
+        return $this->dancesCount;
     }
 }
