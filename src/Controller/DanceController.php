@@ -50,17 +50,15 @@ class DanceController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param DanceRepository<Dance> $danceRepository
      * @param MapService $mapService
-     * @param PlaceRepository<Place::class> $placeRepository
      * @param UpdateDatabaseService $databaseService
      *
      * @return Response
      */
-    public function show(string $slug, DanceRepository $danceRepository, MapService $mapService, PlaceRepository $placeRepository, UpdateDatabaseService $databaseService): Response
+    public function show(string $slug, MapService $mapService, UpdateDatabaseService $databaseService): Response
     {
         // Fetch database
-        $dance = $danceRepository->findOneBy([
+        $dance = $this->getDoctrine()->getRepository(Dance::class)->findOneBy([
             'slug' => $slug,
         ]);
         if (!$dance) {
@@ -68,7 +66,7 @@ class DanceController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $placeRepository->findByDance($dance);
+        $places = $this->getDoctrine()->getRepository(Place::class)->findByDance($dance);
 
         $databaseService->increaseViews($dance);
 

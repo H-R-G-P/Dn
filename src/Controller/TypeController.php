@@ -45,15 +45,13 @@ class TypeController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param TypeRepository<Type> $typeRepository
      * @param MapService $mapService
-     * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, TypeRepository $typeRepository, MapService $mapService, PlaceRepository $placeRepository): Response
+    public function show(string $slug, MapService $mapService): Response
     {
-        $type = $typeRepository->findOneBy([
+        $type = $this->getDoctrine()->getRepository(Type::class)->findOneBy([
            'slug' => $slug,
         ]);
         if ($type === null){
@@ -61,7 +59,7 @@ class TypeController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $placeRepository->findByEntityExtended($type);
+        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($type);
 
         $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();

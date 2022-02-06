@@ -27,17 +27,14 @@ class DepartmentController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param DepartmentRepository<Department> $departmentRepository
      * @param MapService $mapService
-     * @param PlaceRepository<Place> $placeRepository
      * @param DatabaseService $databaseService
-     * @param RegionRepository<Region> $regionRepository
      *
      * @return Response
      */
-    public function show(string $slug, DepartmentRepository $departmentRepository, MapService $mapService, PlaceRepository $placeRepository, DatabaseService $databaseService, RegionRepository $regionRepository): Response
+    public function show(string $slug, MapService $mapService, DatabaseService $databaseService): Response
     {
-        $department = $departmentRepository->findOneBy([
+        $department = $this->getDoctrine()->getRepository(Department::class)->findOneBy([
             'slug' => $slug,
         ]);
 
@@ -46,8 +43,8 @@ class DepartmentController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $placeRepository->findByEntityExtended($department);
-        $regions = $regionRepository->findByDepartment($department);
+        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($department);
+        $regions = $this->getDoctrine()->getRepository(Region::class)->findByDepartment($department);
         $regions = $databaseService->setDances($regions);
         $dances = $this->getDoctrine()->getRepository(Dance::class)->findByEntityExtended($department);
 
