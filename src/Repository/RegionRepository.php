@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Department;
 use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,6 +21,26 @@ class RegionRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Region::class);
+    }
+
+    /**
+     * @param Department $entity
+     *
+     * @return array<int, Region>
+     */
+    public function findByDepartment(Department $entity): array
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT r
+            FROM App\Entity\Region r 
+            JOIN App\Entity\Version v 
+            JOIN App\Entity\Department d 
+            WHERE d.id = :entityId and v.department = d.id and v.region = r.id'
+        )->setParameter('entityId', $entity->getId());
+
+        return $query->getResult();
     }
 
     // /**
