@@ -47,16 +47,14 @@ class RegionController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param RegionRepository<Region> $regionRepository
      * @param MapService $mapService
-     * @param PlaceRepository<Place> $placeRepository
      * @param DatabaseService $databaseService
      *
      * @return Response
      */
-    public function show(string $slug, RegionRepository $regionRepository, MapService $mapService, PlaceRepository $placeRepository, DatabaseService $databaseService) : Response
+    public function show(string $slug, MapService $mapService, DatabaseService $databaseService) : Response
     {
-        $region = $regionRepository->findOneBy([
+        $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy([
             'slug' => $slug,
         ]);
 
@@ -65,7 +63,7 @@ class RegionController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $placeRepository->findByEntityExtended($region);
+        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($region);
         $allPlaces = $databaseService->getEntitiesRelatedByDances()->getPlaces();
 
         $map = $mapService->createMapDTO($places);

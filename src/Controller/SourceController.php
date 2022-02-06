@@ -52,15 +52,13 @@ class SourceController extends AbstractController
      * )
      *
      * @param string $slug
-     * @param SourceRepository<Source> $sourceRepository
      * @param MapService $mapService
-     * @param PlaceRepository<Place> $placeRepository
      *
      * @return Response
      */
-    public function show(string $slug, SourceRepository $sourceRepository, MapService $mapService, PlaceRepository $placeRepository): Response
+    public function show(string $slug, MapService $mapService): Response
     {
-        $source = $sourceRepository->findOneBy([
+        $source = $this->getDoctrine()->getRepository(Source::class)->findOneBy([
             'slug' => $slug,
         ]);
         if ($source === null){
@@ -68,7 +66,7 @@ class SourceController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $placeRepository->findByEntityExtended($source);
+        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($source);
 
         $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();
