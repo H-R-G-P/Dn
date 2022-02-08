@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
 /**
- * @ORM\Entity(repositoryClass=SourceRepository::class)
+ * @ORM\Entity(repositoryClass=App\Repository\SourceRepository::class)
  */
 class Source implements EntityExtended
 {
@@ -59,7 +59,7 @@ class Source implements EntityExtended
     /**
      * @var array<int, Version>
      */
-    private array $versions;
+    private array $versions = [];
 
     /**
      * Source constructor.
