@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Source;
 use App\Entity\Version;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,6 +21,43 @@ class VersionRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Version::class);
+    }
+
+    /**
+     * @param Source $source
+     *
+     * @return array<int, Version>
+     */
+    public function findBySource(Source $source): array
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT v
+            FROM App\Entity\Version v 
+            JOIN App\Entity\Source s 
+            WHERE s.id = :sourceId and v.source = s.id'
+        )->setParameter('sourceId', $source->getId());
+
+        $versions = $query->getResult();
+
+        $query = $em->createQuery(
+            'SELECT v
+            FROM App\Entity\Version v 
+            JOIN App\Entity\Source s 
+            WHERE s.id = :sourceId and v.source2 = s.id'
+        )->setParameter('sourceId', $source->getId());
+
+        $versions2 = $query->getResult();
+
+        $allVersions = array_merge($versions, $versions2);
+
+        $uniqVersions = [];
+        foreach ($allVersions as $version) {
+            $uniqVersions[$version->getId()] = $version;
+        }
+
+        return $uniqVersions;
     }
 
     // /**
