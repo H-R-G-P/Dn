@@ -57,7 +57,7 @@ class Version
     private ?Type $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="versions")
+     * @ORM\ManyToOne(targetEntity=Source::class)
      */
     private ?Source $source;
 
