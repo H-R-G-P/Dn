@@ -6,13 +6,10 @@ use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Version;
 use App\Repository\DanceRepository;
-use App\Repository\PlaceRepository;
 use App\Repository\VersionRepository;
 use App\Service\MapService;
 use App\Service\UpdateDatabaseService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -61,14 +58,14 @@ class DanceController extends AbstractController
         $dance = $this->getDoctrine()->getRepository(Dance::class)->findOneBy([
             'slug' => $slug,
         ]);
-        if (!$dance) {
+        if (!$dance || !$dance instanceof Dance) {
             $this->addFlash('dark', 'Dance "'.$slug.'" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
         $places = $this->getDoctrine()->getRepository(Place::class)->findByDance($dance);
 
-        $databaseService->increaseViews($dance);
+        $databaseService->increaseDanceViews($dance);
 
         // Create map parameters
         $map = $mapService->createMapDTO($places);
@@ -90,13 +87,13 @@ class DanceController extends AbstractController
      * )
      *
      * @param string $slugVersion
-     * @param RequestStack $requestStack
      * @param VersionRepository<Version> $versionRepository
-     * @param EntityManagerInterface $entityManager
+     * @param MapService $mapService
+     * @param UpdateDatabaseService $databaseService
      *
      * @return Response
      */
-    public function showVersion(string $slugVersion, RequestStack $requestStack, VersionRepository $versionRepository, EntityManagerInterface $entityManager, MapService $mapService) : Response
+    public function showVersion(string $slugVersion, VersionRepository $versionRepository, MapService $mapService, UpdateDatabaseService $databaseService) : Response
     {
         $version = $versionRepository->findOneBy([
             'slug' => $slugVersion,
@@ -108,19 +105,9 @@ class DanceController extends AbstractController
         }
 
         $dance = $version->getDance();
-        $session = $requestStack->getSession();
 
-        if (!$session->has($dance->getId().'Dance')) {
-            $session->set($dance->getId().'Dance', 'This dance already was viewed.');
-            $dance->subView();
-            $entityManager->flush();
-        }
-
-        if (!$session->has($version->getId().'Version')) {
-            $session->set($version->getId().'Version', 'This version already was viewed.');
-            $version->subView();
-            $entityManager->flush();
-        }
+        $databaseService->increaseDanceViews($dance);
+        $databaseService->increaseVersionViews($version);
 
         $map_json = null;
         $place = $version->getPlace();
