@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use App\Interface\EntityExtended;
-use App\Repository\SourceRepository;
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
@@ -26,13 +23,6 @@ class Source implements EntityExtended
      * @ORM\Column(type="string", length=100, unique=true)
      */
     private string $name;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Version::class, mappedBy="source")
-     *
-     * @var Collection<int, Version>
-     */
-    private Collection $versions;
 
     /**
      * @ORM\Column(type="string", length=110, unique=true)
@@ -66,9 +56,16 @@ class Source implements EntityExtended
      */
     private string $title;
 
+    /**
+     * @var array<int, Version>
+     */
+    private array $versions;
+
+    /**
+     * Source constructor.
+     */
     #[Pure] public function __construct()
     {
-        $this->versions = new ArrayCollection();
     }
 
     public function getId(): int
@@ -91,33 +88,19 @@ class Source implements EntityExtended
     }
 
     /**
-     * @return Collection<int, Version>
+     * @return array<int, Version>
      */
-    public function getVersions(): Collection
+    public function getVersions(): array
     {
         return $this->versions;
     }
 
-    public function addVersion(Version $version): self
+    /**
+     * @param Version[] $versions
+     */
+    public function setVersions(array $versions): void
     {
-        if (!$this->versions->contains($version)) {
-            $this->versions[] = $version;
-            $version->setSource($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVersion(Version $version): self
-    {
-        if ($this->versions->removeElement($version)) {
-            // set the owning side to null (unless already changed)
-            if ($version->getSource() === $this) {
-                $version->setSource(null);
-            }
-        }
-
-        return $this;
+        $this->versions = $versions;
     }
 
     public function getSlug(): string
