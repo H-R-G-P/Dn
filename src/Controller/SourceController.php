@@ -30,7 +30,7 @@ class SourceController extends AbstractController
      */
     public function index(SourceRepository $sourceRepository, PlaceRepository $placeRepository, MapService $mapService): Response
     {
-        $sources = $sourceRepository->findAll();
+        $sources = $sourceRepository->findAllWithVersions();
         $places = $placeRepository->findAll();
 
         $map = $mapService->createMapDTO($places);
@@ -61,7 +61,7 @@ class SourceController extends AbstractController
         $source = $this->getDoctrine()->getRepository(Source::class)->findOneBy([
             'slug' => $slug,
         ]);
-        if ($source === null){
+        if ($source === null || !$source instanceof Source){
             $this->addFlash('dark', 'Source "'.$slug.'" not exists.');
             return $this->redirectToRoute('homepage');
         }
