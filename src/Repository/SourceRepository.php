@@ -8,30 +8,28 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Source|null find($id, $lockMode = null, $lockVersion = null)
- * @method Source|null findOneBy(array $criteria, array $orderBy = null)
- * @method Source[]    findAll()
- * @method Source[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
  * @template Source
  * @extends ServiceEntityRepository<Source::class>
  */
 class SourceRepository extends ServiceEntityRepository
 {
+    /**
+     * @var VersionRepository<Version>
+     */
+    private VersionRepository $versionRepository;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Source::class);
+        $this->versionRepository = $this->_em->getRepository(Version::class);
     }
 
     /**
      * @return Source[]
      */
-    public function findAllWithVersions(): array
+    public function findAll(): array
     {
-        $em = $this->getEntityManager();
-        $versionRepository = $em->getRepository(Version::class);
-
-        $query = $em->createQuery(
+        $query = $this->_em->createQuery(
             'SELECT s
             FROM App\Entity\Source s'
         );
@@ -39,38 +37,75 @@ class SourceRepository extends ServiceEntityRepository
         $sources = $query->getResult();
 
         foreach ($sources as $source) {
-            $source->setVersions($versionRepository->findBySource($source));
+            $source->setVersions($this->versionRepository->findBySource($source));
         }
 
         return $sources;
     }
 
-    // /**
-    //  * @return Source[] Returns an array of Source objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Finds an entity by its primary key / identifier.
+     *
+     * @param mixed    $id          The identifier.
+     * @param int|null $lockMode    One of the \Doctrine\DBAL\LockMode::* constants
+     *                              or NULL if no specific lock mode should be used
+     *                              during the search.
+     * @param int|null $lockVersion The lock version.
+     *
+     * @return Source|null The entity instance or NULL if the entity can not be found.
+     */
+    public function find(mixed $id, $lockMode = null, $lockVersion = null): ?Source
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $source = $this->_em->find($this->_entityName, $id, $lockMode, $lockVersion);
 
-    /*
-    public function findOneBySomeField($value): ?Source
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ($source && $source instanceof Source) {
+            $source->setVersions($this->versionRepository->findBySource($source));
+        }
+
+        return $source;
     }
-    */
+
+    /**
+     * Finds entities by a set of criteria.
+     *
+     * @param int|null $limit
+     * @param int|null $offset
+     * @psalm-param array<string, mixed> $criteria
+     * @psalm-param array<string, string>|null $orderBy
+     *
+     * @return object[] The objects.
+     */
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+    {
+        $persister = $this->_em->getUnitOfWork()->getEntityPersister($this->_entityName);
+
+        $sources = $persister->loadAll($criteria, $orderBy, $limit, $offset);
+
+        foreach ($sources as $source) {
+            $source->setVersions($this->versionRepository->findBySource($source));
+        }
+
+        return $sources;
+    }
+
+    /**
+     * Finds a single entity by a set of criteria.
+     *
+     * @psalm-param array<string, mixed> $criteria
+     * @psalm-param array<string, string>|null $orderBy
+     *
+     * @return object|null The entity instance or NULL if the entity can not be found.
+     */
+    public function findOneBy(array $criteria, ?array $orderBy = null)
+    {
+        $persister = $this->_em->getUnitOfWork()->getEntityPersister($this->_entityName);
+
+        $source = $persister->load($criteria, null, null, [], null, 1, $orderBy);
+
+        if ($source) {
+            $source->setVersions($this->versionRepository->findBySource($source));
+        }
+
+        return $source;
+    }
 }
