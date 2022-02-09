@@ -174,7 +174,7 @@ class Department implements EntityExtended
     }
 
     /**
-     * @return Collection|Version[]
+     * @return Collection<int, Version>
      */
     public function getVersions(): Collection
     {
