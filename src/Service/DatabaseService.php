@@ -78,12 +78,6 @@ class DatabaseService
             {
                 $filteredVersions[] = $version;
             }
-            elseif ($entity instanceof Source
-                && $version->getSource2() !== null
-                && $version->getSource2()->getId() === $entity->getId())
-            {
-                $filteredVersions[] = $version;
-            }
             elseif ($entity instanceof Region
                 && $version->getRegion() !== null
                 && $version->getRegion()->getId() === $entity->getId())
@@ -101,6 +95,14 @@ class DatabaseService
                 && $version->getPlace()->getId() === $entity->getId())
             {
                 $filteredVersions[] = $version;
+            }
+            elseif ($entity instanceof Source)
+            {
+                if     ($version->getSource()  !== null && $version->getSource()->getId()  === $entity->getId())
+                    $filteredVersions[] = $version;
+
+                elseif ($version->getSource2() !== null && $version->getSource2()->getId() === $entity->getId())
+                    $filteredVersions[] = $version;
             }
         }
 
