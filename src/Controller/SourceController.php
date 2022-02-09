@@ -30,7 +30,7 @@ class SourceController extends AbstractController
      */
     public function index(SourceRepository $sourceRepository, PlaceRepository $placeRepository, MapService $mapService): Response
     {
-        $sources = $sourceRepository->findAllWithVersions();
+        $sources = $sourceRepository->findAll();
         $places = $placeRepository->findAll();
 
         $map = $mapService->createMapDTO($places);
