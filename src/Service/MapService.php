@@ -20,7 +20,6 @@ class MapService
      */
     public function createMapDTO(array $places): ?MapDTO
     {
-        $map = null;
         $points = [];
         foreach ($places as $place) {
             if ($coordinates = $place->getCoordinates())
@@ -31,9 +30,7 @@ class MapService
             $polygon = $this->createPolygonVO($points);
             $map = new MapDTO($points, $polygon);
         }catch (Exception $e){
-            if (count($points) === 1){
-                $map = new MapDTO($points, null);
-            }
+            $map = null;
         }
 
         return $map;
@@ -48,8 +45,16 @@ class MapService
      */
     public function createPolygonVO(array $points): PolygonVO
     {
-        if (count($points) < 2){
-            throw new Exception('Less_Then_2');
+        if (count($points) === 0) {
+            throw new Exception('No_one');
+        }
+        if (count($points) === 1) {
+            $highestLat = $points[0]->getLat()+1;
+            $lowerLat = $points[0]->getLat()-1;
+            $highestLon = $points[0]->getLon()+1;
+            $lowerLon = $points[0]->getLon()-1;
+
+            return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
         }
 
         usort($points, function(CoordinatesVO $a, CoordinatesVO $b){
