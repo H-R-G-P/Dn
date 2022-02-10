@@ -12,17 +12,25 @@
 {% block content %}
     <div class="row">
         <div class="col mb-3">
-            <div class="list-group list-group-flush">
-                {% for source in sources %}
-                    <a href="{{ url('source', {'slug': source.slug}) }}" class="list-group-item list-group-item-action">
-                        {{ source.name }} ({{ source.versions|length }} {% trans %}ver.{% endtrans %})
-                    </a>
-                {% endfor %}
+            <div class="card">
+                <div class="card-header">{% trans %}Sources{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for source in sources %}
+                            <a href="{{ url('source', {'slug': source.slug}) }}" class="list-group-item list-group-item-action">
+                                {{ source.name }} ({{ source.versions|length }} {% trans %}ver.{% endtrans %})
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         {% if map_json %}
-            <div id="map_parent" class="col mb-3">
-                <div id="map"></div>
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
             </div>
         {% endif %}
     </div>
