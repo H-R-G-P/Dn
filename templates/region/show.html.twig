@@ -2,7 +2,7 @@
 
 {% block title %}{{ region.name }}{% endblock %}
 
-{% block header %}{{ region.name }}{% endblock %}
+{% block header %}{{ region.name }} {% trans %}reg.{% endtrans %}, {{ department.name }} {% trans %}dep.{% endtrans %}{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
