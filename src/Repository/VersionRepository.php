@@ -54,7 +54,8 @@ class VersionRepository extends ServiceEntityRepository
 
         $uniqVersions = [];
         foreach ($allVersions as $version) {
-            $uniqVersions[$version->getId()] = $version;
+            if ($version instanceof Version)
+                $uniqVersions[$version->getId()] = $version;
         }
 
         return $uniqVersions;

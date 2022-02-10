@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Source;
 use App\Entity\Version;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +15,9 @@ use Doctrine\Persistence\ManagerRegistry;
 class SourceRepository extends ServiceEntityRepository
 {
     /**
-     * @var VersionRepository<Version>
+     * @var EntityRepository<Version>
      */
-    private VersionRepository $versionRepository;
+    private EntityRepository $versionRepository;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -54,9 +55,9 @@ class SourceRepository extends ServiceEntityRepository
      *
      * @return Source|null The entity instance or NULL if the entity can not be found.
      */
-    public function find(mixed $id, $lockMode = null, $lockVersion = null): ?Source
+    public function find(mixed $id, $lockMode = null, $lockVersion = null)
     {
-        $source = $this->_em->find($this->_entityName, $id, $lockMode, $lockVersion);
+        $source = $this->_em->find(Source::class, $id, $lockMode, $lockVersion);
 
         if ($source && $source instanceof Source) {
             $source->setVersions($this->versionRepository->findBySource($source));
@@ -77,7 +78,7 @@ class SourceRepository extends ServiceEntityRepository
      */
     public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
     {
-        $persister = $this->_em->getUnitOfWork()->getEntityPersister($this->_entityName);
+        $persister = $this->_em->getUnitOfWork()->getEntityPersister(Source::class);
 
         $sources = $persister->loadAll($criteria, $orderBy, $limit, $offset);
 
@@ -98,11 +99,11 @@ class SourceRepository extends ServiceEntityRepository
      */
     public function findOneBy(array $criteria, ?array $orderBy = null)
     {
-        $persister = $this->_em->getUnitOfWork()->getEntityPersister($this->_entityName);
+        $persister = $this->_em->getUnitOfWork()->getEntityPersister(Source::class);
 
         $source = $persister->load($criteria, null, null, [], null, 1, $orderBy);
 
-        if ($source) {
+        if ($source instanceof Source) {
             $source->setVersions($this->versionRepository->findBySource($source));
         }
 
