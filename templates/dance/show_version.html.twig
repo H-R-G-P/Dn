@@ -8,7 +8,7 @@
 
 {% block title %} {{ title }} {% endblock %}
 
-{% block header %} {{ title }} {% endblock%}
+{% block header %} {{ title }}, {{ version.address(app.request.locale) }} {% endblock%}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
