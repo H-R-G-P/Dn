@@ -23,37 +23,41 @@
 
 {% block content %}
     <div class="row">
-        <div class="col mb-3">
-            <div class="card card-body mb-3">
-                {% if version.place %}
-                    {% trans %}Village{% endtrans %} {{ version.place.name }}
-                    <br>
-                {% endif %}
-                {% if version.source %}
-                    {% trans %}Source{% endtrans %} {{ version.source.name }}
-                    <br>
-                {% endif %}
-                {% if version.source2 %}
-                    {% trans %}Second source{% endtrans %} {{ version.source2.name }}
-                    <br>
-                {% endif %}
-                {% trans %}Type{% endtrans %}
-                    {% if version.type %}
-                        {{ version.type.name }}
-                    {% else %}
-                        {% trans %}Improvisation{% endtrans %}
+        <div class="col mb-3 my-col">
+            <div class="card">
+                <div class="card-header">{% trans %}Description{% endtrans %}</div>
+                <div class="card-body">
+                    {% if version.place %}
+                        {% trans %}Village{% endtrans %} {{ version.place.name }}
+                        <br>
                     {% endif %}
-                <br>
-                <a href="#"><em>{% trans %}Video{% endtrans %}</em></a>
+                    {% if version.source %}
+                        {% trans %}Source{% endtrans %} {{ version.source.name }}
+                        <br>
+                    {% endif %}
+                    {% if version.source2 %}
+                        {% trans %}Second source{% endtrans %} {{ version.source2.name }}
+                        <br>
+                    {% endif %}
+                    {% trans %}Type{% endtrans %}
+                        {% if version.type %}
+                            {{ version.type.name }}
+                        {% else %}
+                            {% trans %}Improvisation{% endtrans %}
+                        {% endif %}
+                    <br>
+                    <a href="#"><em>{% trans %}Video{% endtrans %}</em></a>
+                </div>
             </div>
         </div>
-        <div class="col">
-            {% if map_json %}
-                <div id="map_parent" class="col mb-3">
-                <div id="map"></div>
+        {% if map_json %}
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
             </div>
-            {% endif %}
-        </div>
+        {% endif %}
     </div>
 
     {% if version.youtube %}
