@@ -12,16 +12,21 @@ class MapMarkerVO
     /** Longitude */
     private float $lon;
 
+    /** @var string */
+    private string $popup;
+
     /**
      * MapMarkerVO constructor.
      *
      * @param float $lat
      * @param float $lon
+     * @param string $popup
      */
-    public function __construct(float $lat, float $lon)
+    public function __construct(float $lat, float $lon, string $popup)
     {
         $this->lat = $lat;
         $this->lon = $lon;
+        $this->popup = $popup;
     }
 
     /** Get Latitude
@@ -38,5 +43,13 @@ class MapMarkerVO
     public function getLon(): float
     {
         return $this->lon;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPopup(): string
+    {
+        return $this->popup;
     }
 }

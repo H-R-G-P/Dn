@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Dto\MapDTO;
 use App\Entity\Place;
+use App\Entity\Version;
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use Exception;
@@ -22,8 +23,22 @@ class MapService
     {
         $markers = [];
         foreach ($places as $place) {
-            if ($coordinates = $place->getMarker())
-            $markers[] = $coordinates;
+            if ($place->getLat() !== null && $place->getLon() !== null) {
+                $popup = '';
+                $versions = $place->getVersions();
+
+                $firstVersion = $versions->get(0);
+                $versions->remove(0);
+                if ($firstVersion) $popup = $this->createPopup($firstVersion);
+
+                foreach ($versions as $version) {
+                    $popup.= '
+-------
+'.$this->createPopup($version);
+                }
+
+                $markers[] = new MapMarkerVO($place->getLat(), $place->getLon(), $popup);
+            }
         }
 
         try {
@@ -34,6 +49,28 @@ class MapService
         }
 
         return $map;
+    }
+
+    /**
+     * Create marker popup inner html.
+     *
+     * @param Version $version
+     *
+     * @return string
+     */
+    public function createPopup(Version $version): string
+    {
+        $danceName = $version->getDance()->getName();
+        $placeName = $danceName.'|'.$version->getName();
+        if ($version->getName() === '') {
+            $placeName = $danceName;
+        }
+        $typeName = $version->getType() ? $version->getType()->getName() : '';
+        $sourceName = $version->getSource() ? $version->getSource()->getName() : '';
+
+        return $placeName.'
+Type: '.$typeName.'
+Source: '.$sourceName;
     }
 
     /**
