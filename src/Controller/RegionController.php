@@ -63,6 +63,7 @@ class RegionController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
+        $department = null;
         if ($version = $this->getDoctrine()->getRepository(Version::class)->findOneBy(['region' => $region->getId()]))
             $department = $version->getDepartment();
 
