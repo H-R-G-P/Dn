@@ -38,12 +38,14 @@ function setMarkers(points) {
         iconAnchor:   [10,35]
     });
 
-    points.forEach(function (coordinates) {
-        let lat = coordinates.lat,
-            lon = coordinates.lon;
+    points.forEach(function (mapMarker) {
+        let lat = mapMarker.lat,
+            lon = mapMarker.lon;
 
         if (lat && lon){
-            L.marker([lat, lon], {icon: defIcon}).addTo(map);
+            L.marker([lat, lon], {icon: defIcon})
+                .bindPopup(mapMarker.versions)
+                .addTo(map);
         }
     });
 }

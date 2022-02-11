@@ -6,7 +6,7 @@ namespace App\Service;
 
 use App\Dto\MapDTO;
 use App\Entity\Place;
-use App\Vo\CoordinatesVO;
+use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use Exception;
 
@@ -20,15 +20,15 @@ class MapService
      */
     public function createMapDTO(array $places): ?MapDTO
     {
-        $points = [];
+        $markers = [];
         foreach ($places as $place) {
-            if ($coordinates = $place->getCoordinates())
-            $points[] = $coordinates;
+            if ($coordinates = $place->getMarker())
+            $markers[] = $coordinates;
         }
 
         try {
-            $polygon = $this->createPolygonVO($points);
-            $map = new MapDTO($points, $polygon);
+            $polygon = $this->createPolygonVO($markers);
+            $map = new MapDTO($markers, $polygon);
         }catch (Exception $e){
             $map = null;
         }
@@ -37,45 +37,45 @@ class MapService
     }
 
     /**
-     * @param CoordinatesVO[] $points
+     * @param MapMarkerVO[] $markers
      *
      * @return PolygonVO
      *
      * @throws Exception
      */
-    public function createPolygonVO(array $points): PolygonVO
+    public function createPolygonVO(array $markers): PolygonVO
     {
-        if (count($points) === 0) {
+        if (count($markers) === 0) {
             throw new Exception('No_one');
         }
-        if (count($points) === 1) {
-            $highestLat = $points[0]->getLat()+1;
-            $lowerLat = $points[0]->getLat()-1;
-            $highestLon = $points[0]->getLon()+1;
-            $lowerLon = $points[0]->getLon()-1;
+        if (count($markers) === 1) {
+            $highestLat = $markers[0]->getLat()+1;
+            $lowerLat = $markers[0]->getLat()-1;
+            $highestLon = $markers[0]->getLon()+1;
+            $lowerLon = $markers[0]->getLon()-1;
 
             return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
         }
 
-        usort($points, function(CoordinatesVO $a, CoordinatesVO $b){
+        usort($markers, function(MapMarkerVO $a, MapMarkerVO $b){
             if ($a->getLat() === $b->getLat()) {
                 return 0;
             }
             return ($a->getLat() > $b->getLat()) ? +1 : -1;
         });
 
-        $highestLat = $points[0]->getLat();
-        $lowerLat = $points[array_key_last($points)]->getLat();
+        $highestLat = $markers[0]->getLat();
+        $lowerLat = $markers[array_key_last($markers)]->getLat();
 
-        usort($points, function(CoordinatesVO $a, CoordinatesVO $b){
+        usort($markers, function(MapMarkerVO $a, MapMarkerVO $b){
             if ($a->getLon() === $b->getLon()) {
                 return 0;
             }
             return ($a->getLon() > $b->getLon()) ? +1 : -1;
         });
 
-        $highestLon = $points[0]->getLon();
-        $lowerLon = $points[array_key_last($points)]->getLon();
+        $highestLon = $markers[0]->getLon();
+        $lowerLon = $markers[array_key_last($markers)]->getLon();
 
         return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
     }

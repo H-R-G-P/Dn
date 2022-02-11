@@ -4,7 +4,7 @@
 namespace App\Dto;
 
 
-use App\Vo\CoordinatesVO;
+use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -17,28 +17,28 @@ class MapDTO
     private ?PolygonVO $polygon;
 
     /**
-     * @var CoordinatesVO[]
+     * @var MapMarkerVO[]
      */
-    private array $points;
+    private array $markers;
 
     /**
      * MapDTO constructor.
      *
+     * @param MapMarkerVO[] $markers
      * @param ?PolygonVO $polygon
-     * @param CoordinatesVO[] $points
      */
-    public function __construct(array $points, ?PolygonVO $polygon)
+    public function __construct(array $markers, ?PolygonVO $polygon)
     {
-        $this->points = $points;
+        $this->markers = $markers;
         $this->polygon = $polygon;
     }
 
     /**
-     * @return CoordinatesVO[]
+     * @return MapMarkerVO[]
      */
-    public function getPoints(): array
+    public function getMarkers(): array
     {
-        return $this->points;
+        return $this->markers;
     }
 
     /**
@@ -51,12 +51,12 @@ class MapDTO
 
     #[Pure] public function hasPlaces(): bool
     {
-        return count($this->points) === 0 ? false : true;
+        return count($this->markers) === 0 ? false : true;
     }
 
     #[Pure] public function hasOnlyOnePlace(): bool
     {
-        return count($this->points) === 1;
+        return count($this->markers) === 1;
     }
 
     public function serializeToJson(): string

@@ -4,7 +4,7 @@
 namespace App\Vo;
 
 
-class CoordinatesVO
+class MapMarkerVO
 {
     /** Latitude */
     private float $lat;
@@ -13,7 +13,7 @@ class CoordinatesVO
     private float $lon;
 
     /**
-     * CoordinatesVO constructor.
+     * MapMarkerVO constructor.
      *
      * @param float $lat
      * @param float $lon
