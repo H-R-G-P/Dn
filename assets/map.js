@@ -34,7 +34,8 @@ function setMap(polygon) {
 function setMarkers(points) {
     let defIcon = L.icon({
         iconUrl: "/build/images/marker-icon.2b3e1faf.png",
-        iconSize:     [20, 35]
+        iconSize:     [20, 35],
+        iconAnchor:   [10,35]
     });
 
     points.forEach(function (coordinates) {
