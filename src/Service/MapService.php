@@ -65,8 +65,8 @@ class MapService
         if ($version->getName() === '') {
             $placeName = $danceName;
         }
-        $typeName = $version->getType() ? $version->getType()->getName() : '';
-        $sourceName = $version->getSource() ? $version->getSource()->getName() : '';
+        $typeName = $version->getType() !== null ? $version->getType()->getName() : '';
+        $sourceName = $version->getSource() !== null ? $version->getSource()->getName() : '';
 
         return $placeName.'
 Type: '.$typeName.'
