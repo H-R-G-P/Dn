@@ -24,7 +24,7 @@ class MapServiceTest extends TestCase
             self::assertSame('No_one', $e->getMessage());
         }
 
-        $markers[] = new MapMarkerVO(1.2, 1.2);
+        $markers[] = new MapMarkerVO(1.2, 1.2, '');
 
         try {
             $polygon = null;
@@ -34,8 +34,8 @@ class MapServiceTest extends TestCase
             self::assertInstanceOf(PolygonVO::class, $polygon);
         }
 
-        $markers[] = new MapMarkerVO(1.4, 1.6);
-        $markers[] = new MapMarkerVO(1.7, 1.2);
+        $markers[] = new MapMarkerVO(1.4, 1.6, '');
+        $markers[] = new MapMarkerVO(1.7, 1.2, '');
 
         try {
             $polygon = null;
