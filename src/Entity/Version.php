@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Vo\AddressVO;
 use App\Repository\VersionRepository;
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
@@ -40,11 +42,6 @@ class Version
      * @ORM\Column(type="string", length=110)
      */
     private string $slug;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true, options={"comment": "id for youtube video"})
-     */
-    private ?string $youtube;
 
     /**
      * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="versions")
@@ -97,16 +94,6 @@ class Version
     private int $hasLocalVideo;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $youtube2;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $vk;
-
-    /**
      * @ORM\Column(type="string", length=2000)
      */
     private string $comments;
@@ -125,6 +112,16 @@ class Version
      * @ORM\Column(type="string", length=1)
      */
     private string $drob;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="version")
+     */
+    private $videos;
+
+    public function __construct()
+    {
+        $this->videos = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -172,18 +169,6 @@ class Version
     public function getSlug(): string
     {
         return $this->slug;
-    }
-
-    public function getYoutube(): ?string
-    {
-        return $this->youtube;
-    }
-
-    public function setYoutube(?string $youtube): self
-    {
-        $this->youtube = $youtube;
-
-        return $this;
     }
 
     public function __toString(): string
@@ -311,30 +296,6 @@ class Version
         return $this;
     }
 
-    public function getYoutube2(): string
-    {
-        return $this->youtube2;
-    }
-
-    public function setYoutube2(string $youtube2): self
-    {
-        $this->youtube2 = $youtube2;
-
-        return $this;
-    }
-
-    public function getVk(): string
-    {
-        return $this->vk;
-    }
-
-    public function setVk(string $vk): self
-    {
-        $this->vk = $vk;
-
-        return $this;
-    }
-
     public function getComments(): string
     {
         return $this->comments;
@@ -386,5 +347,35 @@ class Version
     #[Pure] public function getAddress(string $language): AddressVO
     {
         return new AddressVO($this, $language);
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setVersion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getVersion() === $this) {
+                $video->setVersion(null);
+            }
+        }
+
+        return $this;
     }
 }
