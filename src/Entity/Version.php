@@ -115,8 +115,10 @@ class Version
 
     /**
      * @ORM\OneToMany(targetEntity=Video::class, mappedBy="version")
+     *
+     * @var Collection<int, Video>
      */
-    private $videos;
+    private Collection $videos;
 
     public function __construct()
     {
@@ -350,7 +352,7 @@ class Version
     }
 
     /**
-     * @return Collection|Video[]
+     * @return Collection<int, Video>
      */
     public function getVideos(): Collection
     {

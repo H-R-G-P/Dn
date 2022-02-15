@@ -11,6 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Video|null findOneBy(array $criteria, array $orderBy = null)
  * @method Video[]    findAll()
  * @method Video[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @template Video
+ * @extends ServiceEntityRepository<Video::class>
  */
 class VideoRepository extends ServiceEntityRepository
 {

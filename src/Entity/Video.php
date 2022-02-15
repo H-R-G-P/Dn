@@ -15,22 +15,22 @@ class Video
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $type;
+    private string $type;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $link;
+    private string $link;
 
     /**
      * @ORM\ManyToOne(targetEntity=Version::class, inversedBy="videos")
      */
-    private $version;
+    private ?Version $version;
 
     public function getId(): ?int
     {
