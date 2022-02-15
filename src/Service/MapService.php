@@ -32,9 +32,7 @@ class MapService
                 if ($firstVersion) $popup = $this->createPopup($firstVersion);
 
                 foreach ($versions as $version) {
-                    $popup.= '
--------
-'.$this->createPopup($version);
+                    $popup.= "\n-------\n".$this->createPopup($version);
                 }
 
                 $markers[] = new MapMarkerVO($place->getLat(), $place->getLon(), $popup);
@@ -68,9 +66,7 @@ class MapService
         $typeName = $version->getType() !== null ? $version->getType()->getName() : '';
         $sourceName = $version->getSource() !== null ? $version->getSource()->getName() : '';
 
-        return $placeName.'
-Type: '.$typeName.'
-Source: '.$sourceName;
+        return $placeName."\nType: ".$typeName."\nSource: ".$sourceName;
     }
 
     /**
