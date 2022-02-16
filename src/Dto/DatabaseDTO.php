@@ -56,7 +56,7 @@ class DatabaseDTO
         $this->sources = $this->entityManager->getRepository(Source::class)->findAll();
         $this->types = $this->entityManager->getRepository(Type::class)->findAll();
         $this->regions = $this->entityManager->getRepository(Region::class)->findAll();
-        $this->departments = $this->entityManager->getRepository(Department::class)->findAll();
+        $this->departments = $this->entityManager->getRepository(Department::class)->findBy([], ['name' => 'ASC']);
         $this->places = $this->entityManager->getRepository(Place::class)->findAll();
     }
 
