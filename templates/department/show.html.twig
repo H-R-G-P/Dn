@@ -2,49 +2,51 @@
 
 {% block title %}{{ department.name }} {% trans %}department{% endtrans %}{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center my-5">{{ department.name }} {% trans %}department{% endtrans %}</h1>
-        </div>
-        <div class="row">
-            <div class="col mb-3 my-col">
-                <div class="card">
-                    <div class="card-header">{% trans %}Dances{% endtrans %}</div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush">
-                            {% for dance in dances %}
-                                <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                                    {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
-                                </a>
-                            {% endfor %}
-                        </div>
+{% block header %}{{ department.name }} {% trans %}department{% endtrans %}{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ department.name }} {% trans %}department{% endtrans %}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col mb-3 my-col">
+            <div class="card">
+                <div class="card-header">{% trans %}Dances{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for dance in dances %}
+                            <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
+                                {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            <div class="col mb-3 my-col">
-                <div class="card">
-                    <div class="card-header">{% trans %}Regions{% endtrans %}</div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush">
-                            {% for region in regions %}
-                                <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
-                                    {{ region.name }} {% trans %}reg.{% endtrans %} ({{ region.dancesCount }} {% trans %}dan.{% endtrans %})
-                                </a>
-                            {% endfor %}
-                        </div>
+        </div>
+        <div class="col mb-3 my-col">
+            <div class="card">
+                <div class="card-header">{% trans %}Regions{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for region in regions %}
+                            <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
+                                {{ region.name }} {% trans %}reg.{% endtrans %} ({{ region.dancesCount }} {% trans %}dan.{% endtrans %})
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            {% if map_json %}
-                <div class="col mb-3 my-col">
-                    <div class="card">
-                        <div class="card-header">{% trans %}Map{% endtrans %}</div>
-                        <div id="map"></div>
-                    </div>
-                </div>
-            {% endif %}
         </div>
+        {% if map_json %}
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
+            </div>
+        {% endif %}
     </div>
     <div hidden id="map_json">{{ map_json|raw }}</div>
 {% endblock %}
