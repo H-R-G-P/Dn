@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ department.name }}{% endblock %}
+{% block title %}{{ department.name }} {% trans %}department{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
-            <h1 class="text-center my-5">{{ department.name }}</h1>
+            <h1 class="text-center my-5">{{ department.name }} {% trans %}department{% endtrans %}</h1>
         </div>
         <div class="row">
             <div class="col mb-3 my-col">
