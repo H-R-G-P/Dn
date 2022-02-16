@@ -29,7 +29,7 @@ class HomepageController extends AbstractController
     {
         $entityCollection = $databaseService->getEntitiesRelatedByDances();
         $topTenRegions = $databaseService->getTopTenRegions();
-        $topTenDances = $danceRepository->findBy([], ['views' => 'DESC'],10);
+        $topTenDances = $danceRepository->findTop10ByVersions();
 
         return $this->render('homepage/index.html.twig', [
             'entity_collection' => $entityCollection,
