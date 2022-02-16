@@ -9,14 +9,35 @@
 {% endblock %}
 {% block content %}
     <div class="row">
-        <div class="col">
-            <div class="list-group list-group-flush">
-                {% for dance in dances %}
-                    <a href="{{ url('dance', {'slug': dance.slug}) }}" class="list-group-item list-group-item-action">
-                        {{ dance.name }} ({{ dance.versions|length }})
-                    </a>
-                {% endfor %}
+        <div class="col mb-3">
+            <div class="card">
+                <div class="card-header">{% trans %}Dances{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for dance in dances %}
+                            {% if not dance.versions|length is same as(0) %}
+                                <a href="{{ url('dance', {'slug': dance.slug}) }}" class="list-group-item list-group-item-action">
+                                    {{ dance.name }} ({{ dance.versions|length }})
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
+        {% if map_json %}
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
+            </div>
+        {% endif %}
     </div>
+    <div hidden id="map_json">{{ map_json|raw }}</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('map') }}
 {% endblock %}

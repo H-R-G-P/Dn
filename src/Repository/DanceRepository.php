@@ -49,7 +49,7 @@ class DanceRepository extends ServiceEntityRepository
     /**
      * @return array<int, Dance>
      */
-    public function findTop10ByVersions(): array
+    public function findSortedByVersions(): array
     {
         $dances = $this->findAll();
 
@@ -64,7 +64,7 @@ class DanceRepository extends ServiceEntityRepository
             return ($a > $b) ? -1 : 1;
         });
 
-        return array_slice($dances, 0, 10);
+        return $dances;
     }
 
     // /**
