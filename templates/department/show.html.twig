@@ -17,9 +17,11 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for dance in dances %}
-                            <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                                {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
-                            </a>
+                            {% if not dance.versions|length is same as(0) %}
+                                <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
+                                    {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
+                                </a>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
