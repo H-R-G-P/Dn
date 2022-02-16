@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Version;
-use App\Repository\DanceRepository;
 use App\Repository\VersionRepository;
 use App\Service\MapService;
 use App\Service\UpdateDatabaseService;
@@ -24,16 +23,21 @@ class DanceController extends AbstractController
      *     name="dances"
      * )
      *
-     * @param DanceRepository<Dance> $danceRepository
+     * @param MapService $mapService
      *
      * @return Response
      */
-    public function index(DanceRepository $danceRepository): Response
+    public function index(MapService $mapService): Response
     {
-        $dances = $danceRepository->findAll();
+        $dances = $this->getDoctrine()->getRepository(Dance::class)->findSortedByVersions();
+        $places = $this->getDoctrine()->getRepository(Place::class)->findAll();
+
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('dance/index.html.twig', [
             'dances' => $dances,
+            'map_json' => $map_json,
         ]);
     }
 
