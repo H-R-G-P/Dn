@@ -49,10 +49,10 @@ class MapService
             throw new Exception('No_one');
         }
         if (count($points) === 1) {
-            $highestLat = $points[0]->getLat()+1;
-            $lowerLat = $points[0]->getLat()-1;
-            $highestLon = $points[0]->getLon()+1;
-            $lowerLon = $points[0]->getLon()-1;
+            $highestLat = $points[0]->getLat()+0.3;
+            $lowerLat = $points[0]->getLat()-0.3;
+            $highestLon = $points[0]->getLon()+0.3;
+            $lowerLon = $points[0]->getLon()-0.3;
 
             return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
         }
