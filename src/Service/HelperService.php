@@ -6,6 +6,7 @@ namespace App\Service;
 
 
 use App\Interface\EntityExtended;
+use Cocur\Slugify\Slugify;
 
 class HelperService
 {
@@ -28,5 +29,50 @@ class HelperService
         }
 
         return $result;
+    }
+
+    public static function slugify(string $string)
+    {
+        $slugify = new Slugify();
+
+        $slugify->addRules([
+            'а' => 'a',
+            'б' => 'b',
+            'в' => 'v',
+            'г' => 'h',
+            'д' => 'd',
+            'дз' => 'dz',
+            'дж' => 'dzh',
+            'е' => 'ie',
+            'ё' => 'io',
+            'ж' => 'zh',
+            'з' => 'z',
+            'і' => 'i',
+            'й' => 'j',
+            'к' => 'k',
+            'л' => 'l',
+            'м' => 'm',
+            'н' => 'n',
+            'о' => 'o',
+            'п' => 'p',
+            'р' => 'r',
+            'с' => 's',
+            'т' => 't',
+            'у' => 'u',
+            'ў' => 'u',
+            'ф' => 'f',
+            'х' => 'ch',
+            'ц' => 'c',
+            'ч' => 'cz',
+            'ш' => 'sz',
+            'ы' => 'y',
+            'ь' => '',
+            'э' => 'e',
+            'ю' => 'iu',
+            'я' => 'ia',
+            "'" => '',
+        ]);
+
+        return $slugify->slugify($string);
     }
 }
