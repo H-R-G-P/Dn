@@ -12,23 +12,31 @@
 
 {% block content %}
     <div class="row">
-        <div class="col mb-3">
-            <div class="list-group list-group-flush">
-                {% for version in dance.versions %}
-                    <a href="{{ url('version', {'slugDance': dance.slug, 'slugVersion': version.slug}) }}" class="list-group-item list-group-item-action">
-                        <b>{% if version.name is same as('') %}
-                                {{ dance.name }}
-                            {% else %}
-                                {{ version.name }}
-                            {% endif %}
-                        </b> {{ version.address(app.request.locale) }} ({{ version.views }})
-                    </a>
-                {% endfor %}
+        <div class="col mb-3 my-col">
+            <div class="card">
+                <div class="card-header">{% trans %}Versions{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for version in dance.versions %}
+                            <a href="{{ url('version', {'slugDance': dance.slug, 'slugVersion': version.slug}) }}" class="list-group-item list-group-item-action">
+                                <b>{% if version.name is same as('') %}
+                                        {{ dance.name }}
+                                    {% else %}
+                                        {{ version.name }}
+                                    {% endif %}
+                                </b> {{ version.address(app.request.locale) }} ({{ version.views }})
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         {% if map_json %}
-            <div id="map_parent" class="col mb-3">
-                <div id="map"></div>
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
             </div>
         {% endif %}
     </div>

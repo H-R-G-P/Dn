@@ -2,7 +2,12 @@
 
 {% block title %}{{ region.name }}{% endblock %}
 
-{% block header %}{{ region.name }}{% endblock %}
+{% block header %}
+    {{ region.name }} {% trans %}reg.{% endtrans %}
+    {% if department %}
+        , {{ department.name }} {% trans %}dep.{% endtrans %}
+    {% endif %}
+{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
@@ -12,27 +17,40 @@
 
 {% block content %}
     <div class="row">
-        <div class="col mb-3">
-            <div class="list-group list-group-flush">
-                {% for dance in region.dancesFromDb %}
-                    <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                        {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
-                    </a>
-                {% endfor %}
+        <div class="col mb-3 my-col">
+            <div class="card">
+                <div class="card-header">{% trans %}Dances{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for dance in region.dancesFromDb %}
+                            <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
+                                {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <div class="list-group list-group-flush">
-                {% for place in places %}
-                    <a href="#" class="list-group-item list-group-item-action">
-                        {{ place.name }} ({{ place.dancesCount }} {% trans %}dan.{% endtrans %})
-                    </a>
-                {% endfor %}
+        <div class="col mb-3 my-col">
+            <div class="card">
+                <div class="card-header">{% trans %}Places{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for place in places %}
+                            <a href="#" class="list-group-item list-group-item-action">
+                                {{ place.name }} ({{ place.dancesCount }} {% trans %}dan.{% endtrans %})
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         {% if map_json %}
-            <div id="map_parent" class="col mb-3">
-                <div id="map"></div>
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
             </div>
         {% endif %}
     </div>

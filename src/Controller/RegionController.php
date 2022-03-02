@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Place;
 use App\Entity\Region;
-use App\Repository\PlaceRepository;
+use App\Entity\Version;
 use App\Service\DatabaseService;
 use App\Service\HelperService;
 use App\Service\MapService;
@@ -58,10 +58,14 @@ class RegionController extends AbstractController
             'slug' => $slug,
         ]);
 
-        if ($region === null) {
+        if (!$region instanceof Region) {
             $this->addFlash('dark', 'Region "'.$slug.'" not exists.');
             return $this->redirectToRoute('homepage');
         }
+
+        $department = null;
+        if ($version = $this->getDoctrine()->getRepository(Version::class)->findOneBy(['region' => $region->getId()]))
+            $department = $version->getDepartment();
 
         $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($region);
         $allPlaces = $databaseService->getEntitiesRelatedByDances()->getPlaces();
@@ -73,6 +77,7 @@ class RegionController extends AbstractController
 
         return $this->render('region/show.html.twig', [
             'region' => $region,
+            'department' => $department,
             'places' => $placesWithDances,
             'map_json' => $map_json,
         ]);

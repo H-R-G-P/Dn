@@ -46,6 +46,27 @@ class DanceRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    /**
+     * @return array<int, Dance>
+     */
+    public function findSortedByVersions(): array
+    {
+        $dances = $this->findAll();
+
+        usort($dances, function ($a, $b){
+            $a = count($a->getVersions());
+            $b = count($b->getVersions());
+
+            if ($a == $b) {
+                return 0;
+            }
+
+            return ($a > $b) ? -1 : 1;
+        });
+
+        return $dances;
+    }
+
     // /**
     //  * @return Dance[] Returns an array of Dance objects
     //  */
