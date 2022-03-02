@@ -18,9 +18,11 @@ class Video
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * 1 mean 'youtube', 2 mean 'vk'
+     *
+     * @ORM\Column(type="int")
      */
-    private string $type;
+    private int $type;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,12 +51,12 @@ class Video
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): int
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(int $type): self
     {
         $this->type = $type;
 
