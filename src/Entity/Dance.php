@@ -109,6 +109,14 @@ class Dance
         return $this;
     }
 
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
     public function getSlug(): string
     {
         return $this->slug;
