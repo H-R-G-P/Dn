@@ -31,7 +31,7 @@ class HelperService
         return $result;
     }
 
-    public static function slugify(string $string)
+    public static function slugify(string $string): string
     {
         $slugify = new Slugify();
 
