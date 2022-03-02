@@ -81,11 +81,11 @@ class MapService
         if (count($markers) === 0) {
             throw new Exception('No_one');
         }
-        if (count($points) === 1) {
-            $highestLat = $points[0]->getLat()+0.3;
-            $lowerLat = $points[0]->getLat()-0.3;
-            $highestLon = $points[0]->getLon()+0.3;
-            $lowerLon = $points[0]->getLon()-0.3;
+        if (count($markers) === 1) {
+            $highestLat = $markers[0]->getLat()+0.3;
+            $lowerLat = $markers[0]->getLat()-0.3;
+            $highestLon = $markers[0]->getLon()+0.3;
+            $lowerLon = $markers[0]->getLon()-0.3;
 
             return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
         }
