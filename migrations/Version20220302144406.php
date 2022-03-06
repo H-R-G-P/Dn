@@ -33,7 +33,6 @@ final class Version20220302144406 extends AbstractMigration implements Container
 
             foreach ($dances as $dance) {
                 $dance->setSlug(HelperService::slugify($dance->getName()));
-                $em->persist($dance);
             }
             $em->flush();
         }
