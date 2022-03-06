@@ -37,7 +37,8 @@ class RegionRepository extends ServiceEntityRepository
             FROM App\Entity\Region r 
             JOIN App\Entity\Version v 
             JOIN App\Entity\Department d 
-            WHERE d.id = :entityId and v.department = d.id and v.region = r.id'
+            WHERE d.id = :entityId and v.department = d.id and v.region = r.id
+            ORDER BY r.name ASC'
         )->setParameter('entityId', $entity->getId());
 
         return $query->getResult();
