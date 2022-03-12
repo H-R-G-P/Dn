@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Interface\EntityExtended;
 use App\Repository\PlaceRepository;
-use App\Vo\CoordinatesVO;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -200,15 +199,6 @@ class Place implements EntityExtended
     public function __toString(): string
     {
         return $this->name;
-    }
-
-    public function getCoordinates(): ?CoordinatesVO
-    {
-        if ($this->getLat() !== null && $this->getLon() !== null){
-            return new CoordinatesVO($this->getLat(), $this->getLon());
-        }
-
-        return null;
     }
 
     public function setDancesCount(int $dancesCount): void

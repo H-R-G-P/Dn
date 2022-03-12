@@ -12,7 +12,7 @@ $( document ).ready(function() {
         setMap(mapProperties.polygon);
     }
 
-    setMarkers(mapProperties.points);
+    setMarkers(mapProperties.markers);
 });
 
 function setBelMap() {
@@ -31,18 +31,21 @@ function setMap(polygon) {
     map.fitBounds(bounds);
 }
 
-function setMarkers(points) {
+function setMarkers(markers) {
     let defIcon = L.icon({
         iconUrl: "/build/images/marker-icon.2b3e1faf.png",
-        iconSize:     [20, 35]
+        iconSize:     [20, 35],
+        iconAnchor:   [10,35]
     });
 
-    points.forEach(function (coordinates) {
-        let lat = coordinates.lat,
-            lon = coordinates.lon;
+    markers.forEach(function (mapMarker) {
+        let lat = mapMarker.lat,
+            lon = mapMarker.lon;
 
         if (lat && lon){
-            L.marker([lat, lon], {icon: defIcon}).addTo(map);
+            L.marker([lat, lon], {icon: defIcon})
+                .bindPopup('<pre>'+mapMarker.popup+'</pre>')
+                .addTo(map);
         }
     });
 }

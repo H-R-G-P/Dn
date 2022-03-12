@@ -4,7 +4,7 @@
 namespace App\Vo;
 
 
-class CoordinatesVO
+class MapMarkerVO
 {
     /** Latitude */
     private float $lat;
@@ -12,16 +12,21 @@ class CoordinatesVO
     /** Longitude */
     private float $lon;
 
+    /** @var string */
+    private string $popup;
+
     /**
-     * CoordinatesVO constructor.
+     * MapMarkerVO constructor.
      *
      * @param float $lat
      * @param float $lon
+     * @param string $popup
      */
-    public function __construct(float $lat, float $lon)
+    public function __construct(float $lat, float $lon, string $popup)
     {
         $this->lat = $lat;
         $this->lon = $lon;
+        $this->popup = $popup;
     }
 
     /** Get Latitude
@@ -38,5 +43,13 @@ class CoordinatesVO
     public function getLon(): float
     {
         return $this->lon;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPopup(): string
+    {
+        return $this->popup;
     }
 }
