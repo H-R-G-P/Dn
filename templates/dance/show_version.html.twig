@@ -28,7 +28,7 @@
                 <div class="card-header">{% trans %}Description{% endtrans %}</div>
                 <div class="card-body">
                     {% if version.place %}
-                        {% trans %}Village{% endtrans %} {#<a href="{{ url('place', {'slug': version.place}) }}">#}{{ version.place.name }}{#</a>#}
+                        {% trans %}Village{% endtrans %} <a href="{{ url('place', {'slug': version.place.slug}) }}">{{ version.place.name }}</a>
                         <br>
                     {% endif %}
                     {% if version.source %}

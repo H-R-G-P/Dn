@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ place.name }} {% trans %}village{% endtrans %}{% endblock %}
+
+{% block header %}{{ place.name }} {% trans %}village{% endtrans %}{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ place.name }} {% trans %}village{% endtrans %}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col mb-3">
+            <div class="card">
+                <div class="card-header">{% trans %}Versions{% endtrans %}</div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for version in place.versions %}
+                            {% if not version.name is same as('') %}
+                                <a href="{{ url('version', {'slugVersion': version.slug, 'slugDance': version.dance})}}" class="list-group-item list-group-item-action">
+                                    {{ version.name }} ({% trans %}ver.{% endtrans %})
+                                </a>
+
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if map_json %}
+            <div class="col mb-3 my-col">
+                <div class="card">
+                    <div class="card-header">{% trans %}Map{% endtrans %}</div>
+                    <div id="map"></div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div hidden id="map_json">{{ map_json|raw }}</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('map') }}
+{% endblock %}

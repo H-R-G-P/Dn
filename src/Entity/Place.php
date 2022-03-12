@@ -66,6 +66,11 @@ class Place implements EntityExtended
 
     private int $dancesCount = 0;
 
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private string $slug;
+
     #[Pure] public function __construct(?float $lat, ?float $lon)
     {
         $this->versions = new ArrayCollection();
@@ -214,5 +219,17 @@ class Place implements EntityExtended
     public function getDancesCount(): int
     {
         return $this->dancesCount;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
