@@ -36,7 +36,7 @@
                         <br>
                     {% endif %}
                     {% if version.source2 %}
-                        {% trans %}Second source{% endtrans %} <a href="{{ url('source', {'slug': source.slug}) }}">{{ version.source2.name }}</a>
+                        {% trans %}Second source{% endtrans %} <a href="{{ url('source', {'slug': version.source.slug}) }}">{{ version.source2.name }}</a>
                         <br>
                     {% endif %}
                     {% trans %}Type{% endtrans %}

@@ -20,7 +20,7 @@ class Video
     /**
      * 1 mean 'youtube', 2 mean 'vk'
      *
-     * @ORM\Column(type="int")
+     * @ORM\Column(type="integer")
      */
     private int $type;
 
