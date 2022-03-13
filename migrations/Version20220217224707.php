@@ -29,7 +29,10 @@ final class Version20220217224707 extends AbstractMigration implements Container
 
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE place ADD slug VARCHAR(150) NOT NULL');
+    }
 
+    public function postUp(Schema $schema): void
+    {
         $em = $this->container->get('doctrine.orm.entity_manager');
         if ($em !== null && $em instanceof EntityManagerInterface) {
             $places = $em->getRepository(Place::class)->findAll();
