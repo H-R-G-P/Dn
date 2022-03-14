@@ -45,8 +45,6 @@
                         {% else %}
                             <a href="{{ url('type', {'slug': version.type.slug}) }}">{% trans %}Improvisation{% endtrans %}</a>
                         {% endif %}
-                    <br>
-                    <a href="#"><em>{% trans %}Video{% endtrans %}</em></a>
                 </div>
             </div>
             {% for video in version.videos %}
