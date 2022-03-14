@@ -23,15 +23,29 @@ class TypeController extends AbstractController
      * )
      *
      * @param TypeRepository<Type> $typeRepository
+     * @param PlaceRepository<Place> $placeRepository
+     * @param MapService $mapService
      *
      * @return Response
      */
-    public function index(TypeRepository $typeRepository): Response
+    public function index(TypeRepository $typeRepository, PlaceRepository $placeRepository, MapService $mapService): Response
     {
         $types = $typeRepository->findAll();
+        $places = $placeRepository->findAll();
+
+        usort($types, function ($a, $b) {
+            $a = count($a->getVersions());
+            $b = count($b->getVersions());
+            if ($a == $b) return 0;
+            return ($a > $b) ? -1 : 1;
+        });
+
+        $map = $mapService->createMapDTO($places);
+        $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('type/index.html.twig', [
             'types' => $types,
+            'map_json' => $map_json,
         ]);
     }
 
@@ -59,7 +73,8 @@ class TypeController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($type);
+        if ($type instanceof Type)
+            $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($type);
 
         $map = $mapService->createMapDTO($places);
         $map_json = $map === null ? null : $map->serializeToJson();
