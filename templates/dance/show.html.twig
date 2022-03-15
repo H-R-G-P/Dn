@@ -24,7 +24,7 @@
                                     {% else %}
                                         {{ version.name }}
                                     {% endif %}
-                                </b> {{ version.address(app.request.locale) }} ({{ version.videos|length }})
+                                </b> {{ version.address(app.request.locale) }} ({{ version.videos|length }} {% trans %}videos{% endtrans %})
                             </a>
                         {% endfor %}
                     </div>
