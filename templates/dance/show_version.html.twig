@@ -41,9 +41,9 @@
                     {% endif %}
                     {% trans %}Type{% endtrans %}
                         {% if version.type %}
-                        <a href="{{ url('type', {'slug': version.type.slug}) }}">{{ version.type.name }}</a>
+                            <a href="{{ url('type', {'slug': version.type.slug}) }}">{{ version.type.name }}</a>
                         {% else %}
-                            <a href="{{ url('type', {'slug': version.type.slug}) }}">{% trans %}Improvisation{% endtrans %}</a>
+                            <a href="#">{% trans %}Improvisation{% endtrans %}</a>
                         {% endif %}
                 </div>
             </div>
