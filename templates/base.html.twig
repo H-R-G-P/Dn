@@ -18,7 +18,7 @@
         {% block body %}
             <div class="container">
                 <div class="row">
-                    <h1 class="text-center my-5">{% block header %}{% endblock %}</h1>
+                    <h1 class="text-center">{% block header %}{% endblock %}</h1>
                 </div>
                 {% block flash_message %}
                     {% for label, messages in app.flashes %}
