@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Place;
+use App\Entity\Version;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,11 +36,17 @@ class PlaceController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
+        $version = $place->getVersions()->get(0);
+        $region = $version instanceof Version ? $version->getRegion() : null;
+        $department = $version instanceof Version ? $version->getDepartment() : null;
+
         $map = $mapService->createMapDTO([$place]);
         $map_json = $map === null ? null : $map->serializeToJson();
 
         return $this->render('place/show.html.twig', [
             'place' => $place,
+            'region' => $region,
+            'department' => $department,
             'map_json' => $map_json,
         ]);
     }
