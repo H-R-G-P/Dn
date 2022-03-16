@@ -66,7 +66,7 @@ class MapService
         $typeName = $version->getType() !== null ? $version->getType()->getName() : '';
         $sourceName = $version->getSource() !== null ? $version->getSource()->getName() : '';
 
-        return $placeName."\nType: ".$typeName."\nSource: ".$sourceName;
+        return $placeName.", ".$typeName.", ".$sourceName;
     }
 
     /**
