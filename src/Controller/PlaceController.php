@@ -36,7 +36,13 @@ class PlaceController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $version = $place->getVersions()->get(0);
+        $versions = $place->getVersions()->toArray();
+        for ($i = count($versions); $i > 0; $i--) {
+            $versions[$i] = $versions[$i-1];
+            unset($versions[$i-1]);
+        }
+
+        $version = $versions[1];
         $region = $version instanceof Version ? $version->getRegion() : null;
         $department = $version instanceof Version ? $version->getDepartment() : null;
 
@@ -46,6 +52,7 @@ class PlaceController extends AbstractController
         return $this->render('place/show.html.twig', [
             'place' => $place,
             'region' => $region,
+            'versions' => $versions,
             'department' => $department,
             'map_json' => $map_json,
         ]);

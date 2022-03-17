@@ -22,13 +22,14 @@
                 <div class="card-header">{% trans %}Versions{% endtrans %}</div>
                 <div class="card-body">
                     <div class="list-group list-group-flush">
-                        {% for version in place.versions %}
-                            {% if not version.name is same as('') %}
-                                <a href="{{ url('version', {'slugVersion': version.slug, 'slugDance': version.dance})}}" class="list-group-item list-group-item-action">
-                                    {{ version.name }} ({% trans %}ver.{% endtrans %})
-                                </a>
-
-                            {% endif %}
+                        {% for version in versions %}
+                            <a href="{{ url('version', {'slugVersion': version.slug, 'slugDance': version.dance})}}" class="list-group-item list-group-item-action">
+                                {% if not version.name is same as('') %}
+                                        {{ version.name }}
+                                {% elseif not version.dance.name is same as('') %}
+                                        {{ version.dance.name }}
+                                {% endif %}
+                            </a>
                         {% endfor %}
                     </div>
                 </div>
