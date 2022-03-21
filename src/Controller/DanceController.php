@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Version;
+use App\Entity\Video;
 use App\Repository\VersionRepository;
 use App\Service\MapService;
 use App\Service\UpdateDatabaseService;
@@ -113,6 +114,10 @@ class DanceController extends AbstractController
         $databaseService->increaseDanceViews($dance);
         $databaseService->increaseVersionViews($version);
 
+        $videos = $this->getDoctrine()->getRepository(Video::class)->findBy([
+            'version' => $version->getId(),
+        ]);
+
         $map_json = null;
         $place = $version->getPlace();
         if ($place instanceof Place){
@@ -123,6 +128,7 @@ class DanceController extends AbstractController
         return $this->render('dance/show_version.html.twig', [
             'dance' => $dance,
             'version' => $version,
+            'videos' => $videos,
             'map_json' => $map_json,
         ]);
     }
