@@ -25,9 +25,19 @@ class Video
     private int $type;
 
     /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private string $youtubeId;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private string $link;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private string $linkVk;
 
     /**
      * @ORM\ManyToOne(targetEntity=Version::class, inversedBy="videos")
@@ -37,18 +47,6 @@ class Video
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getVersion(): ?Version
-    {
-        return $this->version;
-    }
-
-    public function setVersion(?Version $version): self
-    {
-        $this->version = $version;
-
-        return $this;
     }
 
     public function getType(): int
@@ -63,6 +61,18 @@ class Video
         return $this;
     }
 
+    public function getVersion(): ?Version
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?Version $version): self
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
     public function getLink(): ?string
     {
         return $this->link;
@@ -73,5 +83,37 @@ class Video
         $this->link = $link;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkVk(): string
+    {
+        return $this->linkVk;
+    }
+
+    /**
+     * @param string $linkVk
+     */
+    public function setLinkVk(string $linkVk): void
+    {
+        $this->linkVk = $linkVk;
+    }
+
+    /**
+     * @return string
+     */
+    public function getYoutubeId(): string
+    {
+        return $this->youtubeId;
+    }
+
+    /**
+     * @param string $youtubeId
+     */
+    public function setYoutubeId(string $youtubeId): void
+    {
+        $this->youtubeId = $youtubeId;
     }
 }
