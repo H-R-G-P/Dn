@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Version;
-use App\Entity\Video;
 use App\Repository\VersionRepository;
 use App\Service\MapService;
 use App\Service\UpdateDatabaseService;
@@ -114,9 +113,7 @@ class DanceController extends AbstractController
         $databaseService->increaseDanceViews($dance);
         $databaseService->increaseVersionViews($version);
 
-        $videos = $this->getDoctrine()->getRepository(Video::class)->findBy([
-            'version' => $version->getId(),
-        ]);
+        $videos = $version->getVideos();
 
         $map_json = null;
         $place = $version->getPlace();
