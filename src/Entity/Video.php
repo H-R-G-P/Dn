@@ -30,11 +30,6 @@ class Video
     private string $youtubeId;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $link;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private string $linkVk;
@@ -69,18 +64,6 @@ class Video
     public function setVersion(?Version $version): self
     {
         $this->version = $version;
-
-        return $this;
-    }
-
-    public function getLink(): ?string
-    {
-        return $this->link;
-    }
-
-    public function setLink(string $link): self
-    {
-        $this->link = $link;
 
         return $this;
     }
