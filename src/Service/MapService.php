@@ -10,9 +10,20 @@ use App\Entity\Version;
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use Exception;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MapService
 {
+    /**
+     * @var TranslatorInterface
+     */
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /** Create MapDTO if at least one place has full coordinates, otherwise return null.
      *
      * @param Place[] $places
@@ -58,15 +69,18 @@ class MapService
      */
     public function createPopup(Version $version): string
     {
-        $danceName = $version->getDance()->getName();
-        $placeName = $danceName.'|'.$version->getName();
-        if ($version->getName() === '') {
-            $placeName = $danceName;
+        $name = $version->getDance()->getName();
+        if ($version->getName() !== '' && str_contains($version->getName(), $name)) {
+            $name = $version->getName();
+        } elseif ($version->getName() !== '') {
+            $name.= '|'.$version->getName();
         }
         $typeName = $version->getType() !== null ? $version->getType()->getName() : '';
-        $sourceName = $version->getSource() !== null ? $version->getSource()->getName() : '';
+        $sourceName = $version->getSource() !== null ? $version->getSource()->getNameShort() : '';
+        $placeName = $version->getPlace() !== null ? $version->getPlace()->getName() : '';
+        $placeShort = $this->translator->trans('vil.');
 
-        return $placeName.", ".$typeName.", ".$sourceName;
+        return $name.", ".$typeName.", ".$sourceName.", $placeShort ".$placeName;
     }
 
     /**
