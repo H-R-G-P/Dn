@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ source.name }}{% endblock %}
+{% set title %}
+    {% trans %}Dances{% endtrans %} {{ source.from }}
+{% endset %}
 
-{% block header %}{{ source.name }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block header %}{{ title }}{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>

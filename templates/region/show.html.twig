@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ region.name }}{% endblock %}
-
-{% block header %}
-    {{ region.name }} {% trans %}reg.{% endtrans %}
+{% set title %}
+    {% trans %}Dances{% endtrans %} {{ region.name }} {% trans %}reg.{% endtrans %}
     {% if department %}
         , {{ department.name }} {% trans %}dep.{% endtrans %}
     {% endif %}
-{% endblock %}
+{% endset %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block header %} {{ title }} {% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
