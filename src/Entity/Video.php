@@ -25,6 +25,11 @@ class Video
     private int $type;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $link;
+
+    /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private string $youtubeId;
@@ -98,5 +103,21 @@ class Video
     public function setYoutubeId(string $youtubeId): void
     {
         $this->youtubeId = $youtubeId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink(): string
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink(string $link): void
+    {
+        $this->link = $link;
     }
 }
