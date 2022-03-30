@@ -7,13 +7,19 @@ use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use \Exception;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Translation\Translator;
 
 class MapServiceTest extends TestCase
 {
 
     public function testCreatePolygonVO(): void
     {
-        $service = new MapService();
+        $translator = $this->createMock(Translator::class);
+        $translator->expects($this->any())
+            ->method('trans')
+            ->willReturn('vil.');
+
+        $service = new MapService($translator);
         $markers = array();
 
         try {
