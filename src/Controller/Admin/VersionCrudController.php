@@ -6,6 +6,7 @@ use App\Entity\Version;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -32,9 +33,21 @@ class VersionCrudController extends AbstractCrudController
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield AssociationField::new('type');
         yield AssociationField::new('source');
+        yield AssociationField::new('source2');
         yield AssociationField::new('dance');
+        yield AssociationField::new('place');
+        yield AssociationField::new('department');
+        yield AssociationField::new('region');
         yield TextField::new('youtube');
         yield IntegerField::new('views');
+        yield BooleanField::new('isRec');
+        yield BooleanField::new('isImp');
+        yield BooleanField::new('isCorrectPlace');
+        yield BooleanField::new('hasLocalVideo');
+        yield TextField::new('comments');
+        yield TextField::new('abrady');
+        yield BooleanField::new('isGame');
+        yield TextField::new('drob');
     }
 
 }
