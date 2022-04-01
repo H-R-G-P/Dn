@@ -35,11 +35,6 @@ class Type implements EntityExtended
     private Collection $versions;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private int $versionrs;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private bool $is_group;
@@ -116,18 +111,6 @@ class Type implements EntityExtended
                 $version->setType(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getVersionrs(): ?int
-    {
-        return $this->versionrs;
-    }
-
-    public function setVersionrs(int $versionrs): self
-    {
-        $this->versionrs = $versionrs;
 
         return $this;
     }
