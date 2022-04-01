@@ -72,8 +72,10 @@ class Place implements EntityExtended
 
     /**
      * @ORM\OneToMany(targetEntity=Song::class, mappedBy="place")
+     *
+     * @var Collection<int, Song>
      */
-    private $songs;
+    private Collection $songs;
 
     #[Pure] public function __construct(?float $lat, ?float $lon)
     {
@@ -230,7 +232,7 @@ class Place implements EntityExtended
     }
 
     /**
-     * @return Collection|Song[]
+     * @return Collection<int, Song>
      */
     public function getSongs(): Collection
     {
@@ -242,18 +244,6 @@ class Place implements EntityExtended
         if (!$this->songs->contains($song)) {
             $this->songs[] = $song;
             $song->setPlace($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSong(Song $song): self
-    {
-        if ($this->songs->removeElement($song)) {
-            // set the owning side to null (unless already changed)
-            if ($song->getPlace() === $this) {
-                $song->setPlace(null);
-            }
         }
 
         return $this;
