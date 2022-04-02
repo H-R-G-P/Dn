@@ -33,6 +33,7 @@ class SourceCrudController extends AbstractCrudController
         yield UrlField::new('url');
         yield TextField::new('description');
         yield TextField::new('from');
+        yield TextField::new('title');
     }
 
 }

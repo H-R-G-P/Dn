@@ -9,6 +9,7 @@ use App\Entity\Region;
 use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
+use App\Entity\Video;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -43,5 +44,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Sources', 'fab fa-sourcetree', Source::class);
         yield MenuItem::linkToCrud('Types', 'fab fa-tumblr', Type::class);
         yield MenuItem::linkToCrud('Versions', 'fas fa-code-branch', Version::class);
+        yield MenuItem::linkToCrud('Videos', 'fa fa-video-camera', Video::class);
     }
 }
