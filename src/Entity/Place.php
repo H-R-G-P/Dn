@@ -70,13 +70,6 @@ class Place implements EntityExtended
      */
     private string $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Song::class, mappedBy="place")
-     *
-     * @var Collection<int, Song>
-     */
-    private Collection $songs;
-
     #[Pure] public function __construct(?float $lat, ?float $lon)
     {
         $this->versions = new ArrayCollection();
@@ -227,24 +220,6 @@ class Place implements EntityExtended
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Song>
-     */
-    public function getSongs(): Collection
-    {
-        return $this->songs;
-    }
-
-    public function addSong(Song $song): self
-    {
-        if (!$this->songs->contains($song)) {
-            $this->songs[] = $song;
-            $song->setPlace($this);
-        }
 
         return $this;
     }

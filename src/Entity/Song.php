@@ -43,16 +43,14 @@ class Song
     private string $area;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="place")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=40)
      */
-    private Region $region;
+    private string $region;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="songs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=40)
      */
-    private Place $place;
+    private string $place;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -149,24 +147,24 @@ class Song
         return $this;
     }
 
-    public function getRegion(): Region
+    public function getRegion(): string
     {
         return $this->region;
     }
 
-    public function setRegion(Region $region): self
+    public function setRegion(string $region): self
     {
         $this->region = $region;
 
         return $this;
     }
 
-    public function getPlace(): Place
+    public function getPlace(): string
     {
         return $this->place;
     }
 
-    public function setPlace(Place $place): self
+    public function setPlace(string $place): self
     {
         $this->place = $place;
 
