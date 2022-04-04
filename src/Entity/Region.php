@@ -54,13 +54,6 @@ class Region implements EntityExtended
      */
     private Collection $versions;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Song::class, mappedBy="region")
-     *
-     * @var Collection<int, Song>
-     */
-    private Collection $songs;
-
     #[Pure] public function __construct()
     {
         $this->places = new ArrayCollection();
@@ -202,13 +195,5 @@ class Region implements EntityExtended
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Song>
-     */
-    public function getSongs(): Collection
-    {
-        return $this->songs;
     }
 }
