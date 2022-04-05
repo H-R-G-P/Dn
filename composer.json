@@ -103,7 +103,7 @@
         "symfony": {
             "allow-contrib": false,
             "require": "5.3.*",
-            "endpoint": "https://flex.symfony.com/versions.json"
+            "endpoint": "https://flex.symfony.com/"
         }
     }
 }
