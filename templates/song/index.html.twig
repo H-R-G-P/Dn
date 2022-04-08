@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Сьпеўны зборнік{% endblock %}
+{% block title %}{% trans %}Song collection{% endtrans %}{% endblock %}
 
-{% block header %}Сьпеўны зборнік{% endblock %}
+{% block header %}{% trans %}Song collection{% endtrans %}{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans %}Songs{% endtrans %}</li>
+{% endblock %}
 
 {% block content %}
     <div class="row">
