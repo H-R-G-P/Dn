@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Сьпеўны зборнік{% endblock %}
+
+{% block header %}Сьпеўны зборнік{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="accordion" id="accordion">
+            {% for song in songs %}
+                <div class="card">
+                    <div class="card-header" id="heading{{ song.id }}">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{ song.id }}" aria-expanded="true" aria-controls="collapse">
+                                {{ song.name }}
+                                {% if song.genre %}<small class="hidden-xs">({{ song.genre }})</small>{% endif %}
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapse{{ song.id }}" class="collapse show" aria-labelledby="heading{{ song.id }}" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">{{ song.text }}</div>
+                                <div class="col-sm-6 col-md-4 col-lg-4 hidden-xs">
+                                    {% if song.genre %} Жанр: <strong>{{ song.genre }}</strong><br/>{% endif %}
+                                    {% if song.artist %} Выканаўца: <strong>{{ song.artist }}</strong><br/>{% endif %}
+                                    {% if song.area %} Вобласьць: <strong>{{ song.area }}</strong><br/>{% endif %}
+                                    {% if song.region %} Раён: <strong>{{ song.region }}</strong><br/>{% endif %}
+                                    {% if song.place %} Месца: <strong>{{ song.place }}</strong><br/>{% endif %}
+                                    {% if song.year %} Год: <strong>{{ song.year }}</strong><br/>{% endif %}
+                                    {% if song.record %} Запісан: <strong>{{ song.record }}</strong><br/>{% endif %}
+                                    {% if song.comments %} {{ song.comments }}<br/>{% endif %}
+
+                                {#    <?  $files = array();
+                                        if ($song->audio_origin && file_exists($_SERVER["DOCUMENT_ROOT"].'/audio/origin/'.$song->audio_origin))
+                                            $files[] = array('file' => '/audio/origin/'.$song->audio_origin, 'mime' => mime_content_type($_SERVER["DOCUMENT_ROOT"].'/audio/origin/'.$song->audio_origin), 'type' => 'origin');
+                                        if ($song->audio_artist && file_exists($_SERVER["DOCUMENT_ROOT"].'/audio/artist/'.$song->audio_artist))
+                                            $files[] = array('file' => '/audio/artist/'.$song->audio_artist, 'mime' => mime_content_type($_SERVER["DOCUMENT_ROOT"].'/audio/artist/'.$song->audio_artist), 'type' => 'artist');
+                                        if ($song->audio_rep && file_exists($_SERVER["DOCUMENT_ROOT"].'/audio/rep/'.$song->audio_rep))
+                                            $files[] = array('file' => '/audio/rep/'.$song->audio_rep, 'mime' => mime_content_type($_SERVER["DOCUMENT_ROOT"].'/audio/rep/'.$song->audio_rep), 'type' => 'origin');
+                                    ?>
+                                    <? if (!empty($files)) { ?>
+                                        <? foreach ($files as $item) { ?>
+                                            <? if ($item['type'] == 'origin') { ?><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Першакрыніца<? } ?>
+                                            <? if ($item['type'] == 'artist') { ?><span class="glyphicon glyphicon-cd" aria-hidden="true"></span> Выкананьне<? } ?>
+                                            <? if ($item['type'] == 'rep') { ?><span class="glyphicon glyphicon-music" aria-hidden="true"></span> Рэпетыцыя<? } ?>
+                                            <!--audio controls>
+                                                <source src="<?=$item['file'] ?>" type="<?=$item['mime'] ?>">
+                                                Ваш браўзер не падтрымлівае аўдыя фармат
+                                            </audio-->
+                                        <? } ?>
+                                    <? } ?>
+                                #}
+                                </div>
+                                <div class="visible-xs">
+                                    <em>
+                                        {% if song.genre %} {{ song.genre }},{% endif %}
+                                        {% if song.artist %} {{ song.artist }},{% endif %}
+                                        {% if song.area %} {{ song.area }},{% endif %}
+                                        {% if song.region %} {{ song.region }},{% endif %}
+                                        {% if song.place %} {{ song.place }},{% endif %}
+                                        {% if song.year %} {{ song.year }},{% endif %}
+                                        {% if song.record %} {{ song.record }},{% endif %}
+                                    </em>
+                                </div>
+                                {#
+                    <a href="{{ path('review_show', {'id': review.id}) }}">show</a>
+                    <a href="{{ path('review_edit', {'id': review.id}) }}">edit</a>
+                                #}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {#
+<a href="{{ path('review_new') }}">Create new</a>
+            #}
+        </div>
+    </div>
+
+{% endblock %}
