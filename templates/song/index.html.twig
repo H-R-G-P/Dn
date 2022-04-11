@@ -26,13 +26,13 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">{{ song.text }}</div>
                                 <div class="col-sm-6 col-md-4 col-lg-4 hidden-xs">
-                                    {% if song.genre %} Жанр: <strong>{{ song.genre }}</strong><br/>{% endif %}
-                                    {% if song.artist %} Выканаўца: <strong>{{ song.artist }}</strong><br/>{% endif %}
-                                    {% if song.area %} Вобласьць: <strong>{{ song.area }}</strong><br/>{% endif %}
-                                    {% if song.region %} Раён: <strong>{{ song.region }}</strong><br/>{% endif %}
-                                    {% if song.place %} Месца: <strong>{{ song.place }}</strong><br/>{% endif %}
-                                    {% if song.year %} Год: <strong>{{ song.year }}</strong><br/>{% endif %}
-                                    {% if song.record %} Запісан: <strong>{{ song.record }}</strong><br/>{% endif %}
+                                    {% if song.genre %} {% trans %}Genre{% endtrans %}: <strong>{{ song.genre }}</strong><br/>{% endif %}
+                                    {% if song.artist %} {% trans %}Artist{% endtrans %}: <strong>{{ song.artist }}</strong><br/>{% endif %}
+                                    {% if song.area %} {% trans %}Area{% endtrans %}: <strong>{{ song.area }}</strong><br/>{% endif %}
+                                    {% if song.region %} {% trans %}Region{% endtrans %}: <strong>{{ song.region }}</strong><br/>{% endif %}
+                                    {% if song.place %} {% trans %}Place{% endtrans %}: <strong>{{ song.place }}</strong><br/>{% endif %}
+                                    {% if song.year %} {% trans %}Year{% endtrans %}: <strong>{{ song.year }}</strong><br/>{% endif %}
+                                    {% if song.record %} {% trans %}Record{% endtrans %}: <strong>{{ song.record }}</strong><br/>{% endif %}
                                     {% if song.comments %} {{ song.comments }}<br/>{% endif %}
 
                                 {#    <?  $files = array();
