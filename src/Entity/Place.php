@@ -75,7 +75,6 @@ class Place implements EntityExtended
         $this->versions = new ArrayCollection();
         $this->lat = $lat;
         $this->lon = $lon;
-        $this->songs = new ArrayCollection();
     }
 
     public function getId(): int

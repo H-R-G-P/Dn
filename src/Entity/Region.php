@@ -58,7 +58,6 @@ class Region implements EntityExtended
     {
         $this->places = new ArrayCollection();
         $this->versions = new ArrayCollection();
-        $this->songs = new ArrayCollection();
     }
 
     public function getId(): int
