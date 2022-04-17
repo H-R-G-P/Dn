@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% set title %} Register {% endset %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block header %} {{ title }} {% endblock %}
+
+{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    <div class="card card-body bg-light mt-5">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="submit" class="btn btn-success btn-block">Register</button>
+                </div>
+                <div class="col">
+                    <a href="{{ path('app_login') }}" class="btn btn-light btn-block">
+                        Have an account? Login
+                    </a>
+                </div>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
