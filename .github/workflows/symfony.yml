@@ -30,7 +30,7 @@ jobs:
     - name: Update flex
       run: composer update symfony/flex --no-plugins --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Install Dependencies
-      run: composer update symfony/flex --no-plugins --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Create Database
       run: |
         mkdir -p data
