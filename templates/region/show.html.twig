@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for place in places %}
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <a href="{{ url('place', {'slug': place.slug}) }}" class="list-group-item list-group-item-action">
                                 {{ place.name }} ({{ place.dancesCount }} {% trans %}dan.{% endtrans %})
                             </a>
                         {% endfor %}
