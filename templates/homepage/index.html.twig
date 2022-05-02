@@ -2,7 +2,15 @@
 
 {% block title %}{% trans %}Dances of Belarus{% endtrans %}{% endblock %}
 
-{% block header %}{% trans %}Dances of Belarus{% endtrans %}{% endblock %}
+{% block header %}
+    {% trans %}Dances of Belarus{% endtrans %}
+    <form action="{{ url('search') }}">
+        <div class="input-group">
+            <input name="input" type="search" class="form-control rounded" placeholder="{% trans %}Search{% endtrans %}" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-primary">{% trans %}search{% endtrans %}</button>
+        </div>
+    </form>
+{% endblock %}
 
 {% block content %}
     <div id="dropdownMenu" class="row">

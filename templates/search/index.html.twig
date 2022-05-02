@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Search{% endtrans %} "{{ input }}"{% endblock %}
+
+{% block header %}{% trans %}Search{% endtrans %} "{{ input }}"{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans %}Search{% endtrans %}</li>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url('search') }}">
+        <div class="input-group">
+            <input name="input" type="search" value="{{ input }}" class="form-control rounded" placeholder="{% trans %}Search{% endtrans %}" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-primary">{% trans %}search{% endtrans %}</button>
+        </div>
+    </form>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    {% trans %}Dances{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for dance in search_result.dances%}
+                        <a href="{{ url('dance', {'slug': dance.slug}) }}">{{ dance.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    {% trans %}Departments{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for department in search_result.departments%}
+                        <a href="{{ url('department', {'slug': department.slug}) }}">{{ department.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    {% trans %}Places{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for place in search_result.places%}
+                        <a href="{{ url('place', {'slug': place.slug}) }}">{{ place.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    {% trans %}Regions{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for region in search_result.regions%}
+                        <a href="{{ url('region', {'slug': region.slug}) }}">{{ region.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    {% trans %}Songs{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for song in search_result.songs%}
+                        <a href="{{ url('song', {'slug': song.slug}) }}">{{ song.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                    {% trans %}Sources{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for source in search_result.sources%}
+                        <a href="{{ url('source', {'slug': source.slug}) }}">{{ source.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                    {% trans %}Types{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for type in search_result.types%}
+                        <a href="{{ url('type', {'slug': type.slug}) }}">{{ type.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item mb-3">
+            <h2 class="accordion-header" id="headingEight">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                    {% trans %}Versions{% endtrans %}
+                </button>
+            </h2>
+            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {% for version in search_result.versions%}
+                        <a href="{{ url('version', {'slugDance': version.dance.slug,'slugVersion': version.slug}) }}">{{ version.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
