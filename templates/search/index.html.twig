@@ -82,7 +82,7 @@
             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     {% for song in search_result.songs%}
-                        <a href="{{ url('song', {'slug': song.slug}) }}">{{ song.name }}</a><br>
+                        <a href="{{ url('songs') }}">{{ song.name }}</a><br>
                     {% endfor %}
                 </div>
             </div>
