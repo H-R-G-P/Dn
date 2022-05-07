@@ -22,49 +22,22 @@ class SearchService
      */
     private EntityManagerInterface $em;
     /**
-     * @var Dance[]
+     * @var SearchResultDTO
      */
-    private array $dances;
-    /**
-     * @var Department[]
-     */
-    private array $departments;
-    /**
-     * @var Place[]
-     */
-    private array $places;
-    /**
-     * @var Region[]
-     */
-    private array $regions;
-    /**
-     * @var Song[]
-     */
-    private array $songs;
-    /**
-     * @var Source[]
-     */
-    private array $sources;
-    /**
-     * @var Type[]
-     */
-    private array $types;
-    /**
-     * @var Version[]
-     */
-    private array $versions;
+    private SearchResultDTO $searchResultDto;
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->dances = $em->getRepository(Dance::class)->findAll();
-        $this->departments = $em->getRepository(Department::class)->findAll();
-        $this->places = $em->getRepository(Place::class)->findAll();
-        $this->regions = $em->getRepository(Region::class)->findAll();
-        $this->songs = $em->getRepository(Song::class)->findAll();
-        $this->sources = $em->getRepository(Source::class)->findAll();
-        $this->types = $em->getRepository(Type::class)->findAll();
-        $this->versions = $em->getRepository(Version::class)->findAll();
+        $this->searchResultDto = new SearchResultDTO();
+        $this->searchResultDto->setDances($em->getRepository(Dance::class)->findAll());
+        $this->searchResultDto->setDepartments($em->getRepository(Department::class)->findAll());
+        $this->searchResultDto->setPlaces($em->getRepository(Place::class)->findAll());
+        $this->searchResultDto->setRegions($em->getRepository(Region::class)->findAll());
+        $this->searchResultDto->setSongs($em->getRepository(Song::class)->findAll());
+        $this->searchResultDto->setSources($em->getRepository(Source::class)->findAll());
+        $this->searchResultDto->setTypes($em->getRepository(Type::class)->findAll());
+        $this->searchResultDto->setVersions($em->getRepository(Version::class)->findAll());
     }
 
     /**
@@ -76,28 +49,28 @@ class SearchService
     {
         $result = new SearchResultDTO();
 
-        $dances = preg_grep("/.*$input.*/iu", $this->dances);
+        $dances = preg_grep("/.*$input.*/iu", $this->searchResultDto->getDances());
         if ($dances !== false) $result->setDances($dances);
 
-        $departments = preg_grep("/.*$input.*/iu", $this->departments);
+        $departments = preg_grep("/.*$input.*/iu", $this->searchResultDto->getDepartments());
         if ($departments !== false) $result->setDepartments($departments);
 
-        $places = preg_grep("/.*$input.*/iu", $this->places);
+        $places = preg_grep("/.*$input.*/iu", $this->searchResultDto->getPlaces());
         if ($places !== false) $result->setPlaces($places);
 
-        $regions = preg_grep("/.*$input.*/iu", $this->regions);
+        $regions = preg_grep("/.*$input.*/iu", $this->searchResultDto->getRegions());
         if ($regions !== false) $result->setRegions($regions);
 
-        $songs = preg_grep("/.*$input.*/iu", $this->songs);
+        $songs = preg_grep("/.*$input.*/iu", $this->searchResultDto->getSongs());
         if ($songs !== false) $result->setSongs($songs);
 
-        $sources = preg_grep("/.*$input.*/iu", $this->sources);
+        $sources = preg_grep("/.*$input.*/iu", $this->searchResultDto->getSources());
         if ($sources !== false) $result->setSources($sources);
 
-        $types = preg_grep("/.*$input.*/iu", $this->types);
+        $types = preg_grep("/.*$input.*/iu", $this->searchResultDto->getTypes());
         if ($types !== false) $result->setTypes($types);
 
-        $versions = preg_grep("/.*$input.*/iu", $this->versions);
+        $versions = preg_grep("/.*$input.*/iu", $this->searchResultDto->getVersions());
         if ($versions !== false) $result->setVersions($versions);
 
         return $result;
