@@ -8,7 +8,6 @@ use App\Entity\Dance;
 use App\Entity\Department;
 use App\Entity\Place;
 use App\Entity\Region;
-use App\Entity\Song;
 use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
@@ -31,10 +30,6 @@ class SearchResultDTO
      * @var Region[]
      */
     private array $regions = [];
-    /**
-     * @var Song[]
-     */
-    private array $songs = [];
     /**
      * @var Source[]
      */
@@ -142,22 +137,6 @@ class SearchResultDTO
     public function setRegions(array $regions): void
     {
         $this->regions = $regions;
-    }
-
-    /**
-     * @return Song[]
-     */
-    public function getSongs(): array
-    {
-        return $this->songs;
-    }
-
-    /**
-     * @param Song[] $songs
-     */
-    public function setSongs(array $songs): void
-    {
-        $this->songs = $songs;
     }
 
     /**
