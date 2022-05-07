@@ -9,7 +9,6 @@ use App\Entity\Dance;
 use App\Entity\Department;
 use App\Entity\Place;
 use App\Entity\Region;
-use App\Entity\Song;
 use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
@@ -34,7 +33,6 @@ class SearchService
         $this->searchResultDto->setDepartments($em->getRepository(Department::class)->findAll());
         $this->searchResultDto->setPlaces($em->getRepository(Place::class)->findAll());
         $this->searchResultDto->setRegions($em->getRepository(Region::class)->findAll());
-        $this->searchResultDto->setSongs($em->getRepository(Song::class)->findAll());
         $this->searchResultDto->setSources($em->getRepository(Source::class)->findAll());
         $this->searchResultDto->setTypes($em->getRepository(Type::class)->findAll());
         $this->searchResultDto->setVersions($em->getRepository(Version::class)->findAll());
@@ -60,9 +58,6 @@ class SearchService
 
         $regions = preg_grep("/.*$input.*/iu", $this->searchResultDto->getRegions());
         if ($regions !== false) $result->setRegions($regions);
-
-        $songs = preg_grep("/.*$input.*/iu", $this->searchResultDto->getSongs());
-        if ($songs !== false) $result->setSongs($songs);
 
         $sources = preg_grep("/.*$input.*/iu", $this->searchResultDto->getSources());
         if ($sources !== false) $result->setSources($sources);
