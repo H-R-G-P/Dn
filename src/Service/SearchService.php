@@ -13,6 +13,7 @@ use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
 use Doctrine\ORM\EntityManagerInterface;
+use MongoDB\BSON\Regex;
 
 class SearchService
 {
@@ -20,22 +21,10 @@ class SearchService
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $em;
-    /**
-     * @var SearchResultDTO
-     */
-    private SearchResultDTO $searchResultDto;
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->searchResultDto = new SearchResultDTO();
-        $this->searchResultDto->setDances($em->getRepository(Dance::class)->findAll());
-        $this->searchResultDto->setDepartments($em->getRepository(Department::class)->findAll());
-        $this->searchResultDto->setPlaces($em->getRepository(Place::class)->findAll());
-        $this->searchResultDto->setRegions($em->getRepository(Region::class)->findAll());
-        $this->searchResultDto->setSources($em->getRepository(Source::class)->findAll());
-        $this->searchResultDto->setTypes($em->getRepository(Type::class)->findAll());
-        $this->searchResultDto->setVersions($em->getRepository(Version::class)->findAll());
     }
 
     /**
@@ -47,26 +36,26 @@ class SearchService
     {
         $result = new SearchResultDTO();
 
-        $dances = preg_grep("/.*$input.*/iu", $this->searchResultDto->getDances());
-        if ($dances !== false) $result->setDances($dances);
+        $dances = $this->em->getRepository(Dance::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        if (count($dances) !== 0) $result->setDances($dances);
 
-        $departments = preg_grep("/.*$input.*/iu", $this->searchResultDto->getDepartments());
-        if ($departments !== false) $result->setDepartments($departments);
+        $departments = $this->em->getRepository(Department::class)->findBy(array('name' => new Regex(".*$input.*/iu")));
+        if (count($departments) !== 0) $result->setDepartments($departments);
 
-        $places = preg_grep("/.*$input.*/iu", $this->searchResultDto->getPlaces());
-        if ($places !== false) $result->setPlaces($places);
+        $places = $this->em->getRepository(Place::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        if (count($places) !== 0) $result->setPlaces($places);
 
-        $regions = preg_grep("/.*$input.*/iu", $this->searchResultDto->getRegions());
-        if ($regions !== false) $result->setRegions($regions);
+        $regions = $this->em->getRepository(Region::class)->findBy(array('name' => new Regex(".*$input.*/iu")));
+        if (count($regions) !== 0) $result->setRegions($regions);
 
-        $sources = preg_grep("/.*$input.*/iu", $this->searchResultDto->getSources());
-        if ($sources !== false) $result->setSources($sources);
+        $sources = $this->em->getRepository(Source::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        if (count($sources) !== 0) $result->setSources($sources);
 
-        $types = preg_grep("/.*$input.*/iu", $this->searchResultDto->getTypes());
-        if ($types !== false) $result->setTypes($types);
+        $types = $this->em->getRepository(Type::class)->findBy(array('name' => new Regex(".*$input.*/iu")));
+        if (count($types) !== 0) $result->setTypes($types);
 
-        $versions = preg_grep("/.*$input.*/iu", $this->searchResultDto->getVersions());
-        if ($versions !== false) $result->setVersions($versions);
+        $versions = $this->em->getRepository(Version::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        if (count($versions) !== 0) $result->setVersions($versions);
 
         return $result;
     }
