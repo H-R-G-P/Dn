@@ -7,11 +7,13 @@
         "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-mongodb": "*",
         "cocur/slugify": "^4.0",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
+        "doctrine/mongodb-odm": "^2.3",
         "doctrine/orm": "^2.9",
         "easycorp/easyadmin-bundle": "^3",
         "phpdocumentor/reflection-docblock": "^5.2",
@@ -44,8 +46,7 @@
         "symfony/webpack-encore-bundle": "^1.12",
         "symfony/yaml": "5.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0",
-        "ext-mongodb": "*"
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.99",
