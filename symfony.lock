@@ -1,4 +1,7 @@
 {
+    "beberlei/doctrineextensions": {
+        "version": "v1.3.0"
+    },
     "cocur/slugify": {
         "version": "v4.0.0"
     },
@@ -76,6 +79,9 @@
     "doctrine/migrations": {
         "version": "3.2.1"
     },
+    "doctrine/mongodb-odm": {
+        "version": "2.3.3"
+    },
     "doctrine/orm": {
         "version": "2.9.4"
     },
@@ -100,8 +106,14 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "jean85/pretty-package-versions": {
+        "version": "2.0.5"
+    },
     "laminas/laminas-code": {
         "version": "4.4.2"
+    },
+    "mongodb/mongodb": {
+        "version": "1.12.0"
     },
     "monolog/monolog": {
         "version": "2.3.2"
