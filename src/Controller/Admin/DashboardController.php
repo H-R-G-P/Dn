@@ -19,7 +19,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractDashboardController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/{_locale}/admin",
+     *     locale="by",
+     *     requirements={
+     *         "_locale": "by|en",
+     *     },
+     *     name="admin"
+     * )
      *
      * @return Response
      */
