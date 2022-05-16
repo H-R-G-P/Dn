@@ -5,15 +5,7 @@ namespace App\Service;
 
 
 use App\Dto\SearchResultDTO;
-use App\Entity\Dance;
-use App\Entity\Department;
-use App\Entity\Place;
-use App\Entity\Region;
-use App\Entity\Source;
-use App\Entity\Type;
-use App\Entity\Version;
 use Doctrine\ORM\EntityManagerInterface;
-use MongoDB\BSON\Regex;
 
 class SearchService
 {
@@ -36,25 +28,67 @@ class SearchService
     {
         $result = new SearchResultDTO();
 
-        $dances = $this->em->getRepository(Dance::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        $dances = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Dance', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($dances) !== 0) $result->setDances($dances);
 
-        $departments = $this->em->getRepository(Department::class)->findBy(array('name' => new Regex(".*$input.*/iu")));
+        $departments = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Department', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($departments) !== 0) $result->setDepartments($departments);
 
-        $places = $this->em->getRepository(Place::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        $places = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Place', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($places) !== 0) $result->setPlaces($places);
 
-        $regions = $this->em->getRepository(Region::class)->findBy(array('name' => new Regex(".*$input.*/iu")));
+        $regions = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Region', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($regions) !== 0) $result->setRegions($regions);
 
-        $sources = $this->em->getRepository(Source::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        $sources = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Source', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($sources) !== 0) $result->setSources($sources);
 
-        $types = $this->em->getRepository(Type::class)->findBy(array('name' => new Regex(".*$input.*/iu")));
+        $types = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Type', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($types) !== 0) $result->setTypes($types);
 
-        $versions = $this->em->getRepository(Version::class)->findBy(array('name' => new Regex("/.*$input.*/iu")));
+        $versions = $this->em
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('App\Entity\Version', 'e')
+            ->where('REGEXP(e.name, :regexp) = true')
+            ->setParameter('regexp', ".*$input.*")
+            ->getQuery()->getResult();
         if (count($versions) !== 0) $result->setVersions($versions);
 
         return $result;
