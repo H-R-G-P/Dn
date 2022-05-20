@@ -6,7 +6,7 @@ use App\Entity\Place;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -32,8 +32,8 @@ class PlaceCrudController extends AbstractCrudController
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield TextField::new('category');
         yield AssociationField::new('department');
-        yield IntegerField::new('lon');
-        yield IntegerField::new('lat');
+        yield NumberField::new('lon');
+        yield NumberField::new('lat');
         yield TextField::new('comment');
         yield AssociationField::new('region');
     }
