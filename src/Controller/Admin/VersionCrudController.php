@@ -38,7 +38,6 @@ class VersionCrudController extends AbstractCrudController
         yield AssociationField::new('place');
         yield AssociationField::new('department');
         yield AssociationField::new('region');
-        yield TextField::new('youtube');
         yield IntegerField::new('views');
         yield BooleanField::new('isRec');
         yield BooleanField::new('isImp');
