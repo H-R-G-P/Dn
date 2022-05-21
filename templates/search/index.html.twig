@@ -20,12 +20,12 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {% trans %}Dances{% endtrans %}
+                    {% trans %}Dances{% endtrans %} ({{ search_result.dances|length }})
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    {% for dance in search_result.dances%}
+                    {% for dance in search_result.dances %}
                         <a href="{{ url('dance', {'slug': dance.slug}) }}">{{ dance.name }}</a><br>
                     {% endfor %}
                 </div>
@@ -34,7 +34,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    {% trans %}Departments{% endtrans %}
+                    {% trans %}Departments{% endtrans %} ({{ search_result.departments|length }})
                 </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -48,7 +48,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingThree">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    {% trans %}Places{% endtrans %}
+                    {% trans %}Places{% endtrans %} ({{ search_result.places|length }})
                 </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -62,7 +62,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingFour">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                    {% trans %}Regions{% endtrans %}
+                    {% trans %}Regions{% endtrans %} ({{ search_result.regions|length }})
                 </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
@@ -76,7 +76,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingSix">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                    {% trans %}Sources{% endtrans %}
+                    {% trans %}Sources{% endtrans %} ({{ search_result.sources|length }})
                 </button>
             </h2>
             <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
@@ -90,7 +90,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingSeven">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                    {% trans %}Types{% endtrans %}
+                    {% trans %}Types{% endtrans %} ({{ search_result.types|length }})
                 </button>
             </h2>
             <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
@@ -104,7 +104,7 @@
         <div class="accordion-item mb-3">
             <h2 class="accordion-header" id="headingEight">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                    {% trans %}Versions{% endtrans %}
+                    {% trans %}Versions{% endtrans %} ({{ search_result.versions|length }})
                 </button>
             </h2>
             <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
