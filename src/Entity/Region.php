@@ -138,11 +138,9 @@ class Region implements EntityExtended
     {
         $dances = [];
 
-        foreach ($this->getPlaces() as $place) {
-            foreach ($place->getVersions() as $version) {
-                $dance = $version->getDance();
-                $dances += [$dance->getId() => $dance];
-            }
+        foreach ($this->getVersions() as $version) {
+            $dance = $version->getDance();
+            $dances += [$dance->getId() => $dance];
         }
 
         return $dances;
