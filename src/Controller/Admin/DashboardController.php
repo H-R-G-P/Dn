@@ -6,6 +6,7 @@ use App\Entity\Dance;
 use App\Entity\Department;
 use App\Entity\Place;
 use App\Entity\Region;
+use App\Entity\Song;
 use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
@@ -51,5 +52,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Types', 'fab fa-tumblr', Type::class);
         yield MenuItem::linkToCrud('Versions', 'fas fa-code-branch', Version::class);
         yield MenuItem::linkToCrud('Videos', 'fa fa-video-camera', Video::class);
+        yield MenuItem::linkToCrud('Songs', 'fa fa-solid fa-music', Song::class);
     }
 }
