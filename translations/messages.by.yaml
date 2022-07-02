@@ -28,6 +28,7 @@ Regions: Раёны
 Region: Раён
 reg.: р-н
 Type: Тып
+Text: Тэкст
 Types: Тыпы
 Title: Загаловак
 Songs: Песні
@@ -46,6 +47,9 @@ Category: Катэгорыя
 Abrady: Абрады
 Area: Вобласьць
 Artist: Выканаўца
+Audio Origin: Паходжанне аўдыё
+Audio Artist: Аўдыёвыканаўца
+Audio Rep: Аўдыё Прадстаўнік
 Record: Запісан
 From: Адкуль
 Map: Mапа
