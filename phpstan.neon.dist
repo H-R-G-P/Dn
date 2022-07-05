@@ -8,9 +8,6 @@ parameters:
         - tests/bootstrap.php
         - src/Security/AppAuthenticator.php
     ignoreErrors:
-        - '#Attribute class JetBrains\\PhpStorm\\Pure does not exist.#'
         - '#Method App\\Entity\\Admin::getRoles\(\) should return array<string> but returns array<int, App\\Entity\\Admin\|string>\.#'
         - '#Call to an undefined method Doctrine\\Persistence\\ObjectRepository<App\\Entity\\[a-zA-Z0-9\\_]+>::[a-zA-Z0-9\\_]+\(\)\.#'
-        - '#Method App\\Repository\\VersionRepository::findBySource\(\) should return array<int, Version> but returns array<int, App\\Entity\\Version>\.#'
         - '#Call to an undefined method Doctrine\\ORM\\EntityRepository<App\\Entity\\[a-zA-Z0-9\\_]+>::[a-zA-Z0-9\\_]+\(\)\.#'
-        - '#Method App\\Repository\\SourceRepository::find\(\) should return Source\|null but returns App\\Entity\\Source\|null\.#'
