@@ -22,8 +22,8 @@ class SourceController extends AbstractController
      *     name="sources"
      * )
      *
-     * @param SourceRepository<Source> $sourceRepository
-     * @param PlaceRepository<Place> $placeRepository
+     * @param SourceRepository $sourceRepository
+     * @param PlaceRepository $placeRepository
      * @param MapService $mapService
      *
      * @return Response

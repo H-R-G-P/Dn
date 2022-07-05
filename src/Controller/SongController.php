@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Song;
 use App\Repository\SongRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +18,7 @@ class SongController extends AbstractController
      *     name="songs"
      * )
      *
-     * @param SongRepository<Song> $repository
+     * @param SongRepository $repository
      *
      * @return Response
      */

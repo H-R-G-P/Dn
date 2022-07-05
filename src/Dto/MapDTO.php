@@ -6,7 +6,6 @@ namespace App\Dto;
 
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -49,12 +48,12 @@ class MapDTO
         return $this->polygon;
     }
 
-    #[Pure] public function hasPlaces(): bool
+    public function hasPlaces(): bool
     {
         return count($this->markers) === 0 ? false : true;
     }
 
-    #[Pure] public function hasOnlyOnePlace(): bool
+    public function hasOnlyOnePlace(): bool
     {
         return count($this->markers) === 1;
     }

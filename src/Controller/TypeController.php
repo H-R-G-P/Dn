@@ -22,8 +22,8 @@ class TypeController extends AbstractController
      *     name="types"
      * )
      *
-     * @param TypeRepository<Type> $typeRepository
-     * @param PlaceRepository<Place> $placeRepository
+     * @param TypeRepository $typeRepository
+     * @param PlaceRepository $placeRepository
      * @param MapService $mapService
      *
      * @return Response
