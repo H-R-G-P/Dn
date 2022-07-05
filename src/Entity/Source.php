@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Interface\EntityExtended;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=App\Repository\SourceRepository::class)
@@ -64,7 +63,7 @@ class Source implements EntityExtended
     /**
      * Source constructor.
      */
-    #[Pure] public function __construct()
+    public function __construct()
     {
     }
 

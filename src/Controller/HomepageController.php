@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Dance;
 use App\Repository\DanceRepository;
 use App\Service\DatabaseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +19,7 @@ class HomepageController extends AbstractController
      *     name="homepage"
      * )
      *
-     * @param DanceRepository<Dance> $danceRepository
+     * @param DanceRepository $danceRepository
      * @param DatabaseService $databaseService
      *
      * @return Response

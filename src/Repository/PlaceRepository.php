@@ -14,7 +14,6 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Place[]    findAll()
  * @method Place[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @template Place
  * @extends ServiceEntityRepository<Place::class>
  */
 class PlaceRepository extends ServiceEntityRepository

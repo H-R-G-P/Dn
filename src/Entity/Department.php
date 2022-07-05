@@ -7,7 +7,6 @@ use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=DepartmentRepository::class)
@@ -54,7 +53,7 @@ class Department implements EntityExtended
      */
     private Collection $versions;
 
-    #[Pure] public function __construct()
+    public function __construct()
     {
         $this->places = new ArrayCollection();
         $this->regions = new ArrayCollection();

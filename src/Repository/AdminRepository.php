@@ -18,7 +18,6 @@ use function get_class;
  * @method Admin[]    findAll()
  * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @template Admin
  * @extends ServiceEntityRepository<Admin::class>
  */
 class AdminRepository extends ServiceEntityRepository implements PasswordUpgraderInterface

@@ -12,7 +12,6 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Department[]    findAll()
  * @method Department[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @template Department
  * @extends ServiceEntityRepository<Department::class>
  */
 class DepartmentRepository extends ServiceEntityRepository

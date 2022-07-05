@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Dance;
 use App\Entity\Place;
-use App\Entity\Version;
 use App\Repository\VersionRepository;
 use App\Service\MapService;
 use App\Service\UpdateDatabaseService;
@@ -91,7 +90,7 @@ class DanceController extends AbstractController
      * )
      *
      * @param string $slugVersion
-     * @param VersionRepository<Version> $versionRepository
+     * @param VersionRepository $versionRepository
      * @param MapService $mapService
      * @param UpdateDatabaseService $databaseService
      *

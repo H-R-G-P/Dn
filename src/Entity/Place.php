@@ -7,7 +7,6 @@ use App\Repository\PlaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
@@ -70,7 +69,7 @@ class Place implements EntityExtended
      */
     private string $slug;
 
-    #[Pure] public function __construct(?float $lat, ?float $lon)
+    public function __construct(?float $lat, ?float $lon)
     {
         $this->versions = new ArrayCollection();
         $this->lat = $lat;

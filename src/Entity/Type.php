@@ -8,7 +8,6 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=TypeRepository::class)
@@ -61,7 +60,7 @@ class Type implements EntityExtended
      */
     private string $namePlural;
 
-    #[Pure] public function __construct()
+    public function __construct()
     {
         $this->versions = new ArrayCollection();
     }

@@ -8,7 +8,6 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=VersionRepository::class)
@@ -346,7 +345,7 @@ class Version
         return $this;
     }
 
-    #[Pure] public function getAddress(string $language): AddressVO
+    public function getAddress(string $language): AddressVO
     {
         return new AddressVO($this, $language);
     }

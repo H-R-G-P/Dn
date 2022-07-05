@@ -24,7 +24,7 @@ class RegionController extends AbstractController
      *     name="regions"
      * )
      *
-     * @param RegionRepository<Region> $regionRepository
+     * @param RegionRepository $regionRepository
      *
      * @return Response
      */

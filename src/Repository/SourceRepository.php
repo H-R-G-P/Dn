@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @template Source
  * @extends ServiceEntityRepository<Source::class>
  */
 class SourceRepository extends ServiceEntityRepository
