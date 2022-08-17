@@ -33,7 +33,7 @@ class VersionCrudController extends AbstractCrudController
         yield AssociationField::new('type');
         yield AssociationField::new('source');
         yield AssociationField::new('source2');
-        yield AssociationField::new('dance');
+        yield AssociationField::new('dance')->setRequired(true);
         yield AssociationField::new('place');
         yield AssociationField::new('department');
         yield AssociationField::new('region');
@@ -44,7 +44,7 @@ class VersionCrudController extends AbstractCrudController
         yield TextField::new('comments');
         yield TextField::new('abrady');
         yield BooleanField::new('isGame');
-        yield TextField::new('drob');
+        yield TextField::new('drob', 'Drob (1 symbol max)');
     }
 
 }
