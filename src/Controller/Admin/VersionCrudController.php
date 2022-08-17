@@ -7,7 +7,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -38,7 +37,6 @@ class VersionCrudController extends AbstractCrudController
         yield AssociationField::new('place');
         yield AssociationField::new('department');
         yield AssociationField::new('region');
-        yield IntegerField::new('views');
         yield BooleanField::new('isRec');
         yield BooleanField::new('isImp');
         yield BooleanField::new('isCorrectPlace');
