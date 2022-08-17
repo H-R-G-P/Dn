@@ -30,7 +30,7 @@ class PlaceCrudController extends AbstractCrudController
     {
         yield TextField::new('name');
         yield SlugField::new('slug')->setTargetFieldName('name');
-        yield TextField::new('category');
+        yield TextField::new('category', 'Category (3 symbols max)');
         yield AssociationField::new('department');
         yield NumberField::new('lon');
         yield NumberField::new('lat');

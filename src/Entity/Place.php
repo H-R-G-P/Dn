@@ -69,7 +69,7 @@ class Place implements EntityExtended
      */
     private string $slug;
 
-    public function __construct(?float $lat, ?float $lon)
+    public function __construct(?float $lat=null, ?float $lon=null)
     {
         $this->versions = new ArrayCollection();
         $this->lat = $lat;
