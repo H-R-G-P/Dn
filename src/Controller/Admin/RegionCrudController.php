@@ -29,7 +29,7 @@ class RegionCrudController extends AbstractCrudController
     {
         yield TextField::new('name');
         yield SlugField::new('slug')->setTargetFieldName('name');
-        yield AssociationField::new('department');
+        yield AssociationField::new('department')->setRequired(true);
     }
 
 }
