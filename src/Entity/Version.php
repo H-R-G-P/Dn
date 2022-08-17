@@ -35,7 +35,7 @@ class Version
     /**
      * @ORM\Column(type="integer", options={"default":0})
      */
-    private int $views;
+    private int $views=0;
 
     /**
      * @ORM\Column(type="string", length=110)
@@ -60,12 +60,12 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private int $isRec;
+    private bool $isRec;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private int $isImp;
+    private bool $isImp;
 
     /**
      * @ORM\ManyToOne(targetEntity=Source::class)
@@ -75,7 +75,7 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private int $isCorrectPlace;
+    private bool $isCorrectPlace;
 
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="versions")
@@ -90,27 +90,27 @@ class Version
     /**
      * @ORM\Column(type="boolean")
      */
-    private int $hasLocalVideo;
+    private bool $hasLocalVideo;
 
     /**
-     * @ORM\Column(type="string", length=2000)
+     * @ORM\Column(type="string", length=2000, nullable=true)
      */
-    private string $comments;
+    private ?string $comments;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $abrady;
+    private ?string $abrady;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private int $isGame;
+    private bool $isGame;
 
     /**
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
-    private string $drob;
+    private ?string $drob;
 
     /**
      * @ORM\OneToMany(targetEntity=Video::class, mappedBy="version")
@@ -213,24 +213,24 @@ class Version
         return $this;
     }
 
-    public function getIsRec(): int
+    public function getIsRec(): bool
     {
         return $this->isRec;
     }
 
-    public function setIsRec(int $isRec): self
+    public function setIsRec(bool $isRec): self
     {
         $this->isRec = $isRec;
 
         return $this;
     }
 
-    public function getIsImp(): int
+    public function getIsImp(): bool
     {
         return $this->isImp;
     }
 
-    public function setIsImp(int $isImp): self
+    public function setIsImp(bool $isImp): self
     {
         $this->isImp = $isImp;
 
@@ -249,12 +249,12 @@ class Version
         return $this;
     }
 
-    public function getIsCorrectPlace(): int
+    public function getIsCorrectPlace(): bool
     {
         return $this->isCorrectPlace;
     }
 
-    public function setIsCorrectPlace(int $isCorrectPlace): self
+    public function setIsCorrectPlace(bool $isCorrectPlace): self
     {
         $this->isCorrectPlace = $isCorrectPlace;
 
@@ -285,60 +285,60 @@ class Version
         return $this;
     }
 
-    public function getHasLocalVideo(): int
+    public function getHasLocalVideo(): bool
     {
         return $this->hasLocalVideo;
     }
 
-    public function setHasLocalVideo(int $hasLocalVideo): self
+    public function setHasLocalVideo(bool $hasLocalVideo): self
     {
         $this->hasLocalVideo = $hasLocalVideo;
 
         return $this;
     }
 
-    public function getComments(): string
+    public function getComments(): ?string
     {
         return $this->comments;
     }
 
-    public function setComments(string $comments): self
+    public function setComments(?string $comments): self
     {
         $this->comments = $comments;
 
         return $this;
     }
 
-    public function getAbrady(): string
+    public function getAbrady(): ?string
     {
         return $this->abrady;
     }
 
-    public function setAbrady(string $abrady): self
+    public function setAbrady(?string $abrady): self
     {
         $this->abrady = $abrady;
 
         return $this;
     }
 
-    public function getIsGame(): int
+    public function getIsGame(): bool
     {
         return $this->isGame;
     }
 
-    public function setIsGame(int $isGame): self
+    public function setIsGame(bool $isGame): self
     {
         $this->isGame = $isGame;
 
         return $this;
     }
 
-    public function getDrob(): string
+    public function getDrob(): ?string
     {
         return $this->drob;
     }
 
-    public function setDrob(string $drob): self
+    public function setDrob(?string $drob): self
     {
         $this->drob = $drob;
 
