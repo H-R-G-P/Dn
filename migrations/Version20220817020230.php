@@ -21,11 +21,13 @@ final class Version20220817020230 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE version CHANGE comments comments VARCHAR(2000) DEFAULT NULL, CHANGE abrady abrady VARCHAR(255) DEFAULT NULL, CHANGE drob drob VARCHAR(1) DEFAULT NULL');
+        $this->addSql('ALTER TABLE source CHANGE `from` wherefrom VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE version CHANGE comments comments VARCHAR(2000) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE abrady abrady VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE drob drob VARCHAR(1) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE source CHANGE wherefrom `from` VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }

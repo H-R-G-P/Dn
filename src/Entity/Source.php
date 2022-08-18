@@ -46,7 +46,7 @@ class Source implements EntityExtended
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $from;
+    private ?string $wherefrom;
 
     private int $dancesCount = 0;
 
@@ -143,14 +143,14 @@ class Source implements EntityExtended
         return $this;
     }
 
-    public function getFrom(): ?string
+    public function getWherefrom(): ?string
     {
-        return $this->from;
+        return $this->wherefrom;
     }
 
-    public function setFrom(?string $from): void
+    public function setWherefrom(?string $wherefrom): void
     {
-        $this->from = $from;
+        $this->wherefrom = $wherefrom;
     }
 
     public function __toString(): string
