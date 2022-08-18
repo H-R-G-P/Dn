@@ -6,7 +6,6 @@ use App\Entity\Type;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TypeCrudController extends AbstractCrudController
@@ -29,7 +28,6 @@ class TypeCrudController extends AbstractCrudController
     {
         yield TextField::new('name');
         yield TextField::new('namePlural');
-        yield SlugField::new('slug')->setTargetFieldName('name');
         yield BooleanField::new('isGroup');
         yield BooleanField::new('isMan');
         yield BooleanField::new('isWoman');

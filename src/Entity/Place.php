@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Interface\EntityExtended;
 use App\Repository\PlaceRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -101,6 +102,8 @@ class Place implements EntityExtended
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $this->slug = Slugify::create()->slugify($name);
 
         return $this;
     }
@@ -213,12 +216,5 @@ class Place implements EntityExtended
     public function getSlug(): string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 }

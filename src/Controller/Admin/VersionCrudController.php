@@ -7,7 +7,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class VersionCrudController extends AbstractCrudController
@@ -29,7 +28,6 @@ class VersionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield SlugField::new('slug')->setTargetFieldName('name');
         yield AssociationField::new('type');
         yield AssociationField::new('source');
         yield AssociationField::new('source2');

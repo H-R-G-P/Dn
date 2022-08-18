@@ -83,13 +83,6 @@ class Region implements EntityExtended
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     public function __toString(): string
     {
         return $this->name;
