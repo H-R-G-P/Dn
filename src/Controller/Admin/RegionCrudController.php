@@ -6,7 +6,6 @@ use App\Entity\Region;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class RegionCrudController extends AbstractCrudController
@@ -28,7 +27,6 @@ class RegionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield SlugField::new('slug')->setTargetFieldName('name');
         yield AssociationField::new('department')->setRequired(true);
     }
 

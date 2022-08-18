@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Interface\EntityExtended;
 use App\Repository\DepartmentRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -74,19 +75,14 @@ class Department implements EntityExtended
     {
         $this->name = $name;
 
+        $this->slug = Slugify::create()->slugify($name);
+
         return $this;
     }
 
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     /**

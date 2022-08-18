@@ -7,7 +7,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class PlaceCrudController extends AbstractCrudController
@@ -29,7 +28,6 @@ class PlaceCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield SlugField::new('slug')->setTargetFieldName('name');
         yield TextField::new('category', 'Category (3 symbols max)');
         yield AssociationField::new('department');
         yield NumberField::new('lon');
