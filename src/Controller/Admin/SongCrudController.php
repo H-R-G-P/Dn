@@ -36,9 +36,9 @@ class SongCrudController extends AbstractCrudController
         yield TextField::new('year');
         yield TextField::new('record');
         yield TextField::new('comments');
-        yield TextField::new('audio_origin');
-        yield TextField::new('audio_artist');
-        yield TextField::new('audio_rep');
+        yield TextField::new('audio_origin')->setRequired(true);
+        yield TextField::new('audio_artist')->setRequired(true);
+        yield TextField::new('audio_rep')->setRequired(true);
         yield TextField::new('region');
         yield TextField::new('place');
     }
