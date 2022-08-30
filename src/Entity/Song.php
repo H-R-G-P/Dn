@@ -30,57 +30,57 @@ class Song
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private string $genre;
+    private ?string $genre;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
      */
-    private string $artist;
+    private ?string $artist;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private string $area;
+    private ?string $area;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
-    private string $region;
+    private ?string $region;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
-    private string $place;
+    private ?string $place;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
-    private string $year;
+    private ?string $year;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
-    private string $record;
+    private ?string $record;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private string $comments;
+    private ?string $comments;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private string $audioOrigin;
+    private ?string $audioOrigin;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private string $audioArtist;
+    private ?string $audioArtist;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private string $audioRep;
+    private ?string $audioRep;
 
     public function getId(): int
     {
@@ -111,132 +111,132 @@ class Song
         return $this;
     }
 
-    public function getGenre(): string
+    public function getGenre(): ?string
     {
         return $this->genre;
     }
 
-    public function setGenre(string $genre): self
+    public function setGenre(?string $genre): self
     {
         $this->genre = $genre;
 
         return $this;
     }
 
-    public function getArtist(): string
+    public function getArtist(): ?string
     {
         return $this->artist;
     }
 
-    public function setArtist(string $artist): self
+    public function setArtist(?string $artist): self
     {
         $this->artist = $artist;
 
         return $this;
     }
 
-    public function getArea(): string
+    public function getArea(): ?string
     {
         return $this->area;
     }
 
-    public function setArea(string $area): self
+    public function setArea(?string $area): self
     {
         $this->area = $area;
 
         return $this;
     }
 
-    public function getRegion(): string
+    public function getRegion(): ?string
     {
         return $this->region;
     }
 
-    public function setRegion(string $region): self
+    public function setRegion(?string $region): self
     {
         $this->region = $region;
 
         return $this;
     }
 
-    public function getPlace(): string
+    public function getPlace(): ?string
     {
         return $this->place;
     }
 
-    public function setPlace(string $place): self
+    public function setPlace(?string $place): self
     {
         $this->place = $place;
 
         return $this;
     }
 
-    public function getYear(): string
+    public function getYear(): ?string
     {
         return $this->year;
     }
 
-    public function setYear(string $year): self
+    public function setYear(?string $year): self
     {
         $this->year = $year;
 
         return $this;
     }
 
-    public function getRecord(): string
+    public function getRecord(): ?string
     {
         return $this->record;
     }
 
-    public function setRecord(string $record): self
+    public function setRecord(?string $record): self
     {
         $this->record = $record;
 
         return $this;
     }
 
-    public function getComments(): string
+    public function getComments(): ?string
     {
         return $this->comments;
     }
 
-    public function setComments(string $comments): self
+    public function setComments(?string $comments): self
     {
         $this->comments = $comments;
 
         return $this;
     }
 
-    public function getAudioOrigin(): string
+    public function getAudioOrigin(): ?string
     {
         return $this->audioOrigin;
     }
 
-    public function setAudioOrigin(string $audioOrigin): self
+    public function setAudioOrigin(?string $audioOrigin): self
     {
         $this->audioOrigin = $audioOrigin;
 
         return $this;
     }
 
-    public function getAudioArtist(): string
+    public function getAudioArtist(): ?string
     {
         return $this->audioArtist;
     }
 
-    public function setAudioArtist(string $audioArtist): self
+    public function setAudioArtist(?string $audioArtist): self
     {
         $this->audioArtist = $audioArtist;
 
         return $this;
     }
 
-    public function getAudioRep(): string
+    public function getAudioRep(): ?string
     {
         return $this->audioRep;
     }
 
-    public function setAudioRep(string $audioRep): self
+    public function setAudioRep(?string $audioRep): self
     {
         $this->audioRep = $audioRep;
 

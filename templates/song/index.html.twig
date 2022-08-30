@@ -52,8 +52,7 @@
                                 </div>
                                 <div class="visible-xs">
                                     <em>
-                                        {% if song.genre %} {{ song.genre }},{% endif %}
-                                        {% if song.artist %} {{ song.artist }}{% endif %}
+                                        {% if song.genre %} {{ song.genre }}{% endif %}{% if song.artist %}, {{ song.artist }}{% endif %}
                                     </em>
                                 </div>
                                 {#
