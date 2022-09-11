@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Vo\AddressVO;
 use App\Repository\VersionRepository;
-use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,19 +27,14 @@ class Version
     private Dance $dance;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private string $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="integer", options={"default":0})
      */
     private int $views=0;
-
-    /**
-     * @ORM\Column(type="string", length=110)
-     */
-    private string $slug;
 
     /**
      * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="versions")
@@ -141,16 +135,14 @@ class Version
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
-
-        $this->slug = Slugify::create()->slugify($name);
 
         return $this;
     }
@@ -167,13 +159,10 @@ class Version
         return $this;
     }
 
-    public function getSlug(): string
-    {
-        return $this->slug;
-    }
-
     public function __toString(): string
     {
+        if ($this->name == null)
+            return '';
         return $this->name;
     }
 

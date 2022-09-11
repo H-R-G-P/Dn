@@ -110,7 +110,7 @@
             <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     {% for version in search_result.versions%}
-                        <a href="{{ url('version', {'slugDance': version.dance.slug,'slugVersion': version.slug}) }}">{{ version.name }}</a><br>
+                        <a href="{{ url('version', {'slugDance': version.dance.slug,'idVersion': version.id}) }}">{{ version.name }}</a><br>
                     {% endfor %}
                 </div>
             </div>

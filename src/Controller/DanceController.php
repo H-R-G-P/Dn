@@ -81,7 +81,7 @@ class DanceController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/dances/{slugDance}/{slugVersion}",
+     * @Route("/{_locale}/dances/{slugDance}/{idVersion}",
      *     locale="by",
      *     requirements={
      *         "_locale": "by|en",
@@ -89,21 +89,21 @@ class DanceController extends AbstractController
      *     name="version"
      * )
      *
-     * @param string $slugVersion
+     * @param int $idVersion
      * @param VersionRepository $versionRepository
      * @param MapService $mapService
      * @param UpdateDatabaseService $databaseService
      *
      * @return Response
      */
-    public function showVersion(string $slugVersion, VersionRepository $versionRepository, MapService $mapService, UpdateDatabaseService $databaseService) : Response
+    public function showVersion(int $idVersion, VersionRepository $versionRepository, MapService $mapService, UpdateDatabaseService $databaseService) : Response
     {
         $version = $versionRepository->findOneBy([
-            'slug' => $slugVersion,
+            'id' => $idVersion,
         ]);
 
         if ($version === null){
-            $this->addFlash('dark', 'Version "'.$slugVersion.'" not exists.');
+            $this->addFlash('dark', 'Version id: "'.$idVersion.'", not exists.');
             return $this->redirectToRoute('homepage');
         }
 
