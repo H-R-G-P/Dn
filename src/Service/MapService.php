@@ -70,7 +70,9 @@ class MapService
     public function createPopup(Version $version): string
     {
         $name = $version->getDance()->getName();
-        if ($version->getName() !== '' && str_contains($version->getName(), $name)) {
+        if ($version->getName() === null) {
+
+        } elseif ($version->getName() !== '' && str_contains($version->getName(), $name)) {
             $name = $version->getName();
         } elseif ($version->getName() !== '') {
             $name.= '|'.$version->getName();
