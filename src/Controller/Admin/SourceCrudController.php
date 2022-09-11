@@ -21,7 +21,8 @@ class SourceCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Source')
             ->setEntityLabelInPlural('Sources')
             ->setSearchFields(['name', 'nameShort'])
-            ->setDefaultSort(['name' => 'ASC']);
+            ->setDefaultSort(['name' => 'ASC'])
+            ->showEntityActionsAsDropdown(false);
     }
 
     public function configureFields(string $pageName): iterable
