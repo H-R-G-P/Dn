@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for version in dance.versions %}
-                            <a href="{{ url('version', {'slugDance': dance.slug, 'slugVersion': version.slug}) }}" class="list-group-item list-group-item-action">
+                            <a href="{{ url('version', {'slugDance': dance.slug, 'idVersion': version.id}) }}" class="list-group-item list-group-item-action">
                                 <b>{% if version.name is same as('') %}
                                         {{ dance.name }}
                                     {% else %}
