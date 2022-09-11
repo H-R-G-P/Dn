@@ -20,7 +20,8 @@ class DepartmentCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Department')
             ->setEntityLabelInPlural('Departments')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC']);
+            ->setDefaultSort(['name' => 'ASC'])
+            ->showEntityActionsAsDropdown(false);
     }
 
     public function configureFields(string $pageName): iterable
