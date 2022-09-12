@@ -27,7 +27,6 @@ class VersionCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-//        yield TextField::new('name')->setRequired(false);
         yield AssociationField::new('type');
         yield AssociationField::new('source');
         yield AssociationField::new('source2');
@@ -35,14 +34,7 @@ class VersionCrudController extends AbstractCrudController
         yield AssociationField::new('place');
         yield AssociationField::new('department');
         yield AssociationField::new('region');
-//        yield BooleanField::new('isRec');
-//        yield BooleanField::new('isImp');
-//        yield BooleanField::new('isCorrectPlace');
-//        yield BooleanField::new('hasLocalVideo');
         yield TextField::new('comments');
-//        yield TextField::new('abrady');
-//        yield BooleanField::new('isGame');
-//        yield TextField::new('drob', 'Drob (1 symbol max)');
     }
 
 }
