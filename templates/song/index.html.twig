@@ -28,6 +28,12 @@
                                 <div class="col-sm-6 col-md-4 col-lg-4 hidden-xs">
                                     {% if song.genre %} {% trans %}Genre{% endtrans %}: <strong>{{ song.genre }}</strong><br/>{% endif %}
                                     {% if song.artist %} {% trans %}Artist{% endtrans %}: <strong>{{ song.artist }}</strong><br/>{% endif %}
+                                    {% if song.area %} {% trans %}Area{% endtrans %}: <strong>{{ song.area }}</strong><br/>{% endif %}
+                                    {% if song.region %} {% trans %}Region{% endtrans %}: <strong>{{ song.region }}</strong><br/>{% endif %}
+                                    {% if song.place %} {% trans %}Place{% endtrans %}: <strong>{{ song.place }}</strong><br/>{% endif %}
+                                    {% if song.year %} {% trans %}Year{% endtrans %}: <strong>{{ song.year }}</strong><br/>{% endif %}
+                                    {% if song.record %} {% trans %}Record{% endtrans %}: <strong>{{ song.record }}</strong><br/>{% endif %}
+                                    {% if song.comments %} {{ song.comments }}<br/>{% endif %}
 
                                 {#    <?  $files = array();
                                         if ($song->audio_origin && file_exists($_SERVER["DOCUMENT_ROOT"].'/audio/origin/'.$song->audio_origin))
@@ -52,7 +58,13 @@
                                 </div>
                                 <div class="visible-xs">
                                     <em>
-                                        {% if song.genre %} {{ song.genre }}{% endif %}{% if song.artist %}, {{ song.artist }}{% endif %}
+                                        {% if song.genre %} {{ song.genre }},{% endif %}
+                                        {% if song.artist %} {{ song.artist }},{% endif %}
+                                        {% if song.area %} {{ song.area }},{% endif %}
+                                        {% if song.region %} {{ song.region }},{% endif %}
+                                        {% if song.place %} {{ song.place }},{% endif %}
+                                        {% if song.year %} {{ song.year }},{% endif %}
+                                        {% if song.record %} {{ song.record }},{% endif %}
                                     </em>
                                 </div>
                                 {#
