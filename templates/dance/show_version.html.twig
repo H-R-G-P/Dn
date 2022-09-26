@@ -2,11 +2,11 @@
 
 {% if version.name is same as('') %}
     {% set title %}
-        {% trans %}Dance{% endtrans %} {{ version.type.name }} {{ dance.name }}, {{ version.address(app.request.locale) }}, {{ version.source.from }}
+        {% trans %}Dance{% endtrans %} {{ version.type.name }} {{ dance.name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
     {% endset %}
 {% else %}
     {% set title %}
-        {% trans %}Dance{% endtrans %} {{ version.type.name }} {{ version.name }}, {{ version.address(app.request.locale) }}, {{ version.source.from }}
+        {% trans %}Dance{% endtrans %} {{ version.type.name }} {{ version.name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
     {% endset %}
 {% endif %}
 
