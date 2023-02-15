@@ -6,7 +6,7 @@ use App\Entity\Video;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class VideoCrudController extends AbstractCrudController
@@ -30,7 +30,10 @@ class VideoCrudController extends AbstractCrudController
     {
         yield TextField::new('youtubeId');
         yield TextField::new('linkVk');
-        yield IntegerField::new('type');
+        yield ChoiceField::new('type')->setChoices([
+            'Youtube Id' => Video::YOUTUBE_ID,
+            'VK link' => Video::VK_LINK,
+        ]);
         yield AssociationField::new('version');
     }
 
