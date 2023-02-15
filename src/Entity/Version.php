@@ -161,7 +161,7 @@ class Version
 
     public function __toString(): string
     {
-        return (string) $this->name;
+        return $this->id.','.$this->dance.','.$this->type.','.$this->source.','.$this->place;
     }
 
     public function getPlace(): ?Place
