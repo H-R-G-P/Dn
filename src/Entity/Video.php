@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
+    public const YOUTUBE_ID = 1;
+    public const VK_LINK = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
