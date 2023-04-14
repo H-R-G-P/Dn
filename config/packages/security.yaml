@@ -28,6 +28,8 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+            idle_timeout: 86400
+            logout_on_user_idle: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -38,5 +40,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/by/admin, roles: ROLE_ADMIN }
+         - { path: ^/en/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
