@@ -17,69 +17,71 @@ class GeoPoint
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $lat;
+    private float $lat;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $lon;
+    private float $lon;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $region;
+    private ?string $region;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $district;
+    private ?string $district;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nameWordStress;
+    private ?string $nameWordStress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $subdistrict;
+    private ?string $subdistrict;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nameRu;
+    private ?string $nameRu;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $prefixBy;
+    private ?string $prefixBy;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $prefixRu;
+    private ?string $prefixRu;
 
     /**
-     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="geoPointId")
+     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="geoPoint")
+     *
+     * @var Collection<int, Place>
      */
-    private $places;
+    private Collection $places;
 
     public function __construct()
     {
         $this->places = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -96,7 +98,7 @@ class GeoPoint
         return $this;
     }
 
-    public function getLat(): ?float
+    public function getLat(): float
     {
         return $this->lat;
     }
@@ -108,7 +110,7 @@ class GeoPoint
         return $this;
     }
 
-    public function getLon(): ?float
+    public function getLon(): float
     {
         return $this->lon;
     }
@@ -205,7 +207,7 @@ class GeoPoint
     }
 
     /**
-     * @return Collection|Place[]
+     * @return Collection<int, Place>
      */
     public function getPlaces(): Collection
     {
@@ -216,7 +218,7 @@ class GeoPoint
     {
         if (!$this->places->contains($place)) {
             $this->places[] = $place;
-            $place->setGeoPointId($this);
+            $place->setGeoPoint($this);
         }
 
         return $this;
@@ -226,8 +228,8 @@ class GeoPoint
     {
         if ($this->places->removeElement($place)) {
             // set the owning side to null (unless already changed)
-            if ($place->getGeoPointId() === $this) {
-                $place->setGeoPointId(null);
+            if ($place->getGeoPoint() === $this) {
+                $place->setGeoPoint(null);
             }
         }
 

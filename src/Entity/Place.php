@@ -73,7 +73,7 @@ class Place implements EntityExtended
     /**
      * @ORM\ManyToOne(targetEntity=GeoPoint::class, inversedBy="places")
      */
-    private $geoPointId;
+    private ?GeoPoint $geoPoint;
 
     public function __construct(?float $lat=null, ?float $lon=null)
     {
@@ -223,14 +223,14 @@ class Place implements EntityExtended
         return $this->slug;
     }
 
-    public function getGeoPointId(): ?GeoPoint
+    public function getGeoPoint(): ?GeoPoint
     {
-        return $this->geoPointId;
+        return $this->geoPoint;
     }
 
-    public function setGeoPointId(?GeoPoint $geoPointId): self
+    public function setGeoPoint(?GeoPoint $geoPoint): self
     {
-        $this->geoPointId = $geoPointId;
+        $this->geoPoint = $geoPoint;
 
         return $this;
     }
