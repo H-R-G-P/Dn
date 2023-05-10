@@ -20,9 +20,9 @@ class GeoPoint
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private ?string $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="float")
@@ -86,12 +86,12 @@ class GeoPoint
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
