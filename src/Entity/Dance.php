@@ -86,6 +86,22 @@ class Dance
         return $this->versions;
     }
 
+    /**
+     * @param Source $source
+     * @return Collection<int, Version>
+     */
+    public function getVersionsBySource(Source $source): Collection
+    {
+        $allVersions = $this->versions;
+        $versions = new ArrayCollection();
+        foreach ($allVersions as $version){
+            if ($version->getSource() === $source || $version->getSource2() === $source){
+                $versions->add($version);
+            }
+        }
+        return $versions;
+    }
+
     public function addVersion(Version $version): self
     {
         if (!$this->versions->contains($version)) {
