@@ -41,7 +41,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Menu');
+            ->setTitle('Menu')
+            ->setFaviconPath('/build/images/admin-icon.ico');
+
     }
 
     public function configureMenuItems(): iterable
@@ -49,11 +51,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('To the site', 'fas fa-home', 'homepage')
             ->setLinkTarget('_blank');
         yield MenuItem::linkToCrud('Dances', 'fas fa-user-friends', Dance::class);
-        yield MenuItem::linkToCrud('Department', 'fas fa-map-marker-alt', Department::class);
-        yield MenuItem::linkToCrud('Place', 'fas fa-map-marker-alt', Place::class);
+        yield MenuItem::linkToCrud('Departments', 'fas fa-map-marker-alt', Department::class);
+        yield MenuItem::linkToCrud('Places', 'fas fa-map-marker-alt', Place::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marker-alt', Region::class);
-        yield MenuItem::linkToCrud('Sources', 'fab fa-sourcetree', Source::class);
-        yield MenuItem::linkToCrud('Types', 'fab fa-tumblr', Type::class);
+        yield MenuItem::linkToCrud('Sources', 'fa fa-address-card', Source::class);
+        yield MenuItem::linkToCrud('Types', 'fa fa-grip-horizontal', Type::class);
         yield MenuItem::linkToCrud('Versions', 'fas fa-code-branch', Version::class);
         yield MenuItem::linkToCrud('Videos', 'fa fa-video-camera', Video::class);
         yield MenuItem::linkToCrud('Songs', 'fa fa-solid fa-music', Song::class);
