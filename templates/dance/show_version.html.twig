@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% if version.name is same as('') %}
-    {% set title %}
-        {% trans %}Dance{% endtrans %} {{ version.type.name }} {{ dance.name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
-    {% endset %}
-{% else %}
-    {% set title %}
-        {% trans %}Dance{% endtrans %} {{ version.type.name }} {{ version.name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
-    {% endset %}
-{% endif %}
+{% set type = version.type is not null ? version.type.name : '' %}
+{% set name = version.name is defined ? version.name : dance.name %}
+
+{% set title %}
+    {% trans %}Dance{% endtrans %} {{ type }} {{ name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
+{% endset %}
 
 {% block title %} {{ title }} {% endblock %}
 
