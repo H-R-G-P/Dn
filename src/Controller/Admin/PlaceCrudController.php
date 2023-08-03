@@ -19,8 +19,8 @@ class PlaceCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Place')
-            ->setEntityLabelInPlural('Places')
+            ->setEntityLabelInSingular('Нас. пункт')
+            ->setEntityLabelInPlural('Нас. пункты')
             ->setSearchFields(['name'])
             ->setDefaultSort(['name' => 'ASC'])
             ->showEntityActionsAsDropdown(false);
