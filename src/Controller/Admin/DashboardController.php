@@ -56,7 +56,7 @@ class DashboardController extends AbstractDashboardController
             ->setLinkTarget('_blank');
         yield MenuItem::linkToCrud('Dances', 'fas fa-user-friends', Dance::class);
         yield MenuItem::linkToCrud('Departments', 'fas fa-map-marker-alt', Department::class);
-        yield MenuItem::linkToCrud('Places', 'fas fa-map-marker-alt', Place::class);
+        yield MenuItem::linkToCrud('Нас. пункты', 'fas fa-map-marker-alt', Place::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marker-alt', Region::class);
         yield MenuItem::linkToCrud('Sources', 'fa fa-address-card', Source::class);
         yield MenuItem::linkToCrud('Types', 'fa fa-grip-horizontal', Type::class);
