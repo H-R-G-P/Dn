@@ -15,11 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VersionController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/versions/{slugDance}/{slugSource}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/versions/{slugDance}/{slugSource}",
      *     name="versions_by_dance_source"
      * )
      *

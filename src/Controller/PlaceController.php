@@ -11,11 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaceController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/place/{slug}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/place/{slug}",
      *     name="place"
      * )
      *

@@ -11,11 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/",
      *     name="homepage"
      * )
      *

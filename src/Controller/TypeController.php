@@ -14,11 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TypeController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/types",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/types",
      *     name="types"
      * )
      *
@@ -50,11 +46,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/type/{slug}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/type/{slug}",
      *     name="type"
      * )
      *
