@@ -13,11 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/register",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/register",
      *     name="app_register"
      * )
      *

@@ -14,11 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SourceController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/sources",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/sources",
      *     name="sources"
      * )
      *
@@ -43,11 +39,7 @@ class SourceController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/sources/{slug}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/sources/{slug}",
      *     name="source"
      * )
      *

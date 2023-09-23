@@ -10,11 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SongController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/songs",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/songs",
      *     name="songs"
      * )
      *

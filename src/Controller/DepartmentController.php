@@ -18,11 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DepartmentController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/departments/{slug}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/departments/{slug}",
      *     name="department"
      * )
      *

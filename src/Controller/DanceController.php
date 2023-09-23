@@ -14,11 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DanceController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/dances",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/dances",
      *     name="dances"
      * )
      *
@@ -41,11 +37,7 @@ class DanceController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/dances/{slug}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/dances/{slug}",
      *     name="dance"
      * )
      *
@@ -81,11 +73,7 @@ class DanceController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/dances/{slugDance}/{idVersion}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/dances/{slugDance}/{idVersion}",
      *     name="version"
      * )
      *

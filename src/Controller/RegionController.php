@@ -16,11 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegionController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/regions",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/regions",
      *     name="regions"
      * )
      *
@@ -38,11 +34,7 @@ class RegionController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/regions/{slug}",
-     *     locale="by",
-     *     requirements={
-     *         "_locale": "by|en",
-     *     },
+     * @Route("/regions/{slug}",
      *     name="region"
      * )
      *
