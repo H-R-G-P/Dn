@@ -39,7 +39,7 @@ class DanceRepository extends ServiceEntityRepository
             FROM App\Entity\Dance d 
             JOIN App\Entity\Version v 
             JOIN App\Entity\\'.$className.' e 
-            WHERE e.id = :entityId and v.'.strtolower($className).' = e.id and v.place = d.id'
+            WHERE e.id = :entityId and v.'.strtolower($className).' = e.id and v.dance = d.id'
         )->setParameter('entityId', $entity->getId());
 
         return $query->getResult();
