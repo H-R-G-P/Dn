@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
-
 
 use App\Entity\Song;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -43,5 +43,4 @@ class SongCrudController extends AbstractCrudController
         yield TextField::new('region')->hideOnIndex();
         yield TextField::new('place')->hideOnIndex();
     }
-
 }

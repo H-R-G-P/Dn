@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -34,7 +36,7 @@ class Version
     /**
      * @ORM\Column(type="integer", options={"default":0})
      */
-    private int $views=0;
+    private int $views = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="versions")
@@ -123,6 +125,11 @@ class Version
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getDance(): Dance
     {
         return $this->dance;
@@ -161,7 +168,7 @@ class Version
 
     public function __toString(): string
     {
-        return $this->id.','.$this->dance.','.$this->type.','.$this->source.','.$this->place;
+        return $this->id . ',' . $this->dance . ',' . $this->type . ',' . $this->source . ',' . $this->place;
     }
 
     public function getPlace(): ?Place
@@ -357,11 +364,9 @@ class Version
 
     public function removeVideo(Video $video): self
     {
-        if ($this->videos->removeElement($video)) {
-            // set the owning side to null (unless already changed)
-            if ($video->getVersion() === $this) {
-                $video->setVersion(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->videos->removeElement($video) && $video->getVersion() === $this) {
+            $video->setVersion(null);
         }
 
         return $this;

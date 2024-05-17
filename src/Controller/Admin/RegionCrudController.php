@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
@@ -30,5 +32,4 @@ class RegionCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield AssociationField::new('department')->setRequired(true);
     }
-
 }

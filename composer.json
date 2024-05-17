@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
+        "php": "^8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-mongodb": "*",
@@ -14,9 +14,9 @@
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
-        "doctrine/mongodb-odm": "^2.3",
         "doctrine/orm": "^2.9",
         "easycorp/easyadmin-bundle": "^3",
+        "laminas/laminas-code": "^4.13",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",
@@ -50,8 +50,9 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.99",
+        "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.9",
         "symfony/browser-kit": "^5.3",
         "symfony/css-selector": "^5.3",
         "symfony/debug-bundle": "^5.3",
@@ -98,6 +99,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "phpcs": [
+            "vendor/bin/phpcs src migrations tests -n --standard=PSR12 --extensions=php --exclude=PSR12.Files.FileHeader,Generic.Files.LineLength"
         ]
     },
     "conflict": {
@@ -105,11 +109,9 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.3.*",
-            "endpoint": [
-                "flex://defaults"
-            ]
+            "endpoint": ["flex://defaults"]
         }
     }
 }

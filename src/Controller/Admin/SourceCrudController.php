@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
@@ -34,5 +36,4 @@ class SourceCrudController extends AbstractCrudController
         yield TextField::new('wherefrom');
         yield TextField::new('title');
     }
-
 }

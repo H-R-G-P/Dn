@@ -1,9 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Place;
-use App\Entity\Type;
 use App\Repository\PlaceRepository;
 use App\Repository\TypeRepository;
 use App\Service\MapService;
@@ -13,31 +13,34 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TypeController extends AbstractController
 {
+    public function __construct(
+        private PlaceRepository $placeRepository,
+        private TypeRepository $typeRepository,
+        private MapService $mapService,
+    ) {
+    }
+
     /**
      * @Route("/types",
      *     name="types"
      * )
-     *
-     * @param TypeRepository $typeRepository
-     * @param PlaceRepository $placeRepository
-     * @param MapService $mapService
-     *
-     * @return Response
      */
-    public function index(TypeRepository $typeRepository, PlaceRepository $placeRepository, MapService $mapService): Response
+    public function index(): Response
     {
-        $types = $typeRepository->findAll();
-        $places = $placeRepository->findAll();
+        $types = $this->typeRepository->findAll();
+        $places = $this->placeRepository->findAll();
 
-        usort($types, function ($a, $b) {
+        usort($types, static function ($a, $b) {
             $a = count($a->getVersions());
             $b = count($b->getVersions());
-            if ($a == $b) return 0;
+            if ($a === $b) {
+                return 0;
+            }
             return ($a > $b) ? -1 : 1;
         });
 
-        $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map = $this->mapService->createMapDTO($places);
+        $map_json = $map?->serializeToJson();
 
         return $this->render('type/index.html.twig', [
             'types' => $types,
@@ -49,27 +52,21 @@ class TypeController extends AbstractController
      * @Route("/type/{slug}",
      *     name="type"
      * )
-     *
-     * @param string $slug
-     * @param MapService $mapService
-     *
-     * @return Response
      */
-    public function show(string $slug, MapService $mapService): Response
+    public function show(string $slug): Response
     {
-        $type = $this->getDoctrine()->getRepository(Type::class)->findOneBy([
+        $type = $this->typeRepository->findOneBy([
            'slug' => $slug,
         ]);
-        if ($type === null){
-            $this->addFlash('dark', 'Type "'.$slug.'" not exists.');
+        if ($type === null) {
+            $this->addFlash('dark', 'Type "' . $slug . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
-        if ($type instanceof Type)
-            $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($type);
+        $places = $this->placeRepository->findByEntityExtended($type);
 
-        $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map = $this->mapService->createMapDTO($places);
+        $map_json = $map?->serializeToJson();
 
         return $this->render('type/show.html.twig', [
             'type' => $type,

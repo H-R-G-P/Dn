@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace App\EventListener;
-
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -22,9 +22,9 @@ class ProfilerSubscriber implements EventSubscriberInterface
 
     public function onKernelController(ControllerEvent $event): void
     {
-        if ($event->getRequest()->query->get("profiler") === null){
+        if ($event->getRequest()->query->get("profiler") === null) {
             $this->profiler->disable();
-        }else{
+        } else {
             $this->profiler->enable();
         }
     }

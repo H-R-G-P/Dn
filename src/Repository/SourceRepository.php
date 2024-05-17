@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -9,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Source::class>
+ * @extends ServiceEntityRepository<Source>
  */
 class SourceRepository extends ServiceEntityRepository
 {
@@ -54,11 +56,11 @@ class SourceRepository extends ServiceEntityRepository
      *
      * @return Source|null The entity instance or NULL if the entity can not be found.
      */
-    public function find(mixed $id, $lockMode = null, $lockVersion = null)
+    public function find(mixed $id, $lockMode = null, $lockVersion = null): ?Source
     {
-        $source = $this->_em->find(Source::class, $id, $lockMode, $lockVersion);
+        $source = $this->_em->find(Source::class, $id);
 
-        if ($source && $source instanceof Source) {
+        if ($source instanceof Source) {
             $source->setVersions($this->versionRepository->findBySource($source));
         }
 

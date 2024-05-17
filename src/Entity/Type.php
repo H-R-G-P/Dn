@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -70,6 +72,11 @@ class Type implements EntityExtended
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -104,11 +111,9 @@ class Type implements EntityExtended
 
     public function removeVersion(Version $version): self
     {
-        if ($this->versions->removeElement($version)) {
-            // set the owning side to null (unless already changed)
-            if ($version->getType() === $this) {
-                $version->setType(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->versions->removeElement($version) && $version->getType() === $this) {
+            $version->setType(null);
         }
 
         return $this;
@@ -163,7 +168,7 @@ class Type implements EntityExtended
     /**
      * @return array<int, Dance>
      */
-    public function getDancesFromDb() : array
+    public function getDancesFromDb(): array
     {
         $dances = [];
 
@@ -175,19 +180,11 @@ class Type implements EntityExtended
         return $dances;
     }
 
-    /**
-     * @param int $dancesCount
-     *
-     * @return void
-     */
     public function setDancesCount(int $dancesCount): void
     {
         $this->dancesCount = $dancesCount;
     }
 
-    /**
-     * @return int
-     */
     public function getDancesCount(): int
     {
         return $this->dancesCount;

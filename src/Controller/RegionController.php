@@ -1,15 +1,17 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
 use App\Entity\Place;
 use App\Entity\Region;
 use App\Entity\Version;
+use App\Repository\RegionRepository;
 use App\Service\DatabaseService;
 use App\Service\HelperService;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\RegionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,10 +21,6 @@ class RegionController extends AbstractController
      * @Route("/regions",
      *     name="regions"
      * )
-     *
-     * @param RegionRepository $regionRepository
-     *
-     * @return Response
      */
     public function index(RegionRepository $regionRepository): Response
     {
@@ -37,33 +35,28 @@ class RegionController extends AbstractController
      * @Route("/regions/{slug}",
      *     name="region"
      * )
-     *
-     * @param string $slug
-     * @param MapService $mapService
-     * @param DatabaseService $databaseService
-     *
-     * @return Response
      */
-    public function show(string $slug, MapService $mapService, DatabaseService $databaseService) : Response
+    public function show(string $slug, MapService $mapService, DatabaseService $databaseService): Response
     {
         $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy([
             'slug' => $slug,
         ]);
 
         if (!$region instanceof Region) {
-            $this->addFlash('dark', 'Region "'.$slug.'" not exists.');
+            $this->addFlash('dark', 'Region "' . $slug . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
         $department = null;
-        if ($version = $this->getDoctrine()->getRepository(Version::class)->findOneBy(['region' => $region->getId()]))
+        if ($version = $this->getDoctrine()->getRepository(Version::class)->findOneBy(['region' => $region->getId()])) {
             $department = $version->getDepartment();
+        }
 
         $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($region);
         $allPlaces = $databaseService->getEntitiesRelatedByDances()->getPlaces();
 
         $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map_json = $map?->serializeToJson();
 
         $placesWithDances = HelperService::intersectEntitiesId($places, $allPlaces);
 

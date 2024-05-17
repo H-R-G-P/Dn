@@ -1,2 +1,2 @@
 # Dancing site
-Project for showing and seaching of dances
+Project for showing and searching of dances

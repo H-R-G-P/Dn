@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Repository\SongRepository;
@@ -13,10 +15,6 @@ class SongController extends AbstractController
      * @Route("/songs",
      *     name="songs"
      * )
-     *
-     * @param SongRepository $repository
-     *
-     * @return Response
      */
     public function index(SongRepository $repository): Response
     {

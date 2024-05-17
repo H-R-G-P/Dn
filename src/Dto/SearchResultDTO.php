@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Dto;
-
 
 use App\Entity\Dance;
 use App\Entity\Department;
