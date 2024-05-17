@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controller;
+
 use App\Entity\Dance;
 use App\Entity\Place;
 use App\Entity\Source;
@@ -11,20 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class VersionController extends AbstractController
 {
     /**
      * @Route("/versions/{slugDance}/{slugSource}",
      *     name="versions_by_dance_source"
      * )
-     *
-     * @param string $slugDance
-     * @param string $slugSource
-     * @param MapService $mapService
-     * @return Response
      */
-    public function showVersionsByDanceSource(string $slugDance, string $slugSource, MapService $mapService) : Response
+    public function showVersionsByDanceSource(string $slugDance, string $slugSource, MapService $mapService): Response
     {
         $dance = $this->getDoctrine()->getRepository(Dance::class)->findOneBy([
             'slug' => $slugDance,
@@ -33,12 +29,12 @@ class VersionController extends AbstractController
             'slug' => $slugSource,
         ]);
 
-        if (!$dance || !$dance instanceof Dance) {
-            $this->addFlash('dark', 'Dance "'.$slugDance.'" not exists.');
+        if (!$dance instanceof Dance) {
+            $this->addFlash('dark', 'Dance "' . $slugDance . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
-        if (!$source || !$source instanceof Source){
-            $this->addFlash('dark', 'Source "'.$slugSource.'" not exists.');
+        if (!$source instanceof Source) {
+            $this->addFlash('dark', 'Source "' . $slugSource . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
@@ -47,21 +43,24 @@ class VersionController extends AbstractController
             'source' => $source->getId(),
         ]);
 
-        if (count($versions) === 0){
-            $this->addFlash('dark', 'Versions related with dance "'.$dance->getName().'" and source "'.$source->getName().'" not exists.');
+        if (count($versions) === 0) {
+            $this->addFlash(
+                'dark',
+                'Versions related with dance "' . $dance . '" and source "' . $source->getName() . '" not exists.'
+            );
             return $this->redirectToRoute('homepage');
         }
 
         $places = [];
-        foreach ($versions as $version){
+        foreach ($versions as $version) {
             $place = $version->getPlace();
-            if ($place instanceof Place){
+            if ($place instanceof Place) {
                 $places[] = $place;
             }
         }
 
         $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map_json = $map?->serializeToJson();
 
         return $this->render('version/show_versions_by_ds.html.twig', [
             'dance' => $dance,
@@ -70,5 +69,4 @@ class VersionController extends AbstractController
             'map_json' => $map_json,
         ]);
     }
-
 }

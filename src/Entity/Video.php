@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
@@ -47,6 +49,11 @@ class Video
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getType(): int
     {
         return $this->type;
@@ -71,33 +78,21 @@ class Video
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLinkVk(): string
     {
         return $this->linkVk;
     }
 
-    /**
-     * @param string $linkVk
-     */
     public function setLinkVk(string $linkVk): void
     {
         $this->linkVk = $linkVk;
     }
 
-    /**
-     * @return string
-     */
     public function getYoutubeId(): string
     {
         return $this->youtubeId;
     }
 
-    /**
-     * @param string $youtubeId
-     */
     public function setYoutubeId(string $youtubeId): void
     {
         $this->youtubeId = $youtubeId;

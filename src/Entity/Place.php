@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -75,7 +77,7 @@ class Place implements EntityExtended
      */
     private ?GeoPoint $geoPoint;
 
-    public function __construct(?float $lat=null, ?float $lon=null)
+    public function __construct(?float $lat = null, ?float $lon = null)
     {
         $this->versions = new ArrayCollection();
         $this->lat = $lat;
@@ -85,6 +87,11 @@ class Place implements EntityExtended
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getCategory(): string
@@ -181,11 +188,9 @@ class Place implements EntityExtended
 
     public function removeVersion(Version $version): self
     {
-        if ($this->versions->removeElement($version)) {
-            // set the owning side to null (unless already changed)
-            if ($version->getPlace() === $this) {
-                $version->setPlace(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->versions->removeElement($version) && $version->getPlace() === $this) {
+            $version->setPlace(null);
         }
 
         return $this;

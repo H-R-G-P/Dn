@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -12,10 +14,6 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
-     *
-     * @param AuthenticationUtils $authenticationUtils
-     *
-     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -36,6 +34,8 @@ class SecurityController extends AbstractController
      */
     public function logout(): LogicException
     {
-        throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new LogicException(
+            'This method can be blank - it will be intercepted by the logout key on your firewall.'
+        );
     }
 }

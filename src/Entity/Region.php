@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -62,6 +64,11 @@ class Region implements EntityExtended
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getName(): string
@@ -133,7 +140,7 @@ class Region implements EntityExtended
     /**
      * @return array<int, Dance>
      */
-    public function getDancesFromDb() : array
+    public function getDancesFromDb(): array
     {
         $dances = [];
 
@@ -145,19 +152,11 @@ class Region implements EntityExtended
         return $dances;
     }
 
-    /**
-     * @param int $dancesCount
-     *
-     * @return void
-     */
     public function setDancesCount(int $dancesCount): void
     {
         $this->dancesCount = $dancesCount;
     }
 
-    /**
-     * @return int
-     */
     public function getDancesCount(): int
     {
         return $this->dancesCount;
@@ -183,11 +182,9 @@ class Region implements EntityExtended
 
     public function removeVersion(Version $version): self
     {
-        if ($this->versions->removeElement($version)) {
-            // set the owning side to null (unless already changed)
-            if ($version->getRegion() === $this) {
-                $version->setRegion(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->versions->removeElement($version) && $version->getRegion() === $this) {
+            $version->setRegion(null);
         }
 
         return $this;

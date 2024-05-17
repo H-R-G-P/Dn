@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace App\Vo;
-
 
 use App\Entity\Version;
 
@@ -26,18 +26,17 @@ class AddressVO
         $region = $version->getRegion() !== null ? $version->getRegion()->getName() : '';
         $village = $version->getPlace() !== null ? $version->getPlace()->getName() : '';
 
-        if ($language === 'by'){
-            $this->address = ($department !== '' ? $department.' вобл.' : '')
-                .($region !== '' ? ', '.$region .' р-н': '')
-                .($village !== '' ? ', в. '.$village : '');
+        if ($language === 'by') {
+            $this->address = ($department !== '' ? $department . ' вобл.' : '')
+                . ($region !== '' ? ', ' . $region . ' р-н' : '')
+                . ($village !== '' ? ', в. ' . $village : '');
         }
 
-        if ($language === 'en'){
-            $this->address = ($department !== '' ? $department.' dep.' : '')
-                .($region !== '' ? ', '.$region .' reg.': '')
-                .($village !== '' ? ', vil. '.$village : '');
+        if ($language === 'en') {
+            $this->address = ($department !== '' ? $department . ' dep.' : '')
+                . ($region !== '' ? ', ' . $region . ' reg.' : '')
+                . ($village !== '' ? ', vil. ' . $village : '');
         }
-
     }
 
     public function __toString(): string

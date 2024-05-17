@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Service\SearchService;
@@ -14,11 +16,6 @@ class SearchController extends AbstractController
      * @Route("/search",
      *     name="search"
      * )
-     *
-     * @param Request $request
-     * @param SearchService $searchService
-     *
-     * @return Response
      */
     public function search(Request $request, SearchService $searchService): Response
     {

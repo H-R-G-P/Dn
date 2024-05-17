@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -12,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Department[]    findAll()
  * @method Department[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Department::class>
+ * @extends ServiceEntityRepository<Department>
  */
 class DepartmentRepository extends ServiceEntityRepository
 {

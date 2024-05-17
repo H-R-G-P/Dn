@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace App\Service;
 
-
+use App\Dto\DatabaseDTO;
 use App\Dto\EntityCollectionDTO;
 use App\Entity\Department;
 use App\Entity\Place;
@@ -12,7 +13,6 @@ use App\Entity\Source;
 use App\Entity\Type;
 use App\Entity\Version;
 use App\Interface\EntityExtended;
-use App\Dto\DatabaseDTO;
 
 class DatabaseService
 {
@@ -23,9 +23,8 @@ class DatabaseService
         $this->database = $database;
     }
 
-    /** Return entities (Region, Department, Source, Type, Place) related by Dances
-     *
-     * @return EntityCollectionDTO
+    /**
+     * Return entities (Region, Department, Source, Type, Place) related by Dances
      */
     public function getEntitiesRelatedByDances(): EntityCollectionDTO
     {
@@ -41,7 +40,7 @@ class DatabaseService
     }
 
     /**
-     * @param array <int, EntityExtended> $entityCollection
+     * @param array<int, EntityExtended> $entityCollection
      *
      * @return EntityExtended[]
      */
@@ -72,37 +71,36 @@ class DatabaseService
         $filteredVersions = [];
 
         foreach ($this->database->getVersions() as $version) {
-            if ($entity instanceof Type
+            if (
+                $entity instanceof Type
                 && $version->getType() !== null
-                && $version->getType()->getId() === $entity->getId())
-            {
+                && $version->getType()->getId() === $entity->getId()
+            ) {
                 $filteredVersions[] = $version;
-            }
-            elseif ($entity instanceof Region
+            } elseif (
+                $entity instanceof Region
                 && $version->getRegion() !== null
-                && $version->getRegion()->getId() === $entity->getId())
-            {
+                && $version->getRegion()->getId() === $entity->getId()
+            ) {
                 $filteredVersions[] = $version;
-            }
-            elseif ($entity instanceof Department
+            } elseif (
+                $entity instanceof Department
                 && $version->getDepartment() !== null
-                && $version->getDepartment()->getId() === $entity->getId())
-            {
+                && $version->getDepartment()->getId() === $entity->getId()
+            ) {
                 $filteredVersions[] = $version;
-            }
-            elseif ($entity instanceof Place
+            } elseif (
+                $entity instanceof Place
                 && $version->getPlace() !== null
-                && $version->getPlace()->getId() === $entity->getId())
-            {
+                && $version->getPlace()->getId() === $entity->getId()
+            ) {
                 $filteredVersions[] = $version;
-            }
-            elseif ($entity instanceof Source)
-            {
-                if     ($version->getSource()  !== null && $version->getSource()->getId()  === $entity->getId())
+            } elseif ($entity instanceof Source) {
+                if ($version->getSource() !== null && $version->getSource()->getId() === $entity->getId()) {
                     $filteredVersions[] = $version;
-
-                elseif ($version->getSource2() !== null && $version->getSource2()->getId() === $entity->getId())
+                } elseif ($version->getSource2() !== null && $version->getSource2()->getId() === $entity->getId()) {
                     $filteredVersions[] = $version;
+                }
             }
         }
 
@@ -126,11 +124,11 @@ class DatabaseService
     {
         $regions = $this->database->getRegions();
 
-        usort($regions, function ($a, $b){
+        usort($regions, static function ($a, $b) {
             $a = $a->getDancesCount();
             $b = $b->getDancesCount();
 
-            if ($a == $b) {
+            if ($a === $b) {
                 return 0;
             }
 

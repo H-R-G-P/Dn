@@ -1,13 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Interface\EntityExtended;
+use App\Repository\SourceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=App\Repository\SourceRepository::class)
+ * @ORM\Entity(repositoryClass=SourceRepository::class)
  */
 class Source implements EntityExtended
 {
@@ -70,6 +73,11 @@ class Source implements EntityExtended
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getName(): string
@@ -161,7 +169,7 @@ class Source implements EntityExtended
     /**
      * @return array<int, Dance>
      */
-    public function getDancesFromDb() : array
+    public function getDancesFromDb(): array
     {
         $dances = [];
 
@@ -173,19 +181,11 @@ class Source implements EntityExtended
         return $dances;
     }
 
-    /**
-     * @param int $dancesCount
-     *
-     * @return void
-     */
     public function setDancesCount(int $dancesCount): void
     {
         $this->dancesCount = $dancesCount;
     }
 
-    /**
-     * @return int
-     */
     public function getDancesCount(): int
     {
         return $this->dancesCount;

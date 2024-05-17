@@ -28,7 +28,7 @@ final class Version20220302144406 extends AbstractMigration implements Container
     {
         // this up() migration is auto-generated, please modify it to your needs
         $em = $this->container->get('doctrine.orm.entity_manager');
-        if ($em !== null && $em instanceof EntityManagerInterface) {
+        if ($em instanceof EntityManagerInterface) {
             $dances = $em->getRepository(Dance::class)->findAll();
 
             foreach ($dances as $dance) {

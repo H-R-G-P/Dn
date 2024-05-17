@@ -1,17 +1,18 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Tests\Service;
 
 use App\Service\MapService;
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
-use \Exception;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\Translator;
 
 class MapServiceTest extends TestCase
 {
-
     public function testCreatePolygonVO(): void
     {
         $translator = $this->createMock(Translator::class);
@@ -23,10 +24,9 @@ class MapServiceTest extends TestCase
         $markers = array();
 
         try {
-            $polygon = null;
             $polygon = $service->createPolygonVO($markers);
-            self::assertSame(null, $polygon);
-        }catch (Exception $e) {
+            self::assertNull($polygon);
+        } catch (Exception $e) {
             self::assertSame('No_one', $e->getMessage());
         }
 
@@ -35,8 +35,8 @@ class MapServiceTest extends TestCase
         try {
             $polygon = null;
             $polygon = $service->createPolygonVO($markers);
-            self::assertSame(null, $polygon);
-        }catch (Exception $e) {
+            self::assertNull($polygon);
+        } catch (Exception $e) {
             self::assertInstanceOf(PolygonVO::class, $polygon);
         }
 
@@ -50,9 +50,8 @@ class MapServiceTest extends TestCase
             self::assertSame($polygon->getRight(), $markers[1]->getLon());
             self::assertSame($polygon->getBottom(), $markers[0]->getLat());
             self::assertSame($polygon->getLeft(), $markers[0]->getLon());
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             self::assertInstanceOf(PolygonVO::class, $polygon);
         }
     }
-
 }

@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace App\Dto;
-
 
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
@@ -50,7 +50,7 @@ class MapDTO
 
     public function hasPlaces(): bool
     {
-        return count($this->markers) === 0 ? false : true;
+        return !(count($this->markers) === 0);
     }
 
     public function hasOnlyOnePlace(): bool
