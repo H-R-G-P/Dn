@@ -1,15 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
 use App\Entity\Admin;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+
 use function get_class;
 
 /**
@@ -18,7 +19,7 @@ use function get_class;
  * @method Admin[]    findAll()
  * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Admin::class>
+ * @extends ServiceEntityRepository<Admin>
  */
 class AdminRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
@@ -29,12 +30,6 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
-     *
-     * @param PasswordAuthenticatedUserInterface $user
-     * @param string $newHashedPassword
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {

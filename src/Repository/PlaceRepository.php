@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -14,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Place[]    findAll()
  * @method Place[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Place::class>
+ * @extends ServiceEntityRepository<Place>
  */
 class PlaceRepository extends ServiceEntityRepository
 {
@@ -59,8 +61,8 @@ class PlaceRepository extends ServiceEntityRepository
             'SELECT p
             FROM App\Entity\Place p 
             JOIN App\Entity\Version v 
-            JOIN App\Entity\\'.$className.' e 
-            WHERE e.id = :entityId and v.'.strtolower($className).' = e.id and v.place = p.id'
+            JOIN App\Entity\\' . $className . ' e 
+            WHERE e.id = :entityId and v.' . strtolower($className) . ' = e.id and v.place = p.id'
         )->setParameter('entityId', $entity->getId());
 
         return $query->getResult();

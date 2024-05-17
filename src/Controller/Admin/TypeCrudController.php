@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
@@ -33,5 +35,4 @@ class TypeCrudController extends AbstractCrudController
         yield BooleanField::new('isMan');
         yield BooleanField::new('isWoman');
     }
-
 }

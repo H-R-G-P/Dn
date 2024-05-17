@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
@@ -29,12 +31,18 @@ class VideoCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('youtubeId')->formatValue(function ($value, $entity) {
-            if ($value != null) return "<a target='_blank' rel='noopener' href='https://www.youtube.com/watch?v=".$value."'>$value</a>";
-            else return null;
+            if ($value !== null) {
+                return "<a target='_blank' rel='noopener' href='https://www.youtube.com/watch?v=$value'>$value</a>";
+            }
+
+            return null;
         });
         yield TextField::new('linkVk')->formatValue(function ($value, $entity) {
-            if ($value != null) return "<a target='_blank' rel='noopener' href='".$value."'>$value</a>";
-            else return null;
+            if ($value !== null) {
+                return "<a target='_blank' rel='noopener' href='" . $value . "'>$value</a>";
+            }
+
+            return null;
         });
         yield ChoiceField::new('type')->setChoices([
             'Youtube Id' => Video::YOUTUBE_ID,
@@ -42,5 +50,4 @@ class VideoCrudController extends AbstractCrudController
         ]);
         yield AssociationField::new('version');
     }
-
 }

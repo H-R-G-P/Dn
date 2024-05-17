@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Place;
@@ -14,11 +16,6 @@ class PlaceController extends AbstractController
      * @Route("/place/{slug}",
      *     name="place"
      * )
-     *
-     * @param string $slug
-     * @param MapService $mapService
-     *
-     * @return Response
      */
     public function show(string $slug, MapService $mapService): Response
     {
@@ -27,14 +24,14 @@ class PlaceController extends AbstractController
         ]);
 
         if ($place === null) {
-            $this->addFlash('dark', 'Place "'.$slug.'" not exists.');
+            $this->addFlash('dark', 'Place "' . $slug . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
         $versions = $place->getVersions()->toArray();
         for ($i = count($versions); $i > 0; $i--) {
-            $versions[$i] = $versions[$i-1];
-            unset($versions[$i-1]);
+            $versions[$i] = $versions[$i - 1];
+            unset($versions[$i - 1]);
         }
 
         $version = $versions[1];
@@ -42,7 +39,7 @@ class PlaceController extends AbstractController
         $department = $version->getDepartment();
 
         $map = $mapService->createMapDTO([$place]);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map_json = $map?->serializeToJson();
 
         return $this->render('place/show.html.twig', [
             'place' => $place,

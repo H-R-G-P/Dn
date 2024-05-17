@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -14,11 +16,6 @@ class HomepageController extends AbstractController
      * @Route("/",
      *     name="homepage"
      * )
-     *
-     * @param DanceRepository $danceRepository
-     * @param DatabaseService $databaseService
-     *
-     * @return Response
      */
     public function index(DanceRepository $danceRepository, DatabaseService $databaseService): Response
     {

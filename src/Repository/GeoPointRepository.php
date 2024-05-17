@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\GeoPoint;
@@ -12,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method GeoPoint[]    findAll()
  * @method GeoPoint[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<GeoPoint::class>
+ * @extends ServiceEntityRepository<GeoPoint>
  */
 class GeoPointRepository extends ServiceEntityRepository
 {

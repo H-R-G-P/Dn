@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -52,6 +54,11 @@ class Dance
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -94,8 +101,8 @@ class Dance
     {
         $allVersions = $this->versions;
         $versions = new ArrayCollection();
-        foreach ($allVersions as $version){
-            if ($version->getSource() === $source || $version->getSource2() === $source){
+        foreach ($allVersions as $version) {
+            if ($version->getSource() === $source || $version->getSource2() === $source) {
                 $versions->add($version);
             }
         }
@@ -114,11 +121,9 @@ class Dance
 
     public function removeVersion(Version $version): self
     {
-        if ($this->versions->removeElement($version)) {
-            // set the owning side to null (unless already changed)
-            if ($version->getDance() === $this) {
-                $version = null;
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->versions->removeElement($version) && $version->getDance() === $this) {
+            $version = null;
         }
 
         return $this;

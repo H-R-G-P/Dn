@@ -1,17 +1,14 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Dto\SearchResultDTO;
 use Doctrine\ORM\EntityManagerInterface;
 
 class SearchService
 {
-    /**
-     * @var EntityManagerInterface
-     */
     private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -19,11 +16,6 @@ class SearchService
         $this->em = $em;
     }
 
-    /**
-     * @param string $input
-     *
-     * @return SearchResultDTO
-     */
     public function findMatches(string $input): SearchResultDTO
     {
         $result = new SearchResultDTO();
@@ -35,7 +27,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($dances) !== 0) $result->setDances($dances);
+        if (count($dances) !== 0) {
+            $result->setDances($dances);
+        }
 
         $departments = $this->em
             ->createQueryBuilder()
@@ -44,7 +38,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($departments) !== 0) $result->setDepartments($departments);
+        if (count($departments) !== 0) {
+            $result->setDepartments($departments);
+        }
 
         $places = $this->em
             ->createQueryBuilder()
@@ -53,7 +49,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($places) !== 0) $result->setPlaces($places);
+        if (count($places) !== 0) {
+            $result->setPlaces($places);
+        }
 
         $regions = $this->em
             ->createQueryBuilder()
@@ -62,7 +60,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($regions) !== 0) $result->setRegions($regions);
+        if (count($regions) !== 0) {
+            $result->setRegions($regions);
+        }
 
         $sources = $this->em
             ->createQueryBuilder()
@@ -71,7 +71,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($sources) !== 0) $result->setSources($sources);
+        if (count($sources) !== 0) {
+            $result->setSources($sources);
+        }
 
         $types = $this->em
             ->createQueryBuilder()
@@ -80,7 +82,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($types) !== 0) $result->setTypes($types);
+        if (count($types) !== 0) {
+            $result->setTypes($types);
+        }
 
         $versions = $this->em
             ->createQueryBuilder()
@@ -89,7 +93,9 @@ class SearchService
             ->where('REGEXP(e.name, :regexp) = true')
             ->setParameter('regexp', ".*$input.*")
             ->getQuery()->getResult();
-        if (count($versions) !== 0) $result->setVersions($versions);
+        if (count($versions) !== 0) {
+            $result->setVersions($versions);
+        }
 
         return $result;
     }

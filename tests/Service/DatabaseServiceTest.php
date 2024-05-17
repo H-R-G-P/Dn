@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Tests\Service;
 
@@ -6,6 +8,7 @@ use App\Entity\Region;
 use App\Service\DatabaseService;
 use App\Dto\DatabaseDTO;
 use PHPUnit\Framework\TestCase;
+
 use function PHPUnit\Framework\assertSame;
 
 class DatabaseServiceTest extends TestCase

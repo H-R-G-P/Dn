@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -66,6 +68,11 @@ class Department implements EntityExtended
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -105,11 +112,9 @@ class Department implements EntityExtended
 
     public function removePlace(Place $place): self
     {
-        if ($this->places->removeElement($place)) {
-            // set the owning side to null (unless already changed)
-            if ($place->getDepartment() === $this) {
-                $place->setDepartment(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->places->removeElement($place) && $place->getDepartment() === $this) {
+            $place->setDepartment(null);
         }
 
         return $this;
@@ -135,11 +140,9 @@ class Department implements EntityExtended
 
     public function removeRegion(Region $region): self
     {
-        if ($this->regions->removeElement($region)) {
-            // set the owning side to null (unless already changed)
-            if ($region->getDepartment() === $this) {
-                $region = null;
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->regions->removeElement($region) && $region->getDepartment() === $this) {
+            $region = null;
         }
 
         return $this;
@@ -150,19 +153,11 @@ class Department implements EntityExtended
         return $this->name;
     }
 
-    /**
-     * @param int $dancesCount
-     *
-     * @return void
-     */
     public function setDancesCount(int $dancesCount): void
     {
         $this->dancesCount = $dancesCount;
     }
 
-    /**
-     * @return int
-     */
     public function getDancesCount(): int
     {
         return $this->dancesCount;
@@ -188,11 +183,9 @@ class Department implements EntityExtended
 
     public function removeVersion(Version $version): self
     {
-        if ($this->versions->removeElement($version)) {
-            // set the owning side to null (unless already changed)
-            if ($version->getDepartment() === $this) {
-                $version->setDepartment(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->versions->removeElement($version) && $version->getDepartment() === $this) {
+            $version->setDepartment(null);
         }
 
         return $this;

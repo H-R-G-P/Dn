@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
@@ -28,8 +30,6 @@ class DashboardController extends AbstractDashboardController
      *     },
      *     name="admin"
      * )
-     *
-     * @return Response
      */
     public function index(): Response
     {
@@ -37,9 +37,9 @@ class DashboardController extends AbstractDashboardController
 
         if ($routeBuilder instanceof AdminUrlGenerator) {
             return $this->redirect($routeBuilder->setController(DanceCrudController::class)->generateUrl());
-        }else{
-            return parent::index();
         }
+
+        return parent::index();
     }
 
     public function configureDashboard(): Dashboard
@@ -47,7 +47,6 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Menu')
             ->setFaviconPath('/build/images/admin-icon.ico');
-
     }
 
     public function configureMenuItems(): iterable

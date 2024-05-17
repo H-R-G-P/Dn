@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\GeoPointRepository;
@@ -84,6 +86,11 @@ class GeoPoint
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getName(): string
@@ -226,11 +233,9 @@ class GeoPoint
 
     public function removePlace(Place $place): self
     {
-        if ($this->places->removeElement($place)) {
-            // set the owning side to null (unless already changed)
-            if ($place->getGeoPoint() === $this) {
-                $place->setGeoPoint(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->places->removeElement($place) && $place->getGeoPoint() === $this) {
+            $place->setGeoPoint(null);
         }
 
         return $this;

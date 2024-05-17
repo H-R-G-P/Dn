@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -6,9 +8,6 @@ use App\Entity\Dance;
 use App\Entity\Department;
 use App\Entity\Place;
 use App\Entity\Region;
-use App\Repository\DepartmentRepository;
-use App\Repository\PlaceRepository;
-use App\Repository\RegionRepository;
 use App\Service\DatabaseService;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,12 +20,6 @@ class DepartmentController extends AbstractController
      * @Route("/departments/{slug}",
      *     name="department"
      * )
-     *
-     * @param string $slug
-     * @param MapService $mapService
-     * @param DatabaseService $databaseService
-     *
-     * @return Response
      */
     public function show(string $slug, MapService $mapService, DatabaseService $databaseService): Response
     {
@@ -35,7 +28,7 @@ class DepartmentController extends AbstractController
         ]);
 
         if ($department === null) {
-            $this->addFlash('dark', 'Department "'.$slug.'" not exists.');
+            $this->addFlash('dark', 'Department "' . $slug . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
@@ -45,7 +38,7 @@ class DepartmentController extends AbstractController
         $dances = $this->getDoctrine()->getRepository(Dance::class)->findByEntityExtended($department);
 
         $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map_json = $map?->serializeToJson();
 
         return $this->render('department/show.html.twig', [
             'department' => $department,

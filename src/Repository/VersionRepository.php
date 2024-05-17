@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -13,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Version[]    findAll()
  * @method Version[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Version::class>
+ * @extends ServiceEntityRepository<Version>
  */
 class VersionRepository extends ServiceEntityRepository
 {
@@ -53,8 +55,9 @@ class VersionRepository extends ServiceEntityRepository
 
         $uniqVersions = [];
         foreach ($allVersions as $version) {
-            if ($version instanceof Version)
+            if ($version instanceof Version) {
                 $uniqVersions[$version->getId()] = $version;
+            }
         }
 
         return $uniqVersions;

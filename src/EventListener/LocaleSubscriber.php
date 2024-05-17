@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace App\EventListener;
-
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,10 +15,12 @@ class LocaleSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
         $uriLocale = explode('/', $request->getPathInfo())[1];
 
-        if ($request->attributes->has('exception')
-            && $uriLocale !== $request->getLocale())
-        {
-            $updatedUrl = 'http://'.$request->headers->get('host').'/'.$request->getDefaultLocale().$request->getPathInfo();
+        if (
+            $request->attributes->has('exception')
+            && $uriLocale !== $request->getLocale()
+        ) {
+            $updatedUrl = 'http://' . $request->headers->get('host')
+                . '/' . $request->getDefaultLocale() . $request->getPathInfo();
             $event->setResponse(new RedirectResponse($updatedUrl));
         }
     }

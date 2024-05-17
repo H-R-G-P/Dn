@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 namespace App\Service;
-
 
 use App\Dto\MapDTO;
 use App\Entity\Place;
@@ -14,9 +14,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MapService
 {
-    /**
-     * @var TranslatorInterface
-     */
     private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
@@ -40,10 +37,12 @@ class MapService
 
                 $firstVersion = $versions->get(0);
                 $versions->remove(0);
-                if ($firstVersion) $popup = $this->createPopup($firstVersion);
+                if ($firstVersion) {
+                    $popup = $this->createPopup($firstVersion);
+                }
 
                 foreach ($versions as $version) {
-                    $popup.= "\n-------\n".$this->createPopup($version);
+                    $popup .= "\n-------\n" . $this->createPopup($version);
                 }
 
                 $markers[] = new MapMarkerVO($place->getLat(), $place->getLon(), $popup);
@@ -53,7 +52,7 @@ class MapService
         try {
             $polygon = $this->createPolygonVO($markers);
             $map = new MapDTO($markers, $polygon);
-        }catch (Exception $e){
+        } catch (Exception $e) {
             $map = null;
         }
 
@@ -62,10 +61,6 @@ class MapService
 
     /**
      * Create marker popup inner html.
-     *
-     * @param Version $version
-     *
-     * @return string
      */
     public function createPopup(Version $version): string
     {
@@ -74,14 +69,14 @@ class MapService
         if ($versionName !== null && $versionName !== '' && str_contains($versionName, $name)) {
             $name = $versionName;
         } elseif ($versionName !== '') {
-            $name.= '|'.$versionName;
+            $name .= '|' . $versionName;
         }
         $typeName = $version->getType() !== null ? $version->getType()->getName() : '';
         $sourceName = $version->getSource() !== null ? $version->getSource()->getNameShort() : '';
         $placeName = $version->getPlace() !== null ? $version->getPlace()->getName() : '';
         $placeShort = $this->translator->trans('vil.');
 
-        return $name.", ".$typeName.", ".$sourceName.", $placeShort ".$placeName;
+        return $name . ", " . $typeName . ", " . $sourceName . ", $placeShort " . $placeName;
     }
 
     /**
@@ -97,15 +92,15 @@ class MapService
             throw new Exception('No_one');
         }
         if (count($markers) === 1) {
-            $highestLat = $markers[0]->getLat()+0.3;
-            $lowerLat = $markers[0]->getLat()-0.3;
-            $highestLon = $markers[0]->getLon()+0.3;
-            $lowerLon = $markers[0]->getLon()-0.3;
+            $highestLat = $markers[0]->getLat() + 0.3;
+            $lowerLat = $markers[0]->getLat() - 0.3;
+            $highestLon = $markers[0]->getLon() + 0.3;
+            $lowerLon = $markers[0]->getLon() - 0.3;
 
             return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
         }
 
-        usort($markers, function(MapMarkerVO $a, MapMarkerVO $b){
+        usort($markers, static function (MapMarkerVO $a, MapMarkerVO $b) {
             if ($a->getLat() === $b->getLat()) {
                 return 0;
             }
@@ -115,7 +110,7 @@ class MapService
         $highestLat = $markers[0]->getLat();
         $lowerLat = $markers[array_key_last($markers)]->getLat();
 
-        usort($markers, function(MapMarkerVO $a, MapMarkerVO $b){
+        usort($markers, static function (MapMarkerVO $a, MapMarkerVO $b) {
             if ($a->getLon() === $b->getLon()) {
                 return 0;
             }

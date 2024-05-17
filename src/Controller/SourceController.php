@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -17,20 +19,17 @@ class SourceController extends AbstractController
      * @Route("/sources",
      *     name="sources"
      * )
-     *
-     * @param SourceRepository $sourceRepository
-     * @param PlaceRepository $placeRepository
-     * @param MapService $mapService
-     *
-     * @return Response
      */
-    public function index(SourceRepository $sourceRepository, PlaceRepository $placeRepository, MapService $mapService): Response
-    {
+    public function index(
+        SourceRepository $sourceRepository,
+        PlaceRepository $placeRepository,
+        MapService $mapService
+    ): Response {
         $sources = $sourceRepository->findAll();
         $places = $placeRepository->findAll();
 
         $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map_json = $map?->serializeToJson();
 
         return $this->render('source/index.html.twig', [
             'sources' => $sources,
@@ -42,26 +41,21 @@ class SourceController extends AbstractController
      * @Route("/sources/{slug}",
      *     name="source"
      * )
-     *
-     * @param string $slug
-     * @param MapService $mapService
-     *
-     * @return Response
      */
     public function show(string $slug, MapService $mapService): Response
     {
         $source = $this->getDoctrine()->getRepository(Source::class)->findOneBy([
             'slug' => $slug,
         ]);
-        if ($source === null || !$source instanceof Source){
-            $this->addFlash('dark', 'Source "'.$slug.'" not exists.');
+        if (!$source instanceof Source) {
+            $this->addFlash('dark', 'Source "' . $slug . '" not exists.');
             return $this->redirectToRoute('homepage');
         }
 
         $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($source);
 
         $map = $mapService->createMapDTO($places);
-        $map_json = $map === null ? null : $map->serializeToJson();
+        $map_json = $map?->serializeToJson();
 
         return $this->render('source/show.html.twig', [
             'source' => $source,
