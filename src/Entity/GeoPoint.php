@@ -16,8 +16,7 @@ class GeoPoint
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="bigint")
      */
     private int $id;
 
@@ -37,14 +36,14 @@ class GeoPoint
     private float $lon;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", name="region", length=255, nullable=true)
      */
-    private ?string $region;
+    private ?string $regionText;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", name="district", length=255, nullable=true)
      */
-    private ?string $district;
+    private ?string $districtText;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -67,9 +66,14 @@ class GeoPoint
     private ?string $prefixBy;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private ?string $prefixRu;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private ?string $prefixBe;
 
     /**
      * @ORM\OneToMany(targetEntity=Place::class, mappedBy="geoPoint")
@@ -77,6 +81,16 @@ class GeoPoint
      * @var Collection<int, Place>
      */
     private Collection $places;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class)
+     */
+    private ?Department $department;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class)
+     */
+    private ?Region $district;
 
     public function __construct()
     {
@@ -129,26 +143,26 @@ class GeoPoint
         return $this;
     }
 
-    public function getRegion(): ?string
+    public function getRegionText(): ?string
     {
-        return $this->region;
+        return $this->regionText;
     }
 
-    public function setRegion(?string $region): self
+    public function setRegionText(?string $regionText): self
     {
-        $this->region = $region;
+        $this->regionText = $regionText;
 
         return $this;
     }
 
-    public function getDistrict(): ?string
+    public function getDistrictText(): ?string
     {
-        return $this->district;
+        return $this->districtText;
     }
 
-    public function setDistrict(?string $district): self
+    public function setDistrictText(?string $districtText): self
     {
-        $this->district = $district;
+        $this->districtText = $districtText;
 
         return $this;
     }
@@ -213,6 +227,18 @@ class GeoPoint
         return $this;
     }
 
+    public function getPrefixBe(): ?string
+    {
+        return $this->prefixBe;
+    }
+
+    public function setPrefixBe(?string $prefixBe): self
+    {
+        $this->prefixBe = $prefixBe;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Place>
      */
@@ -237,6 +263,30 @@ class GeoPoint
         if ($this->places->removeElement($place) && $place->getGeoPoint() === $this) {
             $place->setGeoPoint(null);
         }
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    public function getDistrict(): ?Region
+    {
+        return $this->district;
+    }
+
+    public function setDistrict(?Region $district): self
+    {
+        $this->district = $district;
 
         return $this;
     }

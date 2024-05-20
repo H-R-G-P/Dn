@@ -13,8 +13,8 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('regions') }}">{% trans %}Regions{% endtrans %}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ region.name }}</li>
+    <li class="breadcrumb-item"><a href="{{ url('department', {'slug': region.getDepartment().slug}) }}">{{ region.getDepartment().name }} {% trans %}dep.{% endtrans %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ region.name }} {% trans %}reg.{% endtrans %}</li>
 {% endblock %}
 
 {% block content %}
@@ -25,8 +25,8 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for dance in region.dancesFromDb %}
-                            <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                                {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
+                            <a href="{{ url('versions_by_district_dance', {'slugDance': dance.slug, 'slugDistrict': region.slug}) }}" class="list-group-item list-group-item-action">
+                                {{ dance.name }} ({{ dance.getVersionAmounts() }} {% trans %}ver.{% endtrans %})
                             </a>
                         {% endfor %}
                     </div>

@@ -21,7 +21,7 @@ final class Version20210822145627 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE dance ADD region_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE dance ADD CONSTRAINT FK_184BFD6F98260155 FOREIGN KEY (region_id) REFERENCES region (id)');
+        $this->addSql('ALTER TABLE dance ADD CONSTRAINT FK_184BFD6F98260155 FOREIGN KEY (region_id) REFERENCES district (id)');
         $this->addSql('CREATE INDEX IDX_184BFD6F98260155 ON dance (region_id)');
     }
 

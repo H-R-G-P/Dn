@@ -20,12 +20,10 @@
                 <div class="card-header">{% trans %}Dances{% endtrans %}</div>
                 <div class="card-body">
                     <div class="list-group list-group-flush">
-                        {% for dance in dances %}
-                            {% if not dance.versions|length is same as(0) %}
-                                <a href="{{ url('dance', {'slug': dance.slug})}}" class="list-group-item list-group-item-action">
-                                    {{ dance.name }} ({{ dance.versions|length }} {% trans %}ver.{% endtrans %})
-                                </a>
-                            {% endif %}
+                        {% for dance in department.dancesFromDb %}
+                            <a href="{{ url('versions_by_department_dance', {'slugDance': dance.slug, 'slugDepartment': department.slug}) }}" class="list-group-item list-group-item-action">
+                                {{ dance.name }} ({{ dance.getVersionAmounts() }} {% trans %}ver.{% endtrans %})
+                            </a>
                         {% endfor %}
                     </div>
                 </div>
@@ -37,7 +35,7 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for region in regions %}
-                            <a href="{{ url('region', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
+                            <a href="{{ url('district', {'slug': region.slug})}}" class="list-group-item list-group-item-action">
                                 {{ region.name }} {% trans %}reg.{% endtrans %} ({{ region.dancesCount }} {% trans %}dan.{% endtrans %})
                             </a>
                         {% endfor %}
