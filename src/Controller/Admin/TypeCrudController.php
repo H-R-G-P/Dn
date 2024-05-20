@@ -23,8 +23,7 @@ class TypeCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Type')
             ->setEntityLabelInPlural('Types')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['name' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable

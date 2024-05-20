@@ -68,7 +68,7 @@
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     {% for region in search_result.regions%}
-                        <a href="{{ url('region', {'slug': region.slug}) }}">{{ region.name }}</a><br>
+                        <a href="{{ url('district', {'slug': region.slug}) }}">{{ region.name }}</a><br>
                     {% endfor %}
                 </div>
             </div>

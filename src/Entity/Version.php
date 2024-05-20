@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Vo\AddressVO;
 use App\Repository\VersionRepository;
+use App\Vo\AddressVO;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +17,7 @@ class Version
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private int $id;
@@ -159,11 +159,9 @@ class Version
         return $this->views;
     }
 
-    public function subView(): self
+    public function subView(): void
     {
         $this->views++;
-
-        return $this;
     }
 
     public function __toString(): string
@@ -257,6 +255,17 @@ class Version
 
     public function getDepartment(): ?Department
     {
+        return $this->department;
+    }
+
+    public function getViewRegion(): ?Department
+    {
+        if ($this->getPlace()) {
+            if ($this->getPlace()->getGeoPoint()) {
+                return $this->getPlace()->getGeoPoint()->getDepartment();
+            }
+            return $this->getPlace()->getDepartment();
+        }
         return $this->department;
     }
 

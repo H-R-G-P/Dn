@@ -13,12 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TypeRepository::class)
+ * @ORM\Table(name="type")
  */
 class Type implements EntityExtended
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private int $id;
@@ -174,7 +175,12 @@ class Type implements EntityExtended
 
         foreach ($this->getVersions() as $version) {
             $dance = $version->getDance();
-            $dances += [$dance->getId() => $dance];
+            if (!isset($dances[$dance->getId()])) {
+                $dance->addVersionAmount();
+                $dances += [$dance->getId() => $dance];
+            } else {
+                $dances[$dance->getId()]->addVersionAmount();
+            }
         }
 
         return $dances;

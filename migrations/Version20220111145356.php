@@ -22,7 +22,7 @@ final class Version20220111145356 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE version ADD department_id INT DEFAULT NULL, ADD region_id INT DEFAULT NULL, ADD is_rec TINYINT(1) NOT NULL, ADD is_imp TINYINT(1) NOT NULL, ADD source_id2 VARCHAR(255) NOT NULL, ADD is_correct_place TINYINT(1) NOT NULL, ADD has_local_video TINYINT(1) NOT NULL, ADD youtube2 VARCHAR(255) NOT NULL, ADD vk VARCHAR(255) NOT NULL, ADD comments VARCHAR(255) NOT NULL, ADD adrady VARCHAR(255) NOT NULL, ADD is_game TINYINT(1) NOT NULL, ADD drob VARCHAR(1) NOT NULL');
         $this->addSql('ALTER TABLE version ADD CONSTRAINT FK_BF1CD3C3AE80F5DF FOREIGN KEY (department_id) REFERENCES department (id)');
-        $this->addSql('ALTER TABLE version ADD CONSTRAINT FK_BF1CD3C398260155 FOREIGN KEY (region_id) REFERENCES region (id)');
+        $this->addSql('ALTER TABLE version ADD CONSTRAINT FK_BF1CD3C398260155 FOREIGN KEY (region_id) REFERENCES district (id)');
         $this->addSql('CREATE INDEX IDX_BF1CD3C3AE80F5DF ON version (department_id)');
         $this->addSql('CREATE INDEX IDX_BF1CD3C398260155 ON version (region_id)');
     }

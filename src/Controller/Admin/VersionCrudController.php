@@ -24,8 +24,7 @@ class VersionCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Version')
             ->setEntityLabelInPlural('Versions')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['name' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable
