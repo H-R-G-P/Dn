@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Interface\EntityExtended;
-use App\Repository\DepartmentRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -151,6 +150,26 @@ class Department implements EntityExtended
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return array<int, Dance>
+     */
+    public function getDancesFromDb(): array
+    {
+        $dances = [];
+
+        foreach ($this->getVersions() as $version) {
+            $dance = $version->getDance();
+            if (!isset($dances[$dance->getId()])) {
+                $dance->addVersionAmount();
+                $dances += [$dance->getId() => $dance];
+            } else {
+                $dances[$dance->getId()]->addVersionAmount();
+            }
+        }
+
+        return $dances;
     }
 
     public function setDancesCount(int $dancesCount): void

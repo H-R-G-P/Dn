@@ -11,15 +11,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SongController extends AbstractController
 {
+    public function __construct(
+        private SongRepository $songRepository,
+    ) {
+    }
+
     /**
      * @Route("/songs",
      *     name="songs"
      * )
      */
-    public function index(SongRepository $repository): Response
+    public function index(): Response
     {
         return $this->render('song/index.html.twig', [
-            'songs' => $repository->findAll(),
+            'songs' => $this->songRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 }

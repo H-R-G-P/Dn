@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Place;
 use App\Entity\Source;
 use App\Repository\PlaceRepository;
 use App\Repository\SourceRepository;
@@ -15,20 +14,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SourceController extends AbstractController
 {
+    public function __construct(
+        private PlaceRepository $placeRepository,
+        private SourceRepository $sourceRepository,
+        private MapService $mapService,
+    ) {
+    }
+
     /**
      * @Route("/sources",
      *     name="sources"
      * )
      */
-    public function index(
-        SourceRepository $sourceRepository,
-        PlaceRepository $placeRepository,
-        MapService $mapService
-    ): Response {
-        $sources = $sourceRepository->findAll();
-        $places = $placeRepository->findAll();
+    public function index(): Response
+    {
+        $sources = $this->sourceRepository->findAll();
+        $places = $this->placeRepository->findAll();
 
-        $map = $mapService->createMapDTO($places);
+        $map = $this->mapService->createMapDTO($places);
         $map_json = $map?->serializeToJson();
 
         return $this->render('source/index.html.twig', [
@@ -42,9 +45,9 @@ class SourceController extends AbstractController
      *     name="source"
      * )
      */
-    public function show(string $slug, MapService $mapService): Response
+    public function show(string $slug): Response
     {
-        $source = $this->getDoctrine()->getRepository(Source::class)->findOneBy([
+        $source = $this->sourceRepository->findOneBy([
             'slug' => $slug,
         ]);
         if (!$source instanceof Source) {
@@ -52,9 +55,9 @@ class SourceController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($source);
+        $places = $this->placeRepository->findByEntityExtended($source);
 
-        $map = $mapService->createMapDTO($places);
+        $map = $this->mapService->createMapDTO($places);
         $map_json = $map?->serializeToJson();
 
         return $this->render('source/show.html.twig', [

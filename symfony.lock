@@ -44,9 +44,6 @@
     "doctrine/collections": {
         "version": "1.6.8"
     },
-    "doctrine/common": {
-        "version": "3.1.2"
-    },
     "doctrine/dbal": {
         "version": "2.13.2"
     },
@@ -150,9 +147,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.12.0"
-    },
-    "openlss/lib-array2xml": {
-        "version": "1.0.0"
     },
     "phar-io/manifest": {
         "version": "2.0.3"
@@ -690,8 +684,5 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
-    },
-    "webmozart/path-util": {
-        "version": "2.3.0"
     }
 }

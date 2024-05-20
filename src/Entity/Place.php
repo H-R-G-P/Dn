@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Interface\EntityExtended;
-use App\Repository\PlaceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -36,7 +35,7 @@ class Place implements EntityExtended
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="places")
      */
-    private ?Department $department;
+    private ?Department $department = null;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -51,7 +50,7 @@ class Place implements EntityExtended
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      */
-    private ?string $comment;
+    private ?string $comment = null;
 
     /**
      * @ORM\OneToMany(targetEntity=Version::class, mappedBy="place")
@@ -63,7 +62,7 @@ class Place implements EntityExtended
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="places")
      */
-    private ?Region $region;
+    private ?Region $region = null;
 
     private int $dancesCount = 0;
 
@@ -75,7 +74,7 @@ class Place implements EntityExtended
     /**
      * @ORM\ManyToOne(targetEntity=GeoPoint::class, inversedBy="places")
      */
-    private ?GeoPoint $geoPoint;
+    private ?GeoPoint $geoPoint = null;
 
     public function __construct(?float $lat = null, ?float $lon = null)
     {

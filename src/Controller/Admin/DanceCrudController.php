@@ -22,8 +22,7 @@ class DanceCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Dance')
             ->setEntityLabelInPlural('Dances')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['name' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable

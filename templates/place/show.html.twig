@@ -11,7 +11,7 @@
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
     <li class="breadcrumb-item"><a href="{{ url('department', {'slug': department.slug}) }}">{{ department.name }} {% trans %}dep.{% endtrans %}</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('region', {'slug': region.slug}) }}">{{ region.name }} {% trans %}reg.{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('district', {'slug': region.slug}) }}">{{ region.name }} {% trans %}reg.{% endtrans %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{% trans %}village{% endtrans %} {{ place.name }}</li>
 {% endblock %}
 

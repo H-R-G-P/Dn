@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Place;
+use App\Repository\PlaceRepository;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,14 +12,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PlaceController extends AbstractController
 {
+    public function __construct(
+        private PlaceRepository $placeRepository,
+        private MapService $mapService,
+    ) {
+    }
+
     /**
      * @Route("/place/{slug}",
      *     name="place"
      * )
      */
-    public function show(string $slug, MapService $mapService): Response
+    public function show(string $slug): Response
     {
-        $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy([
+        $place = $this->placeRepository->findOneBy([
             'slug' => $slug,
         ]);
 
@@ -38,7 +44,7 @@ class PlaceController extends AbstractController
         $region = $version->getRegion();
         $department = $version->getDepartment();
 
-        $map = $mapService->createMapDTO([$place]);
+        $map = $this->mapService->createMapDTO([$place]);
         $map_json = $map?->serializeToJson();
 
         return $this->render('place/show.html.twig', [

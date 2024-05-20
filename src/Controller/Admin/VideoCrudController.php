@@ -24,8 +24,7 @@ class VideoCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Video')
             ->setEntityLabelInPlural('Videos')
             ->setSearchFields(['youtubeId'])
-            ->setDefaultSort(['type' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['type' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable

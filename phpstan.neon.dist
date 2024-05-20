@@ -8,6 +8,3 @@ parameters:
         - tests/bootstrap.php
         - src/Security/AppAuthenticator.php
     ignoreErrors:
-        - '#Method App\\Entity\\Admin::getRoles\(\) should return array<string> but returns array<int, App\\Entity\\Admin\|string>\.#'
-        - '#Call to an undefined method Doctrine\\Persistence\\ObjectRepository<App\\Entity\\[a-zA-Z0-9\\_]+>::[a-zA-Z0-9\\_]+\(\)\.#'
-        - '#Call to an undefined method Doctrine\\ORM\\EntityRepository<App\\Entity\\[a-zA-Z0-9\\_]+>::[a-zA-Z0-9\\_]+\(\)\.#'

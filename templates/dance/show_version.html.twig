@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% set type = version.type is not null ? version.type.name : '' %}
-{% set name = version.name is defined ? version.name : dance.name %}
+{% set name = version.name is not empty ? version.name : dance.name %}
 
 {% set title %}
-    {% trans %}Dance{% endtrans %} {{ type }} {{ name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
+    {{ type|capitalize }} {% trans %}dance{% endtrans %} {{ name }}, {{ version.address(app.request.locale) }}, {{ version.source.wherefrom }}
 {% endset %}
 
 {% block title %} {{ title }} {% endblock %}
@@ -15,7 +15,7 @@
     <li class="breadcrumb-item"><a href="{{ url('homepage') }}">{% trans %}Homepage{% endtrans %}</a></li>
     <li class="breadcrumb-item"><a href="{{ url('dances') }}">{% trans %}Dances{% endtrans %}</a></li>
     <li class="breadcrumb-item"><a href="{{ url('dance', {'slug': dance.slug}) }}">{{ dance.name }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ version.name }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
 {% endblock %}
 
 {% block rightOfBreadcrumb %}
@@ -28,24 +28,44 @@
             <div class="card mb-3">
                 <div class="card-header">{% trans %}Description{% endtrans %}</div>
                 <div class="card-body">
-                    {% if version.place %}
-                        {% trans %}Village{% endtrans %} <a href="{{ url('place', {'slug': version.place.slug}) }}">{{ version.place.name }}</a>
+                    {% if dance %}
+                        {% trans %}Dance{% endtrans %}: <a href="{{ url('dance', {'slug': dance.slug}) }}">{{ dance.name }}</a>
                         <br>
                     {% endif %}
+                    {% if version.name %}
+                        {% trans %}Local name of dance{% endtrans %}: {{ version.name }}
+                        <br>
+                    {% endif %}
+
+                    {% trans %}Type{% endtrans %}:
+                    {% if version.type %}
+                        <a href="{{ url('type', {'slug': version.type.slug}) }}">{{ version.type.name }}</a>
+                    {% else %}
+                        <a href="#">{% trans %}Improvisation{% endtrans %}</a>
+                    {% endif %}  
+
+                    {% if version.department %}
+                        {% trans %}Department{% endtrans %}: <a href="{{ url('department', {'slug': version.department.slug}) }}">{{ version.department.name }}</a>
+                        <br>
+                    {% endif %}
+                    {% if version.region %}
+                        {% trans %}Region{% endtrans %}: <a href="{{ url('region', {'slug': version.region.slug}) }}">{{ version.region.name }}</a>
+                        <br>
+                    {% endif %}
+                    {% if version.place %}
+                        {% trans %}Village{% endtrans %}: <a href="{{ url('place', {'slug': version.place.slug}) }}">{{ version.place.name }}</a>
+                        <br>
+                    {% endif %}
+
                     {% if version.source %}
-                        {% trans %}Source{% endtrans %} <a href="{{ url('source', {'slug': version.source.slug}) }}">{{ version.source.name }}</a>
+                        {% trans %}Source{% endtrans %}: <a href="{{ url('source', {'slug': version.source.slug}) }}">{{ version.source.name }}</a>
                         <br>
                     {% endif %}
                     {% if version.source2 %}
-                        {% trans %}Second source{% endtrans %} <a href="{{ url('source', {'slug': version.source.slug}) }}">{{ version.source2.name }}</a>
+                        {% trans %}Second source{% endtrans %}: <a href="{{ url('source', {'slug': version.source.slug}) }}">{{ version.source2.name }}</a>
                         <br>
                     {% endif %}
-                    {% trans %}Type{% endtrans %}
-                        {% if version.type %}
-                            <a href="{{ url('type', {'slug': version.type.slug}) }}">{{ version.type.name }}</a>
-                        {% else %}
-                            <a href="#">{% trans %}Improvisation{% endtrans %}</a>
-                        {% endif %}
+
                 </div>
             </div>
             {% for video in videos %}

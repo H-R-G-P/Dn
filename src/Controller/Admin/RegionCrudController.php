@@ -23,8 +23,7 @@ class RegionCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Region')
             ->setEntityLabelInPlural('Regions')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['name' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable

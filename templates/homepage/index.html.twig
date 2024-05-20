@@ -33,7 +33,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownRegionButton">
                 {% for region in top_ten_regions %}
                     <li>
-                        <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url('district', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
                             {{ region.name }} ({{ region.dancesCount }})
                         </a>
                     </li>
@@ -88,7 +88,7 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for region in top_ten_regions %}
-                            <a href="{{ url('region', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
+                            <a href="{{ url('district', {'slug': region.slug}) }}" class="list-group-item list-group-item-action">
                                 {{ region.name }} ({{ region.dancesCount }})
                             </a>
                         {% endfor %}
@@ -120,9 +120,11 @@
                 <div class="card-body">
                     <div class="list-group list-group-flush">
                         {% for source in entity_collection.sources %}
+                            {% if source.dancesCount > 5 %}
                             <a href="{{ url('source', {'slug': source.slug})}}" class="list-group-item list-group-item-action">
                                 {{ source.name }} ({{ source.dancesCount }})
                             </a>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>

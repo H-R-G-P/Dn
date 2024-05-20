@@ -24,8 +24,7 @@ class PlaceCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Нас. пункт')
             ->setEntityLabelInPlural('Нас. пункты')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['name' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable

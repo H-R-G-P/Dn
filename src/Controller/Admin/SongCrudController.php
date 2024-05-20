@@ -23,8 +23,7 @@ class SongCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Song')
             ->setEntityLabelInPlural('Songs')
             ->setSearchFields(['name'])
-            ->setDefaultSort(['name' => 'ASC'])
-            ->showEntityActionsAsDropdown(false);
+            ->setDefaultSort(['name' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable

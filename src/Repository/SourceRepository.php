@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Source;
-use App\Entity\Version;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -15,15 +13,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SourceRepository extends ServiceEntityRepository
 {
-    /**
-     * @var EntityRepository<Version>
-     */
-    private EntityRepository $versionRepository;
-
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private VersionRepository $versionRepository,
+    ) {
         parent::__construct($registry, Source::class);
-        $this->versionRepository = $this->_em->getRepository(Version::class);
     }
 
     /**
@@ -70,14 +64,13 @@ class SourceRepository extends ServiceEntityRepository
     /**
      * Finds entities by a set of criteria.
      *
+     * @param array<string, mixed> $criteria
+     * @param array<string, string>|null $orderBy
      * @param int|null $limit
      * @param int|null $offset
-     * @psalm-param array<string, mixed> $criteria
-     * @psalm-param array<string, string>|null $orderBy
-     *
      * @return object[] The objects.
      */
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null): array
     {
         $persister = $this->_em->getUnitOfWork()->getEntityPersister(Source::class);
 
@@ -98,7 +91,7 @@ class SourceRepository extends ServiceEntityRepository
      *
      * @return object|null The entity instance or NULL if the entity can not be found.
      */
-    public function findOneBy(array $criteria, ?array $orderBy = null)
+    public function findOneBy(array $criteria, ?array $orderBy = null): ?object
     {
         $persister = $this->_em->getUnitOfWork()->getEntityPersister(Source::class);
 

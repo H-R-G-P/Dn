@@ -12,16 +12,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
+    public function __construct(
+        private DanceRepository $danceRepository,
+        private DatabaseService $databaseService,
+    ) {
+    }
+
     /**
      * @Route("/",
      *     name="homepage"
      * )
      */
-    public function index(DanceRepository $danceRepository, DatabaseService $databaseService): Response
+    public function index(): Response
     {
-        $entityCollection = $databaseService->getEntitiesRelatedByDances();
-        $topTenRegions = $databaseService->getTopTenRegions();
-        $topTenDances = array_slice($danceRepository->findSortedByVersions(), 0, 10);
+        $entityCollection = $this->databaseService->getEntitiesRelatedByDances();
+        $topTenRegions = $this->databaseService->getTopTenRegions();
+        $topTenDances = array_slice($this->danceRepository->findSortedByVersions(), 0, 10);
 
         return $this->render('homepage/index.html.twig', [
             'entity_collection' => $entityCollection,

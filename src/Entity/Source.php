@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Interface\EntityExtended;
-use App\Repository\SourceRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -175,7 +174,12 @@ class Source implements EntityExtended
 
         foreach ($this->getVersions() as $version) {
             $dance = $version->getDance();
-            $dances += [$dance->getId() => $dance];
+            if (!isset($dances[$dance->getId()])) {
+                $dance->addVersionAmount();
+                $dances += [$dance->getId() => $dance];
+            } else {
+                $dances[$dance->getId()]->addVersionAmount();
+            }
         }
 
         return $dances;

@@ -32,17 +32,25 @@ class MapService
         $markers = [];
         foreach ($places as $place) {
             if ($place->getLat() !== null && $place->getLon() !== null) {
-                $popup = '';
                 $versions = $place->getVersions();
 
                 $firstVersion = $versions->get(0);
                 $versions->remove(0);
+                $n = 1;
+                $popup = '';
                 if ($firstVersion) {
-                    $popup = $this->createPopup($firstVersion);
+                    $popup = $this->translator->trans('vil.') . ' '
+                        . ($firstVersion->getPlace() ? $firstVersion->getPlace()->getName() : '')
+                        . ($firstVersion->getPlace() && $firstVersion->getPlace()->getRegion()
+                              ? ', ' . $firstVersion->getPlace()->getRegion()->getName()
+                                . ' ' . $this->translator->trans('reg.')
+                              : '')
+                        . "\n++++++++\n";
+                    $popup .= $n . ') ' . $this->createPopup($firstVersion);
                 }
 
                 foreach ($versions as $version) {
-                    $popup .= "\n-------\n" . $this->createPopup($version);
+                    $popup .= "\n" . (++$n) . ') ' . $this->createPopup($version);
                 }
 
                 $markers[] = new MapMarkerVO($place->getLat(), $place->getLon(), $popup);
@@ -65,18 +73,16 @@ class MapService
     public function createPopup(Version $version): string
     {
         $name = $version->getDance()->getName();
-        $versionName = $version->getName();
-        if ($versionName !== null && $versionName !== '' && str_contains($versionName, $name)) {
+        $versionName = (string) $version->getName();
+        if ($versionName !== '' && str_contains($versionName, $name)) {
             $name = $versionName;
         } elseif ($versionName !== '') {
             $name .= '|' . $versionName;
         }
-        $typeName = $version->getType() !== null ? $version->getType()->getName() : '';
-        $sourceName = $version->getSource() !== null ? $version->getSource()->getNameShort() : '';
-        $placeName = $version->getPlace() !== null ? $version->getPlace()->getName() : '';
-        $placeShort = $this->translator->trans('vil.');
+        $typeName = (string) $version->getType()?->getName();
+        $sourceName = (string) $version->getSource()?->getNameShort();
 
-        return $name . ", " . $typeName . ", " . $sourceName . ", $placeShort " . $placeName;
+        return $name . ", " . $typeName . ", " . $sourceName;
     }
 
     /**
@@ -121,5 +127,21 @@ class MapService
         $lowerLon = $markers[array_key_last($markers)]->getLon();
 
         return new PolygonVO($highestLat, $highestLon, $lowerLat, $lowerLon);
+    }
+
+    /**
+    * @param array<Version> $versions
+    */
+    public function getMapJson(array $versions): ?string
+    {
+        $places = [];
+        foreach ($versions as $version) {
+            $place = $version->getPlace();
+            if ($place instanceof Place) {
+                $places[] = $place;
+            }
+        }
+
+        return $this->createMapDTO($places)?->serializeToJson();
     }
 }
