@@ -22,7 +22,7 @@ jobs:
         run: export HOME=/root && composer install
         
       - name: Migrate database
-        run: symfony console doctrine:migrations:migrate
+        run: bin/console doctrine:migrations:migrate
         
       - name: Install encore
         run: yarn install
