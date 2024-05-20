@@ -1,0 +1,28 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.6ad5c9da.js",
+        "/build/987.4ceb9739.js",
+        "/build/app.e6abbe62.js"
+      ],
+      "css": [
+        "/build/987.68b64bd9.css",
+        "/build/app.9d830268.css"
+      ]
+    },
+    "map": {
+      "js": [
+        "/build/runtime.6ad5c9da.js",
+        "/build/504.361736b5.js",
+        "/build/map.c22f3019.js"
+      ]
+    },
+    "flash_messages": {
+      "js": [
+        "/build/runtime.6ad5c9da.js",
+        "/build/flash_messages.886209b1.js"
+      ]
+    }
+  }
+}

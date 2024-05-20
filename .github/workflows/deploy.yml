@@ -2,21 +2,60 @@ name: Deploy
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
-
     steps:
-      #- name: Create SSH connection
-       # run: ssh root@130.0.235.81
-        
-      #- name: Remove project code
-      #  run: rm -rf *
-        
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
+      # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
+      # uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: sqlite3, iconv, ctype, xml
+
+      - name: Copy .env.test.local
+        run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Create Database-file
+        run: touch tests/database.sqlite
+
+      - name: Create schema
+        run: bin/console doctrine:schema:create --env=test || echo "Schema create failed"
+
+      - name: Validate schema
+        run: bin/console doctrine:schema:validate --env=test
+
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        run: vendor/bin/phpunit
+
+      - name: Execute phpStan test
+        run: vendor/bin/phpstan analyse
+
+      - name: Execute PHP_CodeSniffer test
+        run: vendor/bin/phpcs src tests --standard=PSR12
+
+      - name: Psalm test
+        run: vendor/bin/psalm
+
+  deploy:
+    needs: tests
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
       
       - name: Composer install
         run: export HOME=/root && composer install

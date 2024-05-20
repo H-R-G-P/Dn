@@ -44,9 +44,6 @@
     "doctrine/collections": {
         "version": "1.6.8"
     },
-    "doctrine/common": {
-        "version": "3.1.2"
-    },
     "doctrine/dbal": {
         "version": "2.13.2"
     },
@@ -118,9 +115,6 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
-    "egulias/email-validator": {
-        "version": "3.1.1"
-    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.2.1"
     },
@@ -150,9 +144,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.12.0"
-    },
-    "openlss/lib-array2xml": {
-        "version": "1.0.0"
     },
     "phar-io/manifest": {
         "version": "2.0.3"
@@ -415,18 +406,6 @@
     "symfony/intl": {
         "version": "v5.3.4"
     },
-    "symfony/mailer": {
-        "version": "4.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.3",
-            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
-        },
-        "files": [
-            "config/packages/mailer.yaml"
-        ]
-    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -679,9 +658,6 @@
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
-    "twig/extra-bundle": {
-        "version": "v3.3.1"
-    },
     "twig/twig": {
         "version": "v3.3.2"
     },
@@ -690,8 +666,5 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
-    },
-    "webmozart/path-util": {
-        "version": "2.3.0"
     }
 }

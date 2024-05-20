@@ -15,17 +15,13 @@ class AddressVO
      */
     private string $address;
 
-    /** AddressVO constructor.
-     *
-     * @param Version $version
-     * @param string $language
-     */
     public function __construct(Version $version, string $language = 'by')
     {
-        $department = $version->getDepartment() !== null ? $version->getDepartment()->getName() : '';
-        $region = $version->getRegion() !== null ? $version->getRegion()->getName() : '';
-        $village = $version->getPlace() !== null ? $version->getPlace()->getName() : '';
+        $department = (string) $version->getDepartment()?->getName();
+        $region = (string) $version->getRegion()?->getName();
+        $village = (string) $version->getPlace()?->getName();
 
+        $this->address = '';
         if ($language === 'by') {
             $this->address = ($department !== '' ? $department . ' вобл.' : '')
                 . ($region !== '' ? ', ' . $region . ' р-н' : '')

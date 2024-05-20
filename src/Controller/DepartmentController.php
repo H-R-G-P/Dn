@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Dance;
-use App\Entity\Department;
-use App\Entity\Place;
-use App\Entity\Region;
+use App\Repository\DepartmentRepository;
+use App\Repository\PlaceRepository;
+use App\Repository\RegionRepository;
 use App\Service\DatabaseService;
 use App\Service\MapService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,14 +15,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DepartmentController extends AbstractController
 {
+    public function __construct(
+        private DepartmentRepository $departmentRepository,
+        private PlaceRepository $placeRepository,
+        private RegionRepository $regionRepository,
+        private MapService $mapService,
+        private DatabaseService $databaseService,
+    ) {
+    }
+
     /**
      * @Route("/departments/{slug}",
      *     name="department"
      * )
      */
-    public function show(string $slug, MapService $mapService, DatabaseService $databaseService): Response
+    public function show(string $slug): Response
     {
-        $department = $this->getDoctrine()->getRepository(Department::class)->findOneBy([
+        $department = $this->departmentRepository->findOneBy([
             'slug' => $slug,
         ]);
 
@@ -32,18 +40,16 @@ class DepartmentController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        $places = $this->getDoctrine()->getRepository(Place::class)->findByEntityExtended($department);
-        $regions = $this->getDoctrine()->getRepository(Region::class)->findByDepartment($department);
-        $regions = $databaseService->setDances($regions);
-        $dances = $this->getDoctrine()->getRepository(Dance::class)->findByEntityExtended($department);
+        $places = $this->placeRepository->findByEntityExtended($department);
+        $regions = $this->regionRepository->findByDepartment($department);
+        $regions = $this->databaseService->setDances($regions);
 
-        $map = $mapService->createMapDTO($places);
+        $map = $this->mapService->createMapDTO($places);
         $map_json = $map?->serializeToJson();
 
         return $this->render('department/show.html.twig', [
             'department' => $department,
             'regions' => $regions,
-            'dances' => $dances,
             'map_json' => $map_json,
         ]);
     }

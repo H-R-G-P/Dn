@@ -17,7 +17,7 @@ class Video
 
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private int $id;
@@ -32,12 +32,12 @@ class Video
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private string $youtubeId;
+    private ?string $youtubeId;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $linkVk;
+    private ?string $linkVk;
 
     /**
      * @ORM\ManyToOne(targetEntity=Version::class, inversedBy="videos")
@@ -78,22 +78,22 @@ class Video
         return $this;
     }
 
-    public function getLinkVk(): string
+    public function getLinkVk(): ?string
     {
         return $this->linkVk;
     }
 
-    public function setLinkVk(string $linkVk): void
+    public function setLinkVk(?string $linkVk): void
     {
         $this->linkVk = $linkVk;
     }
 
-    public function getYoutubeId(): string
+    public function getYoutubeId(): ?string
     {
         return $this->youtubeId;
     }
 
-    public function setYoutubeId(string $youtubeId): void
+    public function setYoutubeId(?string $youtubeId): void
     {
         $this->youtubeId = $youtubeId;
     }
