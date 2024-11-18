@@ -121,14 +121,8 @@
     "felixfbecker/language-server-protocol": {
         "version": "v1.5.2"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.5"
-    },
     "jean85/pretty-package-versions": {
         "version": "2.0.5"
-    },
-    "laminas/laminas-code": {
-        "version": "4.4.2"
     },
     "mongodb/mongodb": {
         "version": "1.12.0"
@@ -257,18 +251,6 @@
     },
     "sebastian/version": {
         "version": "3.0.2"
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "5.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
     },
     "squizlabs/php_codesniffer": {
         "version": "3.9",
@@ -505,9 +487,6 @@
     "symfony/property-info": {
         "version": "v5.3.4"
     },
-    "symfony/proxy-manager-bridge": {
-        "version": "v5.3.4"
-    },
     "symfony/routing": {
         "version": "5.3",
         "recipe": {
@@ -520,9 +499,6 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
-    },
-    "symfony/runtime": {
-        "version": "v5.3.4"
     },
     "symfony/security-bundle": {
         "version": "5.3",
