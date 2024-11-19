@@ -10,15 +10,15 @@ use App\Entity\Version;
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use Exception;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MapService
 {
-    private TranslatorInterface $translator;
-
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
+    public function __construct(
+        private TranslatorInterface $translator,
+        private SerializerInterface $serializer,
+    ) {
     }
 
     /** Create MapDTO if at least one place has full coordinates, otherwise return null.
@@ -59,7 +59,7 @@ class MapService
 
         try {
             $polygon = $this->createPolygonVO($markers);
-            $map = new MapDTO($markers, $polygon);
+            $map = new MapDTO($markers, $polygon, $this->serializer);
         } catch (Exception $e) {
             $map = null;
         }

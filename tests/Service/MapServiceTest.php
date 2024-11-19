@@ -9,6 +9,7 @@ use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Translation\Translator;
 
 class MapServiceTest extends TestCase
@@ -19,8 +20,9 @@ class MapServiceTest extends TestCase
         $translator->expects($this->any())
             ->method('trans')
             ->willReturn('vil.');
+        $serializer = $this->createMock(Serializer::class);
 
-        $service = new MapService($translator);
+        $service = new MapService($translator, $serializer);
         $markers = array();
 
         try {

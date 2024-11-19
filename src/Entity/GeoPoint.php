@@ -61,11 +61,6 @@ class GeoPoint
     private ?string $nameRu;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $prefixBy;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private ?string $prefixRu;
@@ -199,18 +194,6 @@ class GeoPoint
     public function setNameRu(?string $nameRu): self
     {
         $this->nameRu = $nameRu;
-
-        return $this;
-    }
-
-    public function getPrefixBy(): ?string
-    {
-        return $this->prefixBy;
-    }
-
-    public function setPrefixBy(?string $prefixBy): self
-    {
-        $this->prefixBy = $prefixBy;
 
         return $this;
     }

@@ -92,7 +92,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
 
