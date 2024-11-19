@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Front;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -26,6 +28,6 @@ class BaseTest extends WebTestCase
 
         $content = $response->getContent();
         self::assertIsString($content);
-        self::assertStringContainsString('<h1', (string)$response->getContent());
+        self::assertStringContainsString('<h1', $content);
     }
 }
