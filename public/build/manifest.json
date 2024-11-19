@@ -1,5 +1,9 @@
 {
-  "name": "Dance",
-  "short_name": "Dance",
-  "splash_pages": null
+  "build/app.js": "/build/app.js",
+  "build/map.js": "/build/map.js",
+  "build/flash_messages.js": "/build/flash_messages.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/images/admin-icon.ico": "/build/images/admin-icon.ico",
+  "build/images/favicon.ico": "/build/images/favicon.ico",
+  "build/images/body-background.jpg": "/build/images/body-background.jpg"
 }

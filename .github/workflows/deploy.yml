@@ -46,7 +46,7 @@ jobs:
         run: vendor/bin/phpstan analyse
 
       - name: Execute PHP_CodeSniffer test
-        run: vendor/bin/phpcs src migrations tests --standard=PSR12
+        run: vendor/bin/phpcs src tests --standard=PSR12
 
       - name: Twig test
         run: bin/console lint:twig

@@ -42,14 +42,15 @@
                         <a href="{{ url('type', {'slug': version.type.slug}) }}">{{ version.type.name }}</a>
                     {% else %}
                         <a href="#">{% trans %}Improvisation{% endtrans %}</a>
-                    {% endif %}  
+                    {% endif %}
+                    <br>
 
                     {% if version.department %}
                         {% trans %}Department{% endtrans %}: <a href="{{ url('department', {'slug': version.department.slug}) }}">{{ version.department.name }}</a>
                         <br>
                     {% endif %}
                     {% if version.region %}
-                        {% trans %}Region{% endtrans %}: <a href="{{ url('region', {'slug': version.region.slug}) }}">{{ version.region.name }}</a>
+                        {% trans %}Region{% endtrans %}: <a href="{{ url('district', {'slug': version.region.slug}) }}">{{ version.region.name }}</a>
                         <br>
                     {% endif %}
                     {% if version.place %}
