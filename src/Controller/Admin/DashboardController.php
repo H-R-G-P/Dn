@@ -22,6 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(
+        private AdminUrlGenerator $adminUrlGenerator,
+    ) {
+    }
+
     /**
      * @Route("/{_locale}/admin",
      *     locale="by",
@@ -33,13 +38,7 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        $routeBuilder = $this->get(AdminUrlGenerator::class);
-
-        if ($routeBuilder instanceof AdminUrlGenerator) {
-            return $this->redirect($routeBuilder->setController(DanceCrudController::class)->generateUrl());
-        }
-
-        return parent::index();
+        return $this->redirect($this->adminUrlGenerator->setController(DanceCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard

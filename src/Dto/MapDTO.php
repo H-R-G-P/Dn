@@ -6,10 +6,7 @@ namespace App\Dto;
 
 use App\Vo\MapMarkerVO;
 use App\Vo\PolygonVO;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class MapDTO
 {
@@ -19,17 +16,20 @@ class MapDTO
      * @var MapMarkerVO[]
      */
     private array $markers;
+    private SerializerInterface $serializer;
 
     /**
      * MapDTO constructor.
      *
      * @param MapMarkerVO[] $markers
      * @param ?PolygonVO $polygon
+     * @param SerializerInterface $serializer
      */
-    public function __construct(array $markers, ?PolygonVO $polygon)
+    public function __construct(array $markers, ?PolygonVO $polygon, SerializerInterface $serializer)
     {
         $this->markers = $markers;
         $this->polygon = $polygon;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -60,16 +60,6 @@ class MapDTO
 
     public function serializeToJson(): string
     {
-        $encoder = new JsonEncoder();
-        $defaultContext = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getName();
-            },
-        ];
-        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
-
-        $serializer = new Serializer([$normalizer], [$encoder]);
-
-        return $serializer->serialize($this, 'json');
+        return $this->serializer->serialize($this, 'json');
     }
 }
