@@ -164,9 +164,9 @@ class Department implements EntityExtended
             $dance = $version->getDance();
             if (!isset($dances[$dance->getId()])) {
                 $dance->addVersionAmount();
-                $dances += [$dance->getId() => $dance];
+                $dances += [(int) $dance->getId() => $dance];
             } else {
-                $dances[$dance->getId()]->addVersionAmount();
+                $dances[(int) $dance->getId()]->addVersionAmount();
             }
         }
 

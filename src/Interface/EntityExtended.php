@@ -6,7 +6,7 @@ namespace App\Interface;
 
 interface EntityExtended
 {
-    public function getId(): int;
+    public function getId(): ?int;
 
     public function setDancesCount(int $dancesCount): void;
 
