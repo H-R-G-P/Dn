@@ -19,7 +19,7 @@ class Source implements EntityExtended
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
@@ -70,7 +70,7 @@ class Source implements EntityExtended
     {
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -20,7 +20,7 @@ class Video
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * 1 mean 'youtube', 2 mean 'vk'

@@ -17,7 +17,7 @@ class Song
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=200)
@@ -84,7 +84,7 @@ class Song
      */
     private ?string $audioRep;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
