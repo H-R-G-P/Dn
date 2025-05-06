@@ -21,7 +21,7 @@ class Place implements EntityExtended
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=3)
@@ -84,7 +84,7 @@ class Place implements EntityExtended
         $this->lon = $lon;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

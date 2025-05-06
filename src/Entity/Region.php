@@ -22,7 +22,7 @@ class Region implements EntityExtended
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
@@ -62,7 +62,7 @@ class Region implements EntityExtended
         $this->versions = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -20,7 +20,7 @@ class Version
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Dance::class, inversedBy="versions")
@@ -120,7 +120,7 @@ class Version
         $this->videos = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

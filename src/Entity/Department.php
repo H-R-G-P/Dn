@@ -21,7 +21,7 @@ class Department implements EntityExtended
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=150, unique=true)
@@ -63,7 +63,7 @@ class Department implements EntityExtended
         $this->versions = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
