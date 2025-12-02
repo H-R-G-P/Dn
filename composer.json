@@ -50,7 +50,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "icanhazstring/composer-unused": "^0.8.11",
+        "icanhazstring/composer-unused": "^0.9",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-latest",
@@ -63,7 +63,7 @@
         "symfony/stopwatch": "^6.0",
         "symfony/var-dumper": "^6.0",
         "symfony/web-profiler-bundle": "^6.0",
-        "vimeo/psalm": "^5.1"
+        "vimeo/psalm": "^6.0"
     },
     "config": {
         "optimize-autoloader": true,
