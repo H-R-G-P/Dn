@@ -1,10 +1,4 @@
 {
-    "amphp/amp": {
-        "version": "v2.6.2"
-    },
-    "amphp/byte-stream": {
-        "version": "v1.8.1"
-    },
     "beberlei/doctrineextensions": {
         "version": "v1.3.0"
     },
@@ -13,18 +7,6 @@
     },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
-    },
-    "composer/pcre": {
-        "version": "3.0.0"
-    },
-    "composer/semver": {
-        "version": "3.3.2"
-    },
-    "composer/xdebug-handler": {
-        "version": "3.0.3"
-    },
-    "dnoegel/php-xdg-base-dir": {
-        "version": "v0.1.1"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -115,12 +97,6 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
-    "felixfbecker/advanced-json-rpc": {
-        "version": "v3.2.1"
-    },
-    "felixfbecker/language-server-protocol": {
-        "version": "v1.5.2"
-    },
     "jean85/pretty-package-versions": {
         "version": "2.0.5"
     },
@@ -132,9 +108,6 @@
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
-    },
-    "netresearch/jsonmapper": {
-        "version": "v4.0.0"
     },
     "nikic/php-parser": {
         "version": "v4.12.0"
@@ -565,6 +538,18 @@
     "symfony/uid": {
         "version": "v5.3.3"
     },
+    "symfony/ux-twig-component": {
+        "version": "2.24",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.13",
+            "ref": "f367ae2a1faf01c503de2171f1ec22567febeead"
+        },
+        "files": [
+            "config/packages/twig_component.yaml"
+        ]
+    },
     "symfony/validator": {
         "version": "4.3",
         "recipe": {
@@ -628,11 +613,11 @@
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
+    "twig/extra-bundle": {
+        "version": "v3.21.0"
+    },
     "twig/twig": {
         "version": "v3.3.2"
-    },
-    "vimeo/psalm": {
-        "version": "4.24.0"
     },
     "webmozart/assert": {
         "version": "1.10.0"

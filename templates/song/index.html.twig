@@ -16,7 +16,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading{{ song.id }}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ song.id }}" aria-expanded="true" aria-controls="collapse{{ song.id }}">
-                            {{ song.name }}
+                            {{ loop.index }}. {{ song.name }}
                             {% if song.genre %}&nbsp;<small class="hidden-xs">({{ song.genre }})</small>{% endif %}
                         </button>
                     </h2>
